@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 const coinModel = new mongoose.Schema({
   name: String,
-  id: String,
+  id: {
+    type: String,
+    unique: true,
+  },
   previewImg: String,
 });
 

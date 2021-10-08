@@ -30,9 +30,21 @@ async function addCoin() {
   }
 }
 
+async function deleteCoin() {
+  try {
+    await fetch('http://localhost:8080/coins/delete/testCoin', {
+      method: 'DELETE',
+    });
+  } catch (e) {
+    console.error('coinTest::deleteCoin ', e);
+  }
+}
+
 async function main() {
   await listcoins();
   await addCoin();
+  await listcoins();
+  await deleteCoin();
   await listcoins();
 }
 
