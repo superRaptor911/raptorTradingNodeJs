@@ -6,7 +6,7 @@ const coinModel = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  previewImg: String,
+  avatar: String,
 });
 
 const CoinModel = mongoose.model('Coin', coinModel);

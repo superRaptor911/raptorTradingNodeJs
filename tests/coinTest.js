@@ -14,7 +14,7 @@ async function listcoins() {
 
 async function addCoin() {
   try {
-    const coin = {name: 'Test coin', id: 'testCoin', previewImg: 'preview.png'};
+    const coin = {name: 'Ada', id: 'adainr', avatar: 'preview.png'};
     const response = await fetch('http://localhost:8080/coins/add', {
       method: 'POST',
       headers: {
@@ -32,7 +32,7 @@ async function addCoin() {
 
 async function deleteCoin() {
   try {
-    await fetch('http://localhost:8080/coins/delete/testCoin', {
+    await fetch('http://localhost:8080/coins/delete/adainr', {
       method: 'DELETE',
     });
   } catch (e) {
@@ -40,10 +40,23 @@ async function deleteCoin() {
   }
 }
 
+async function coinPrice() {
+  try {
+    const response = await fetch('http://localhost:8080/coins/prices', {
+      method: 'GET',
+    });
+    const data = await response.json();
+    console.log('coinPrice ', data);
+  } catch (e) {
+    console.error('coinTest::coinPrice ', e);
+  }
+}
+
 async function main() {
   await listcoins();
   await addCoin();
   await listcoins();
+  await coinPrice();
   await deleteCoin();
   await listcoins();
 }

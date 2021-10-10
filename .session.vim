@@ -8,25 +8,30 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +16 index.js
-badd +6 routes/Coins.js
-badd +33 controller/Coins.js
+badd +24 index.js
+badd +10 routes/Coins.js
+badd +9 controller/Coins.js
 badd +1 .env
 badd +8 db/db.js
-badd +2 models/CoinModel.js
-badd +35 tests/coinTest.js
+badd +5 models/CoinModel.js
+badd +16 tests/coinTest.js
+badd +3 controller/coins/utility.js
+badd +8 models/UserModel.js
+badd +6 routes/User.js
+badd +34 controller/User.js
+badd +1 tests/userTest.js
 argglobal
 %argdel
 $argadd index.js
-edit controller/Coins.js
+edit tests/userTest.js
 argglobal
-balt routes/Coins.js
-let s:l = 34 - ((33 * winheight(0) + 22) / 45)
+balt controller/User.js
+let s:l = 23 - ((22 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 34
-normal! 010|
+keepjumps 23
+normal! 053|
 lcd ~/program/node/raptorTrading
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0&& getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
