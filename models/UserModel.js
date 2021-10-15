@@ -7,6 +7,17 @@ const userModel = new mongoose.Schema({
   },
   email: String,
   avatar: String,
+  wallet: {
+    balance: {
+      type: Number,
+      default: 0,
+    },
+    investment: {
+      type: Number,
+      default: 0,
+    },
+    coins: [],
+  },
 });
 
 const UserModel = mongoose.model('User', userModel);

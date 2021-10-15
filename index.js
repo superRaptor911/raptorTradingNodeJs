@@ -7,6 +7,7 @@ require('./db/db');
 
 const {CoinRouter} = require('./routes/Coins');
 const {UserRouter} = require('./routes/User');
+const {FundTransferRouter} = require('./routes/FundTransfer');
 
 const app = express();
 const port = 8080;
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 
 app.use('/coins', CoinRouter);
 app.use('/users', UserRouter);
+app.use('/fund', FundTransferRouter);
 
 app.listen(port, () => {
   console.log(`app listening at port ${process.env.PORT}`);

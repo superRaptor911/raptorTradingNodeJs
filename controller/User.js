@@ -1,5 +1,14 @@
 const UserModel = require('../models/UserModel');
 
+async function getAlluser(_req, res) {
+  try {
+    const result = await UserModel.find({});
+    res.status(200).json({status: true, data: result});
+  } catch (e) {
+    res.status(500).json({status: false, message: e});
+  }
+}
+
 async function addUser(req, res) {
   try {
     const {name, email, avatar} = req.body;
@@ -43,6 +52,7 @@ async function deleteUser(req, res) {
   }
 }
 
+module.exports.getAlluser = getAlluser;
 module.exports.addUser = addUser;
 module.exports.getUser = getUser;
 module.exports.deleteUser = deleteUser;
