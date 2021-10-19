@@ -42,6 +42,7 @@ async function getUser(req, res) {
   }
 }
 
+
 async function deleteUser(req, res) {
   try {
     const name = req.params.id;
@@ -51,6 +52,7 @@ async function deleteUser(req, res) {
     res.status(500).json({status: false, message: e});
   }
 }
+
 
 module.exports.getAlluser = getAlluser;
 module.exports.addUser = addUser;

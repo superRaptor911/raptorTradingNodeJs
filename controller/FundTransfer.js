@@ -36,5 +36,28 @@ async function deleteFundTransfer(req, res) {
   }
 }
 
+async function listAll(_req, res) {
+  try {
+    const transfers = await FundTransferModel.find({});
+    res.status(200).json({status: true, data: transfers});
+  } catch (e) {
+    /* handle error */
+    res.status(500).json({status: false, message: e});
+  }
+}
+
+async function listUserTransfer(req, res) {
+  try {
+    const username = req.params.id;
+    const transfers = await FundTransferModel.findOne({username: username});
+    res.status(200).json({status: true, data: transfers});
+  } catch (e) {
+    /* handle error */
+    res.status(500).json({status: false, message: e});
+  }
+}
+
 module.exports.transferFund = transferFund;
 module.exports.deleteFundTransfer = deleteFundTransfer;
+module.exports.listAll = listAll;
+module.exports.listUserTransfer = listUserTransfer;

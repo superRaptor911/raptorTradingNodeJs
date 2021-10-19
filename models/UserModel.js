@@ -16,7 +16,7 @@ const userModel = new mongoose.Schema({
       type: Number,
       default: 0,
     },
-    coins: [],
+    coins: {},
   },
 });
 

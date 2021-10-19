@@ -1,17 +1,10 @@
+const {postRequest, getRequest} = require('../Utility');
 const {default: fetch} = require('node-fetch');
 
 async function addUser() {
   try {
     const user = {name: 'Raptor x', email: 'ra@inc', avatar: 'preview.png'};
-    const response = await fetch('http://localhost:8080/users/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-
-    const data = await response.json();
+    const data = await postRequest('http://localhost:8080/users/add', user);
     console.log('addUser ', data);
   } catch (e) {
     console.error('userTest::addUser ', e);
@@ -30,10 +23,7 @@ async function deleteUser() {
 
 async function getUser() {
   try {
-    const response = await fetch('http://localhost:8080/users/Raptor x', {
-      method: 'GET',
-    });
-    const data = await response.json();
+    const data = await getRequest('http://localhost:8080/users/Raptor x');
     console.log('getUser ', data);
   } catch (e) {
     console.error('userTest::deleteUser ', e);

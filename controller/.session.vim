@@ -8,30 +8,29 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +29 index.js
+badd +26 index.js
 badd +10 routes/Coins.js
 badd +9 controller/Coins.js
 badd +1 .env
 badd +8 db/db.js
 badd +5 models/CoinModel.js
-badd +1 tests/coinTest.js
+badd +16 tests/coinTest.js
 badd +3 controller/coins/utility.js
 badd +19 models/UserModel.js
 badd +1 routes/User.js
 badd +51 controller/User.js
-badd +54 tests/userTest.js
+badd +28 tests/userTest.js
 badd +7 models/FundTransferModel.js
 badd +8 controller/FundTransfer.js
-badd +11 routes/FundTransfer.js
-badd +13 controller/fund/fund.js
+badd +12 routes/FundTransfer.js
+badd +9 controller/fund/fund.js
 badd +12 models/TransactionModel.js
 badd +8 controller/Transactions.js
 badd +50 controller/transactions/trans.js
-badd +6 tests/FundTest.js
 argglobal
 %argdel
 $argadd index.js
-edit tests/FundTest.js
+edit controller/Transactions.js
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
@@ -51,27 +50,27 @@ set winwidth=1
 exe 'vert 1resize ' . ((&columns * 87 + 87) / 174)
 exe 'vert 2resize ' . ((&columns * 86 + 87) / 174)
 argglobal
-balt tests/userTest.js
+balt controller/transactions/trans.js
 let s:l = 8 - ((7 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 8
-normal! 056|
-lcd ~/program/node/raptorTrading
+normal! 05|
+lcd ~/program/node/raptorTrading/controller
 wincmd w
 argglobal
-if bufexists("~/program/node/raptorTrading/routes/FundTransfer.js") | buffer ~/program/node/raptorTrading/routes/FundTransfer.js | else | edit ~/program/node/raptorTrading/routes/FundTransfer.js | endif
+if bufexists("~/program/node/raptorTrading/controller/fund/fund.js") | buffer ~/program/node/raptorTrading/controller/fund/fund.js | else | edit ~/program/node/raptorTrading/controller/fund/fund.js | endif
 if &buftype ==# 'terminal'
-  silent file ~/program/node/raptorTrading/routes/FundTransfer.js
+  silent file ~/program/node/raptorTrading/controller/fund/fund.js
 endif
-balt ~/program/node/raptorTrading/controller/fund/fund.js
-let s:l = 12 - ((11 * winheight(0) + 22) / 45)
+balt ~/program/node/raptorTrading/controller/transactions/trans.js
+let s:l = 10 - ((9 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 12
-normal! 040|
+keepjumps 10
+normal! 0
 lcd ~/program/node/raptorTrading
 wincmd w
 exe 'vert 1resize ' . ((&columns * 87 + 87) / 174)
