@@ -1,9 +1,12 @@
 const {postRequest, getRequest} = require('../Utility');
 const {default: fetch} = require('node-fetch');
 
+const server = 'https://raptor-trading.herokuapp.com';
+// const server = 'http://localhost:8080';
+
 async function addFund(name, amount = 500, fee = 10) {
   try {
-    const response = await postRequest('http://localhost:8080/fund/transfer', {
+    const response = await postRequest(server + '/fund/transfer', {
       username: name,
       transType: 'DEPOSIT',
       amount: amount,
@@ -20,7 +23,7 @@ async function addFund(name, amount = 500, fee = 10) {
 
 async function withDrawFund(name, amount = 500, fee = 10) {
   try {
-    const response = await postRequest('http://localhost:8080/fund/transfer', {
+    const response = await postRequest(server + '/fund/transfer', {
       username: name,
       transType: 'SELL',
       amount: amount,
@@ -38,7 +41,7 @@ async function withDrawFund(name, amount = 500, fee = 10) {
 async function addUser(name) {
   try {
     const user = {name: name, email: 'ra@inc', avatar: 'preview.png'};
-    const data = await postRequest('http://localhost:8080/users/add', user);
+    const data = await postRequest(server + '/users/add', user);
     console.log('addUser ', data);
   } catch (e) {
     console.error('userTest::addUser ', e);
@@ -47,7 +50,7 @@ async function addUser(name) {
 
 async function getUser(name) {
   try {
-    const data = await getRequest('http://localhost:8080/users/' + name);
+    const data = await getRequest(server + '/users/' + name);
     console.log('getUser ', data);
     return data;
   } catch (e) {
@@ -58,7 +61,7 @@ async function getUser(name) {
 
 async function deleteUser(name) {
   try {
-    await fetch('http://localhost:8080/users/' + name, {
+    await fetch(server + '/users/' + name, {
       method: 'DELETE',
     });
   } catch (e) {
@@ -68,7 +71,7 @@ async function deleteUser(name) {
 
 async function listcoins() {
   try {
-    const data = await getRequest('http://localhost:8080/coins/');
+    const data = await getRequest(server + '/coins/');
     console.log('listcoins ', data);
   } catch (e) {
     console.error('coinTest::listcoins ', e);
@@ -78,7 +81,7 @@ async function listcoins() {
 async function addCoin(name, id = 'adainr') {
   try {
     const coin = {name: name, id: id, avatar: 'preview.png'};
-    const data = await postRequest('http://localhost:8080/coins/add', coin);
+    const data = await postRequest(server + '/coins/add', coin);
     console.log('addCoin ', data);
   } catch (e) {
     console.error('coinTest::addCoin ', e);
@@ -87,7 +90,7 @@ async function addCoin(name, id = 'adainr') {
 
 async function deleteCoin(name) {
   try {
-    await fetch('http://localhost:8080/coins/delete/' + name, {
+    await fetch(server + '/coins/delete/' + name, {
       method: 'DELETE',
     });
   } catch (e) {
@@ -97,7 +100,7 @@ async function deleteCoin(name) {
 
 async function coinPrice() {
   try {
-    const data = await getRequest('http://localhost:8080/coins/prices');
+    const data = await getRequest(server + '/coins/prices');
     console.log('coinPrice ', data);
   } catch (e) {
     console.error('coinTest::coinPrice ', e);
@@ -114,10 +117,7 @@ async function buyCoin(name, coin, count, price, fees = 0) {
       fee: fees,
       transType: 'BUY',
     };
-    const data = await postRequest(
-      'http://localhost:8080/transaction/add',
-      body,
-    );
+    const data = await postRequest(server + '/transaction/add', body);
     console.log(data);
   } catch (e) {
     /* handle error */
@@ -135,10 +135,7 @@ async function sellCoin(name, coin, count, price, fees = 0) {
       fee: fees,
       transType: 'SELL',
     };
-    const data = await postRequest(
-      'http://localhost:8080/transaction/add',
-      body,
-    );
+    const data = await postRequest(server + '/transaction/add', body);
     console.log(data);
   } catch (e) {
     /* handle error */

@@ -11,7 +11,7 @@ const {FundTransferRouter} = require('./routes/FundTransfer');
 const {TransactionRouter} = require('./routes/Transaction');
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT;
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}));
@@ -28,5 +28,5 @@ app.use('/fund', FundTransferRouter);
 app.use('/transaction', TransactionRouter);
 
 app.listen(port, () => {
-  console.log(`app listening at port ${process.env.PORT}`);
+  console.log(`app listening at port ${port}`);
 });
