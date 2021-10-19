@@ -57,5 +57,5 @@ async function listUserTrans(req, res) {
 }
 module.exports.addTransaction = addTransaction;
 module.exports.deleteTransaction = deleteTransaction;
-module.exports.listAll = listAll;
+module.exports.listAllTransactions = listAll;
 module.exports.listUserTrans = listUserTrans;
