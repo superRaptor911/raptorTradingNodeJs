@@ -8,7 +8,7 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +29 index.js
+badd +28 index.js
 badd +10 routes/Coins.js
 badd +9 controller/Coins.js
 badd +1 .env
@@ -16,22 +16,26 @@ badd +8 db/db.js
 badd +5 models/CoinModel.js
 badd +1 tests/coinTest.js
 badd +3 controller/coins/utility.js
-badd +19 models/UserModel.js
+badd +7 models/UserModel.js
 badd +1 routes/User.js
-badd +51 controller/User.js
-badd +54 tests/userTest.js
+badd +1 controller/User.js
+badd +2 tests/userTest.js
 badd +7 models/FundTransferModel.js
-badd +8 controller/FundTransfer.js
-badd +11 routes/FundTransfer.js
+badd +4 controller/FundTransfer.js
+badd +1 routes/FundTransfer.js
 badd +13 controller/fund/fund.js
-badd +12 models/TransactionModel.js
-badd +8 controller/Transactions.js
-badd +50 controller/transactions/trans.js
-badd +6 tests/FundTest.js
+badd +7 models/TransactionModel.js
+badd +1 controller/Transactions.js
+badd +4 controller/transactions/trans.js
+badd +2 tests/FundTest.js
+badd +1 Utility.js
+badd +1 tests/coinPurchaseTest.js
+badd +5 routes/Transaction.js
+badd +52 tests/api.js
 argglobal
 %argdel
 $argadd index.js
-edit tests/FundTest.js
+edit tests/api.js
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
@@ -51,27 +55,27 @@ set winwidth=1
 exe 'vert 1resize ' . ((&columns * 87 + 87) / 174)
 exe 'vert 2resize ' . ((&columns * 86 + 87) / 174)
 argglobal
-balt tests/userTest.js
-let s:l = 8 - ((7 * winheight(0) + 22) / 45)
+balt tests/FundTest.js
+let s:l = 50 - ((41 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 8
-normal! 056|
+keepjumps 50
+normal! 026|
 lcd ~/program/node/raptorTrading
 wincmd w
 argglobal
-if bufexists("~/program/node/raptorTrading/routes/FundTransfer.js") | buffer ~/program/node/raptorTrading/routes/FundTransfer.js | else | edit ~/program/node/raptorTrading/routes/FundTransfer.js | endif
+if bufexists("~/program/node/raptorTrading/models/TransactionModel.js") | buffer ~/program/node/raptorTrading/models/TransactionModel.js | else | edit ~/program/node/raptorTrading/models/TransactionModel.js | endif
 if &buftype ==# 'terminal'
-  silent file ~/program/node/raptorTrading/routes/FundTransfer.js
+  silent file ~/program/node/raptorTrading/models/TransactionModel.js
 endif
-balt ~/program/node/raptorTrading/controller/fund/fund.js
-let s:l = 12 - ((11 * winheight(0) + 22) / 45)
+balt ~/program/node/raptorTrading/controller/transactions/trans.js
+let s:l = 7 - ((6 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 12
-normal! 040|
+keepjumps 7
+normal! 07|
 lcd ~/program/node/raptorTrading
 wincmd w
 exe 'vert 1resize ' . ((&columns * 87 + 87) / 174)

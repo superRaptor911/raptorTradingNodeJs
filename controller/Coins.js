@@ -31,9 +31,8 @@ async function addCoin(req, res) {
 
 async function deleteCoin(req, res) {
   try {
-    const id = req.params.id;
-    console.log('id = ', id);
-    await CoinModel.deleteOne({id: id});
+    const coin = req.params.id;
+    await CoinModel.deleteOne({name: coin});
     res.status(200).json({status: true});
   } catch (e) {
     res.status(500).json({status: false, message: e});

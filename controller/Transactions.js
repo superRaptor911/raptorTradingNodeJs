@@ -5,9 +5,9 @@ async function addTransaction(req, res) {
   try {
     const {username, transType, coin, coinCount, price, fee, time} = req.body;
     if (transType === 'SELL') {
-      await sellCoin(username, coin, coinCount, price, fee );
+      await sellCoin(username, coin, coinCount, price, fee);
     } else {
-      await buyCoin(username, coin, coinCount, price, fee );
+      await buyCoin(username, coin, coinCount, price, fee);
     }
 
     const newTrans = new TransactionModel();
