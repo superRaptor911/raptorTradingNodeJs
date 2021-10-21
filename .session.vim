@@ -17,27 +17,27 @@ badd +1 models/CoinModel.js
 badd +13 tests/coinTest.js
 badd +3 controller/coins/utility.js
 badd +19 models/UserModel.js
-badd +1 routes/User.js
-badd +1 controller/User.js
+badd +10 routes/User.js
+badd +7 controller/User.js
 badd +10 tests/userTest.js
 badd +8 models/FundTransferModel.js
-badd +29 controller/FundTransfer.js
+badd +26 controller/FundTransfer.js
 badd +1 routes/FundTransfer.js
-badd +36 controller/fund/fund.js
+badd +53 controller/fund/fund.js
 badd +7 models/TransactionModel.js
-badd +8 controller/Transactions.js
-badd +45 controller/transactions/trans.js
+badd +14 controller/Transactions.js
+badd +37 controller/transactions/trans.js
 badd +12 tests/FundTest.js
 badd +1 Utility.js
 badd +19 tests/coinPurchaseTest.js
 badd +11 routes/Transaction.js
-badd +132 tests/api.js
-badd +5 tools/recoverData.js
+badd +190 tests/api.js
+badd +125 tools/recoverData.js
 badd +6 models/DonationModel.js
 argglobal
 %argdel
 $argadd index.js
-edit tests/coinPurchaseTest.js
+edit tests/api.js
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
@@ -57,26 +57,26 @@ set winwidth=1
 exe 'vert 1resize ' . ((&columns * 86 + 87) / 174)
 exe 'vert 2resize ' . ((&columns * 87 + 87) / 174)
 argglobal
-balt tests/api.js
-let s:l = 19 - ((18 * winheight(0) + 22) / 45)
+balt routes/User.js
+let s:l = 171 - ((25 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 19
-normal! 0
+keepjumps 171
+normal! 038|
 lcd ~/program/node/raptorTrading
 wincmd w
 argglobal
-if bufexists("~/program/node/raptorTrading/tests/api.js") | buffer ~/program/node/raptorTrading/tests/api.js | else | edit ~/program/node/raptorTrading/tests/api.js | endif
+if bufexists("~/program/node/raptorTrading/routes/Coins.js") | buffer ~/program/node/raptorTrading/routes/Coins.js | else | edit ~/program/node/raptorTrading/routes/Coins.js | endif
 if &buftype ==# 'terminal'
-  silent file ~/program/node/raptorTrading/tests/api.js
+  silent file ~/program/node/raptorTrading/routes/Coins.js
 endif
-balt ~/program/node/raptorTrading/index.js
-let s:l = 5 - ((4 * winheight(0) + 22) / 45)
+balt ~/program/node/raptorTrading/tools/recoverData.js
+let s:l = 14 - ((13 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 5
+keepjumps 14
 normal! 0
 lcd ~/program/node/raptorTrading
 wincmd w
