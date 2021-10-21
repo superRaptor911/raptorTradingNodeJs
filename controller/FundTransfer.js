@@ -1,14 +1,18 @@
 const FundTransferModel = require('../models/FundTransferModel');
-const {depositFund, withdrawFund} = require('./fund/fund');
+const {depositFund, withdrawFund, addDonation} = require('./fund/fund');
 
 async function transferFund(req, res) {
   try {
-    const {username, transType, amount, fee, donation, time} = req.body;
+    let {username, transType, amount, fee, donation, time, force} = req.body;
+
+    amount = parseFloat(amount);
+    fee = parseFloat(fee);
+    donation = parseFloat(donation);
 
     if (transType === 'DEPOSIT') {
       await depositFund(username, amount, fee);
     } else {
-      await withdrawFund(username, amount, fee);
+      await withdrawFund(username, amount, fee, force);
     }
 
     const doc = new FundTransferModel();
@@ -19,6 +23,7 @@ async function transferFund(req, res) {
     doc.donation = donation;
     doc.time = time;
     await doc.save();
+    await addDonation(username, donation, doc._id);
     res.status(200).json({status: true});
   } catch (e) {
     console.error('FundTransfer::transferFund', e);
