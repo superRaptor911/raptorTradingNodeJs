@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 dotenv.config();
 require('./db/db');
@@ -10,8 +11,10 @@ const {UserRouter} = require('./routes/User');
 const {FundTransferRouter} = require('./routes/FundTransfer');
 const {TransactionRouter} = require('./routes/Transaction');
 
-const app = express();
 const port = process.env.PORT;
+
+const app = express();
+app.use(cors());
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}));
