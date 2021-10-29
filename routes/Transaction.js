@@ -7,9 +7,9 @@ const {
 
 const router = require('express').Router();
 
+router.get('/', listAllTransactions);
 router.post('/add', addTransaction);
 router.delete('/:id', deleteTransaction);
-router.get('/list', listAllTransactions);
 router.get('/list/:id', listUserTrans);
 
 module.exports.TransactionRouter = router;

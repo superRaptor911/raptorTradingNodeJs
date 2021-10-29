@@ -23,6 +23,7 @@ async function addTransaction(req, res) {
     newTrans.coinCount = coinCount;
     newTrans.fee = fee;
     newTrans.time = time;
+    newTrans.cost = price;
     await newTrans.save();
     res.status(200).json({status: true});
   } catch (e) {
