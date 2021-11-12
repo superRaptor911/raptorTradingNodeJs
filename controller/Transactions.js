@@ -1,8 +1,17 @@
 const TransactionModel = require('../models/TransactionModel');
+const {checkRequired} = require('../Utility');
 const {sellCoin, buyCoin} = require('./transactions/trans');
 
 async function addTransaction(req, res) {
   try {
+    checkRequired(req.body, [
+      'username',
+      'transType',
+      'coin',
+      'coinCount',
+      'price',
+      'fee',
+    ]);
     let {username, transType, coin, coinCount, price, fee, time, force} =
       req.body;
 

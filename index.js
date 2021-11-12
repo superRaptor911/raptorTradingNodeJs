@@ -1,3 +1,4 @@
+/* eslint-disable no-throw-literal */
 const bodyParser = require('body-parser');
 const express = require('express');
 const dotenv = require('dotenv');
@@ -20,6 +21,23 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 // parse application/json
 app.use(bodyParser.json());
+
+app.use(async (req, res, next) => {
+  if (req.path !== '/users/login' && req.method === 'POST') {
+    try {
+      const {password} = req.body;
+      if (password !== process.env.PASS) {
+        throw 'Wrong Pass';
+      }
+      next();
+    } catch (e) {
+      console.error('index::', e);
+      res.status(500).json({msg: e});
+    }
+  } else {
+    next();
+  }
+});
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

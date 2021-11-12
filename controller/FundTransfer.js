@@ -1,8 +1,18 @@
 const FundTransferModel = require('../models/FundTransferModel');
+const {checkRequired} = require('../Utility');
 const {depositFund, withdrawFund, addDonation} = require('./fund/fund');
 
 async function transferFund(req, res) {
   try {
+    checkRequired(req.body, [
+      'username',
+      'transType',
+      'amount',
+      'fee',
+      'donation',
+      'force',
+    ]);
+
     let {username, transType, amount, fee, donation, time, force} = req.body;
 
     amount = parseFloat(amount);

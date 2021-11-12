@@ -1,5 +1,6 @@
+/* eslint-disable no-throw-literal */
 const {default: fetch} = require('node-fetch');
-async function postRequest(url , data) {
+async function postRequest(url, data) {
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -33,6 +34,14 @@ async function getRequest(url) {
   }
 }
 
+function checkRequired(obj, values) {
+  values.forEach(item => {
+    if (obj[item] === undefined) {
+      throw `Error: ${item} not set`;
+    }
+  });
+}
 
 module.exports.postRequest = postRequest;
 module.exports.getRequest = getRequest;
+module.exports.checkRequired = checkRequired;

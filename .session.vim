@@ -21,94 +21,38 @@ badd +10 routes/User.js
 badd +7 controller/User.js
 badd +10 tests/userTest.js
 badd +8 models/FundTransferModel.js
-badd +26 controller/FundTransfer.js
+badd +13 controller/FundTransfer.js
 badd +1 routes/FundTransfer.js
 badd +53 controller/fund/fund.js
 badd +7 models/TransactionModel.js
-badd +14 controller/Transactions.js
+badd +6 controller/Transactions.js
 badd +37 controller/transactions/trans.js
 badd +12 tests/FundTest.js
-badd +1 Utility.js
+badd +47 Utility.js
 badd +19 tests/coinPurchaseTest.js
 badd +11 routes/Transaction.js
-badd +1 tests/api.js
+badd +171 tests/api.js
 badd +125 tools/recoverData.js
 badd +6 models/DonationModel.js
 argglobal
 %argdel
 $argadd index.js
-edit tests/api.js
-let s:save_splitbelow = &splitbelow
-let s:save_splitright = &splitright
-set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
-let &splitbelow = s:save_splitbelow
-let &splitright = s:save_splitright
-wincmd t
-let s:save_winminheight = &winminheight
-let s:save_winminwidth = &winminwidth
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
-exe 'vert 1resize ' . ((&columns * 86 + 87) / 174)
-exe 'vert 2resize ' . ((&columns * 87 + 87) / 174)
-exe '3resize ' . ((&lines * 1 + 23) / 47)
-exe 'vert 3resize ' . ((&columns * 1 + 87) / 174)
-exe '4resize ' . ((&lines * 1 + 23) / 47)
-exe 'vert 4resize ' . ((&columns * 48 + 87) / 174)
+edit controller/Transactions.js
 argglobal
-balt routes/User.js
-let s:l = 171 - ((25 * winheight(0) + 22) / 45)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 171
-normal! 038|
-lcd ~/program/node/raptorTrading
-wincmd w
-argglobal
-if bufexists("~/program/node/raptorTrading/index.js") | buffer ~/program/node/raptorTrading/index.js | else | edit ~/program/node/raptorTrading/index.js | endif
-if &buftype ==# 'terminal'
-  silent file ~/program/node/raptorTrading/index.js
-endif
-balt ~/program/node/raptorTrading/routes/Coins.js
-let s:l = 20 - ((19 * winheight(0) + 22) / 45)
+balt controller/FundTransfer.js
+let s:l = 20 - ((18 * winheight(0) + 22) / 44)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 20
-normal! 09|
+normal! 017|
 lcd ~/program/node/raptorTrading
-wincmd w
-argglobal
-enew
-balt ~/program/node/raptorTrading/index.js
-lcd ~/program/node/raptorTrading
-wincmd w
-argglobal
-enew
-balt ~/program/node/raptorTrading/index.js
-lcd ~/program/node/raptorTrading
-wincmd w
-2wincmd w
-exe 'vert 1resize ' . ((&columns * 86 + 87) / 174)
-exe 'vert 2resize ' . ((&columns * 87 + 87) / 174)
-exe '3resize ' . ((&lines * 1 + 23) / 47)
-exe 'vert 3resize ' . ((&columns * 1 + 87) / 174)
-exe '4resize ' . ((&lines * 1 + 23) / 47)
-exe 'vert 4resize ' . ((&columns * 48 + 87) / 174)
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0&& getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
 set winheight=1 winwidth=20 shortmess=filnxtToOFc
-let &winminheight = s:save_winminheight
-let &winminwidth = s:save_winminwidth
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
