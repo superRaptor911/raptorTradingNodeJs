@@ -32,7 +32,7 @@ app.use(async (req, res, next) => {
       next();
     } catch (e) {
       console.error('index::', e);
-      res.status(500).json({msg: e});
+      res.status(500).json({status: false, message: e});
     }
   } else {
     next();

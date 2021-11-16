@@ -34,7 +34,7 @@ async function addTransaction(req, res) {
     newTrans.time = time;
     newTrans.cost = price;
     await newTrans.save();
-    res.status(200).json({status: true});
+    res.status(200).json({status: true, message: 'Success'});
   } catch (e) {
     /* handle error */
     res.status(500).json({status: false, message: e});

@@ -10,7 +10,6 @@ async function transferFund(req, res) {
       'amount',
       'fee',
       'donation',
-      'force',
     ]);
 
     let {username, transType, amount, fee, donation, time, force} = req.body;
@@ -34,7 +33,7 @@ async function transferFund(req, res) {
     doc.time = time;
     await doc.save();
     await addDonation(username, donation, doc._id);
-    res.status(200).json({status: true});
+    res.status(200).json({status: true, message: 'Success'});
   } catch (e) {
     console.error('FundTransfer::transferFund', e);
     res.status(500).json({status: false, message: e});
