@@ -18,7 +18,7 @@ async function addUser(req, res) {
     doc.avatar = avatar;
     await doc.save();
 
-    res.status(200).json({status: true});
+    res.status(200).json({status: true, message: 'Success'});
   } catch (e) {
     console.error('User::addUser', e);
     res.status(500).json({status: false, message: e});
@@ -42,7 +42,6 @@ async function getUser(req, res) {
   }
 }
 
-
 async function deleteUser(req, res) {
   try {
     const name = req.params.id;
@@ -52,7 +51,6 @@ async function deleteUser(req, res) {
     res.status(500).json({status: false, message: e});
   }
 }
-
 
 module.exports.getAlluser = getAlluser;
 module.exports.addUser = addUser;
