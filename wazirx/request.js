@@ -40,7 +40,32 @@ async function wazirxPostRequest(endpoint, data) {
     return dat;
   } catch (e) {
     /* handle error */
-    console.error('Utility::getRequest ', e);
+    console.error('Utility::wazirxPostRequest ', e);
+    throw e;
+  }
+}
+
+async function wazirxDeleteRequest(endpoint, data) {
+  data.timestamp = new Date().getTime();
+  data.recvWindow = data.recvWindow ? data.recvWindow : 20000;
+  data.signature = getSignature(secretKey, data);
+
+  try {
+    const response = await fetch(server + endpoint, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-KEY': apiKey,
+      },
+
+      body: JSON.stringify(data),
+    });
+
+    const dat = await response.json();
+    return dat;
+  } catch (e) {
+    /* handle error */
+    console.error('Utility::wazirxDeleteRequest ', e);
     throw e;
   }
 }
@@ -67,10 +92,11 @@ async function wazirxGetRequest(endpoint, data) {
     return data;
   } catch (e) {
     /* handle error */
-    console.error('Utility::getRequest ', e);
+    console.error('Utility::wazirxGetRequest ', e);
     throw e;
   }
 }
 
 module.exports.wazirxGetRequest = wazirxGetRequest;
 module.exports.wazirxPostRequest = wazirxPostRequest;
+module.exports.wazirxDeleteRequest = wazirxDeleteRequest;
