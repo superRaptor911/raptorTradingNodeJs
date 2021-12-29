@@ -1,7 +1,7 @@
 /* eslint-disable no-throw-literal */
 const CoinModel = require('../../models/CoinModel');
 const UserModel = require('../../models/UserModel');
-const LokedAssetModel = require('../../models/wazirx/LockedAssetModel');
+const LockedAssetModel = require('../../models/wazirx/LockedAssetModel');
 const WazirxTransactionModel = require('../../models/wazirx/WazirxTransactionModel');
 const {wazirxOrderLimit} = require('../../wazirx/api');
 
@@ -28,7 +28,7 @@ async function placeBuyOrder(username, coin, coinCount, price) {
     user.wallet.balance = balance;
 
     // Lock balance till wazirx completes transaction
-    const lockedAsset = new LokedAssetModel();
+    const lockedAsset = new LockedAssetModel();
     lockedAsset.username = username;
     lockedAsset.id = orderId;
     lockedAsset.asset = 'balance';
@@ -79,7 +79,7 @@ async function placeSellOrder(username, coin, coinCount, price) {
     const orderId = result.id;
 
     // Lock coin till wazirx completes transaction
-    const lockedAsset = new LokedAssetModel();
+    const lockedAsset = new LockedAssetModel();
     lockedAsset.username = username;
     lockedAsset.id = orderId;
     lockedAsset.asset = coinId;

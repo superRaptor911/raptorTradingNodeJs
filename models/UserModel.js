@@ -6,6 +6,7 @@ const userModel = new mongoose.Schema({
     unique: true,
   },
   email: String,
+  password: String,
   avatar: String,
   wallet: {
     balance: {

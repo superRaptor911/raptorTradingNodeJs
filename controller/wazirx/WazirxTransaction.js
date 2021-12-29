@@ -1,3 +1,5 @@
+/* eslint-disable no-throw-literal */
+const WazirxTransactionModel = require('../../models/wazirx/WazirxTransactionModel');
 const {checkRequired} = require('../../Utility');
 const {wazirxGetOrderInfo, wazirxCancelOrder} = require('../../wazirx/api');
 const {wazirxPlaceSellOrder, wazirxPlaceBuyOrder} = require('./trans');
@@ -55,7 +57,19 @@ async function wazirxStopOrder(req, res) {
     checkRequired(req.body, ['username', 'transId', 'coinId']);
     const {username, orderId, coinId} = req.body;
 
-    console.log(username);
+    const order = await WazirxTransactionModel.findOne({
+      username: username,
+      id: orderId,
+    });
+
+    if (!order) {
+      throw `Order ${orderId} not found for user ${username}`;
+    }
+
+    if (order.status !== 'PENDING') {
+      throw `Order ${orderId} was already cancelled`;
+    }
+
     const result = await wazirxCancelOrder(coinId, orderId);
     res.status(200).json({
       status: true,

@@ -11,6 +11,7 @@ const {CoinRouter} = require('./routes/Coins');
 const {UserRouter} = require('./routes/User');
 const {FundTransferRouter} = require('./routes/FundTransfer');
 const {TransactionRouter} = require('./routes/Transaction');
+const {WazirxRouter} = require('./routes/Wazirx');
 
 const port = process.env.PORT;
 
@@ -23,23 +24,26 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.use(async (req, res, next) => {
-  if (req.path !== '/users/login' && req.method === 'POST') {
+  if (req.path === '/users/login' || req.method === 'GET') {
+    next();
+  } else if (req.path.split('/')[1] === 'wazirx') {
+    next();
+  } else {
     try {
       const {password} = req.body;
       if (password !== process.env.PASS) {
-        throw 'Wrong Pass';
+        throw 'Wrong Admin Password';
       }
       next();
     } catch (e) {
       console.error('index::', e);
       res.status(500).json({status: false, message: e});
     }
-  } else {
     next();
   }
 });
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.send('Hello World!');
 });
 
@@ -47,6 +51,7 @@ app.use('/coins', CoinRouter);
 app.use('/users', UserRouter);
 app.use('/fund', FundTransferRouter);
 app.use('/transaction', TransactionRouter);
+app.use('/wazirx', WazirxRouter);
 
 app.listen(port, () => {
   console.log(`app listening at port ${port}`);

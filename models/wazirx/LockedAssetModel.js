@@ -10,5 +10,5 @@ const lokedAssetModel = new mongoose.Schema({
   amount: Number,
 });
 
-const LokedAssetModel = mongoose.model('LokedAssetModel', lokedAssetModel);
-module.exports = LokedAssetModel;
+const LockedAssetModel = mongoose.model('LockedAssetModel', lokedAssetModel);
+module.exports = LockedAssetModel;
