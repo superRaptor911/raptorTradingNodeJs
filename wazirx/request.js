@@ -29,11 +29,10 @@ async function wazirxPostRequest(endpoint, data) {
     const response = await fetch(server + endpoint, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
         'X-API-KEY': apiKey,
       },
 
-      body: JSON.stringify(data),
+      body: new URLSearchParams(data),
     });
 
     const dat = await response.json();
@@ -54,11 +53,10 @@ async function wazirxDeleteRequest(endpoint, data) {
     const response = await fetch(server + endpoint, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json',
         'X-API-KEY': apiKey,
       },
 
-      body: JSON.stringify(data),
+      body: new URLSearchParams(data),
     });
 
     const dat = await response.json();
