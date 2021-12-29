@@ -1,6 +1,12 @@
 const crypto = require('crypto');
 const {default: fetch} = require('node-fetch');
 
+if (!process.env.WAZIRX_SECRETKEY) {
+  console.log('loading ...');
+  const dotenv = require('dotenv');
+  dotenv.config();
+}
+
 const secretKey = process.env.WAZIRX_SECRETKEY;
 const apiKey = process.env.WAZIRX_APIKEY;
 const server = 'https://api.wazirx.com';
@@ -14,7 +20,9 @@ function getSignature(key, params) {
   return genHmac;
 }
 
-export async function wazirxPostRequest(endpoint, data) {
+async function wazirxPostRequest(endpoint, data) {
+  data.timestamp = new Date().getTime();
+  data.recvWindow = data.recvWindow ? data.recvWindow : 20000;
   data.signature = getSignature(secretKey, data);
 
   try {
@@ -37,8 +45,11 @@ export async function wazirxPostRequest(endpoint, data) {
   }
 }
 
-export async function wazirxGetRequest(endpoint, data) {
+async function wazirxGetRequest(endpoint, data) {
+  data.timestamp = new Date().getTime();
+  data.recvWindow = data.recvWindow ? data.recvWindow : 20000;
   data.signature = getSignature(secretKey, data);
+
   const qs = new URLSearchParams(data);
   const string = qs.toString();
   const url = server + endpoint + '?' + string;
@@ -60,3 +71,6 @@ export async function wazirxGetRequest(endpoint, data) {
     throw e;
   }
 }
+
+module.exports.wazirxGetRequest = wazirxGetRequest;
+module.exports.wazirxPostRequest = wazirxPostRequest;
