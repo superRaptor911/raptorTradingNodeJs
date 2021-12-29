@@ -11,7 +11,7 @@ set shortmess=aoO
 argglobal
 %argdel
 $argadd index.js
-edit controller/wazirx/trans.js
+edit index.js
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -22,43 +22,44 @@ set winwidth=1
 exe '2resize ' . ((&lines * 1 + 23) / 47)
 exe 'vert 2resize ' . ((&columns * 1 + 87) / 174)
 exe '3resize ' . ((&lines * 1 + 23) / 47)
-exe 'vert 3resize ' . ((&columns * 63 + 87) / 174)
+exe 'vert 3resize ' . ((&columns * 55 + 87) / 174)
 argglobal
-balt models/wazirx/WazirxTransactionModel.js
-let s:l = 37 - ((22 * winheight(0) + 22) / 45)
+balt controller/users/Users.js
+let s:l = 30 - ((22 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 37
-normal! 056|
+keepjumps 30
+normal! 022|
 lcd ~/program/node/raptorTrading
 wincmd w
 argglobal
 enew
-balt ~/program/node/raptorTrading/controller/wazirx/trans.js
+balt ~/program/node/raptorTrading/index.js
 lcd ~/program/node/raptorTrading
 wincmd w
 argglobal
 enew
-balt ~/program/node/raptorTrading/controller/wazirx/trans.js
+balt ~/program/node/raptorTrading/index.js
 lcd ~/program/node/raptorTrading
 wincmd w
 exe '2resize ' . ((&lines * 1 + 23) / 47)
 exe 'vert 2resize ' . ((&columns * 1 + 87) / 174)
 exe '3resize ' . ((&lines * 1 + 23) / 47)
-exe 'vert 3resize ' . ((&columns * 63 + 87) / 174)
+exe 'vert 3resize ' . ((&columns * 55 + 87) / 174)
 tabnext 1
+badd +30 ~/program/node/raptorTrading/index.js
+badd +3 ~/program/node/raptorTrading/models/wazirx/WazirxTransactionModel.js
 badd +1 ~/program/node/raptorTrading/wazirx/request.js
-badd +4 ~/program/node/raptorTrading/index.js
-badd +14 ~/program/node/raptorTrading/routes/Coins.js
+badd +1 ~/program/node/raptorTrading/routes/Coins.js
 badd +58 ~/program/node/raptorTrading/controller/Coins.js
 badd +8 ~/program/node/raptorTrading/db/db.js
 badd +4 ~/program/node/raptorTrading/models/CoinModel.js
 badd +13 ~/program/node/raptorTrading/tests/coinTest.js
 badd +3 ~/program/node/raptorTrading/controller/coins/utility.js
-badd +19 ~/program/node/raptorTrading/models/UserModel.js
+badd +9 ~/program/node/raptorTrading/models/UserModel.js
 badd +10 ~/program/node/raptorTrading/routes/User.js
-badd +7 ~/program/node/raptorTrading/controller/User.js
+badd +35 ~/program/node/raptorTrading/controller/User.js
 badd +10 ~/program/node/raptorTrading/tests/userTest.js
 badd +8 ~/program/node/raptorTrading/models/FundTransferModel.js
 badd +16 ~/program/node/raptorTrading/controller/FundTransfer.js
@@ -68,18 +69,20 @@ badd +7 ~/program/node/raptorTrading/models/TransactionModel.js
 badd +36 ~/program/node/raptorTrading/controller/Transactions.js
 badd +17 ~/program/node/raptorTrading/controller/transactions/trans.js
 badd +12 ~/program/node/raptorTrading/tests/FundTest.js
-badd +47 ~/program/node/raptorTrading/Utility.js
+badd +48 ~/program/node/raptorTrading/Utility.js
 badd +19 ~/program/node/raptorTrading/tests/coinPurchaseTest.js
 badd +11 ~/program/node/raptorTrading/routes/Transaction.js
 badd +1 ~/program/node/raptorTrading/tests/api.js
 badd +125 ~/program/node/raptorTrading/tools/recoverData.js
 badd +6 ~/program/node/raptorTrading/models/DonationModel.js
-badd +44 ~/program/node/raptorTrading/wazirx/api.js
+badd +7 ~/program/node/raptorTrading/wazirx/api.js
 badd +4 ~/program/node/raptorTrading/wazirx/tests/ordertest.js
 badd +11 ~/program/node/raptorTrading/models/wazirx/LockedAssetModel.js
-badd +13 ~/program/node/raptorTrading/models/wazirx/WazirxTransactionModel.js
-badd +25 ~/program/node/raptorTrading/controller/wazirx/WazirxTransaction.js
-badd +37 ~/program/node/raptorTrading/controller/wazirx/trans.js
+badd +23 ~/program/node/raptorTrading/controller/wazirx/WazirxTransaction.js
+badd +56 ~/program/node/raptorTrading/controller/wazirx/trans.js
+badd +13 ~/program/node/raptorTrading/routes/Wazirx.js
+badd +1 ~/program/node/raptorTrading/tools/UserPassword.js
+badd +12 ~/program/node/raptorTrading/controller/users/Users.js
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif

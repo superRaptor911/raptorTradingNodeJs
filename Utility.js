@@ -1,5 +1,6 @@
 /* eslint-disable no-throw-literal */
 const {default: fetch} = require('node-fetch');
+
 async function postRequest(url, data) {
   try {
     const response = await fetch(url, {
@@ -42,6 +43,21 @@ function checkRequired(obj, values) {
   });
 }
 
+function hashString(string) {
+  let hash = 0;
+  let i;
+  let chr;
+
+  if (this.length === 0) return hash;
+  for (i = 0; i < string.length; i++) {
+    chr = string.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return 'nt' + hash;
+}
+
 module.exports.postRequest = postRequest;
 module.exports.getRequest = getRequest;
 module.exports.checkRequired = checkRequired;
+module.exports.hashString = hashString;

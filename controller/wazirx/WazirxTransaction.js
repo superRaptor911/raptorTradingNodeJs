@@ -37,7 +37,7 @@ async function wazirxPlaceTransaction(req, res) {
 
 async function wazirxCheckOrderStatus(req, res) {
   try {
-    checkRequired(req.body, ['username', 'transId']);
+    checkRequired(req.body, ['username', 'orderId']);
     const {username, orderId} = req.body;
 
     console.log(username);
@@ -54,7 +54,7 @@ async function wazirxCheckOrderStatus(req, res) {
 
 async function wazirxStopOrder(req, res) {
   try {
-    checkRequired(req.body, ['username', 'transId', 'coinId']);
+    checkRequired(req.body, ['username', 'orderId', 'coinId']);
     const {username, orderId, coinId} = req.body;
 
     const order = await WazirxTransactionModel.findOne({
