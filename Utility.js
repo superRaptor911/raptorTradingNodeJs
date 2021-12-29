@@ -1,5 +1,14 @@
 /* eslint-disable no-throw-literal */
 const {default: fetch} = require('node-fetch');
+const sgMail = require('@sendgrid/mail');
+
+if (!process.env.SENDGRID_APIKEY) {
+  console.log('loading ...');
+  const dotenv = require('dotenv');
+  dotenv.config();
+}
+
+sgMail.setApiKey(process.env.SENDGRID_APIKEY);
 
 async function postRequest(url, data) {
   try {
@@ -57,7 +66,25 @@ function hashString(string) {
   return 'nt' + hash;
 }
 
+async function sendMail(to, subject, text, html = null) {
+  try {
+    const msg = {
+      to: to,
+      from: 'raptor.inc2018@gmail.com',
+      subject: subject,
+      text: text,
+      html: html || text,
+    };
+
+    await sgMail.send(msg);
+  } catch (e) {
+    /* handle error */
+    console.error('UserPassword::Failed to  send mail', e);
+  }
+}
+
 module.exports.postRequest = postRequest;
 module.exports.getRequest = getRequest;
 module.exports.checkRequired = checkRequired;
 module.exports.hashString = hashString;
+module.exports.sendMail = sendMail;
