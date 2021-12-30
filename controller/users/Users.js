@@ -1,6 +1,6 @@
 /* eslint-disable no-throw-literal */
 const {hashString} = require('../../Utility');
-const UserModel = require('./models/UserModel');
+const UserModel = require('../../models/UserModel');
 
 async function verifyUser(username, password) {
   const usr = await UserModel.findOne({name: username});
