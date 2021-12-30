@@ -1,4 +1,20 @@
 const UserModel = require('../models/UserModel');
+const {hashString} = require('../Utility');
+
+async function loginUser(req, res) {
+  try {
+    const {email, password} = req.body;
+    const doc = await UserModel.findOne({email: email});
+    if (hashString(password) === doc.password) {
+      res.status(200).json({status: true, message: 'Success'});
+    } else {
+      res.status(200).json({status: false, message: 'Wrong Password'});
+    }
+  } catch (e) {
+    console.error('User::addUser', e);
+    res.status(500).json({status: false, message: 'User not found'});
+  }
+}
 
 async function getAlluser(_req, res) {
   try {
@@ -52,6 +68,7 @@ async function deleteUser(req, res) {
   }
 }
 
+module.exports.loginUser = loginUser;
 module.exports.getAlluser = getAlluser;
 module.exports.addUser = addUser;
 module.exports.getUser = getUser;
