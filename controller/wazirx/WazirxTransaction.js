@@ -81,6 +81,26 @@ async function wazirxStopOrder(req, res) {
   }
 }
 
+async function wazirxGetTransactionList(req, res) {
+  try {
+    checkRequired(req.body, ['username']);
+    const {username} = req.body;
+
+    const transactions = await WazirxTransactionModel.find({
+      username: username,
+    });
+
+    res.status(200).json({
+      status: true,
+      data: transactions,
+    });
+  } catch (e) {
+    /* handle error */
+    res.status(500).json({status: false, message: e});
+  }
+}
+
 module.exports.wazirxPlaceTransaction = wazirxPlaceTransaction;
 module.exports.wazirxCheckOrderStatus = wazirxCheckOrderStatus;
 module.exports.wazirxStopOrder = wazirxStopOrder;
+module.exports.wazirxGetTransactionList = wazirxGetTransactionList;

@@ -31,8 +31,8 @@ app.use(async (req, res, next) => {
   } else if (req.path.split('/')[1] === 'wazirx') {
     // User Auth
     try {
-      const {username, password} = req.body;
-      verifyUserAuth(username, password);
+      const {email, password} = req.body;
+      verifyUserAuth(email, password);
     } catch (e) {
       /* handle error */
       res.status(500).json({status: false, message: e});
