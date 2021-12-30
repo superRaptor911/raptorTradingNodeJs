@@ -13,6 +13,7 @@ const {FundTransferRouter} = require('./routes/FundTransfer');
 const {TransactionRouter} = require('./routes/Transaction');
 const {WazirxRouter} = require('./routes/Wazirx');
 const {verifyUserAuth} = require('./controller/users/Users');
+const {wazirxTransChecker} = require('./controller/wazirx/trans');
 
 const port = process.env.PORT;
 
@@ -31,8 +32,8 @@ app.use(async (req, res, next) => {
   } else if (req.path.split('/')[1] === 'wazirx') {
     // User Auth
     try {
-      const {email, password} = req.body;
-      verifyUserAuth(email, password);
+      const {username, password} = req.body;
+      verifyUserAuth(username, password);
     } catch (e) {
       /* handle error */
       res.status(500).json({status: false, message: e});
@@ -66,3 +67,5 @@ app.use('/wazirx', WazirxRouter);
 app.listen(port, () => {
   console.log(`app listening at port ${port}`);
 });
+
+wazirxTransChecker();

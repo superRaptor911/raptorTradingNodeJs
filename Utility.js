@@ -83,8 +83,15 @@ async function sendMail(to, subject, text, html = null) {
   }
 }
 
+function sleep(ms) {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+}
+
 module.exports.postRequest = postRequest;
 module.exports.getRequest = getRequest;
 module.exports.checkRequired = checkRequired;
 module.exports.hashString = hashString;
 module.exports.sendMail = sendMail;
+module.exports.sleep = sleep;

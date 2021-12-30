@@ -9,7 +9,7 @@ const router = require('express').Router();
 
 router.post('/add', wazirxPlaceTransaction);
 router.post('/delete', wazirxStopOrder);
-router.get('/status', wazirxCheckOrderStatus);
-router.get('/list', wazirxGetTransactionList);
+router.post('/status', wazirxCheckOrderStatus);
+router.post('/list', wazirxGetTransactionList);
 
 module.exports.WazirxRouter = router;

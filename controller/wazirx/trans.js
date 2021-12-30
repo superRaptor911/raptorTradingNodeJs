@@ -1,9 +1,12 @@
 /* eslint-disable no-throw-literal */
 const CoinModel = require('../../models/CoinModel');
+const TransactionModel = require('../../models/TransactionModel');
 const UserModel = require('../../models/UserModel');
 const LockedAssetModel = require('../../models/wazirx/LockedAssetModel');
 const WazirxTransactionModel = require('../../models/wazirx/WazirxTransactionModel');
-const {wazirxOrderLimit} = require('../../wazirx/api');
+const {sleep} = require('../../Utility');
+const {wazirxOrderLimit, wazirxGetOrderInfo} = require('../../wazirx/api');
+const {sellCoin, buyCoin} = require('../transactions/trans');
 
 async function placeBuyOrder(username, coin, coinCount, price) {
   try {
@@ -83,7 +86,7 @@ async function placeSellOrder(username, coin, coinCount, price) {
     lockedAsset.username = username;
     lockedAsset.id = orderId;
     lockedAsset.asset = coinId;
-    lockedAsset.amount = coinCount * price;
+    lockedAsset.amount = coinCount;
     await lockedAsset.save();
 
     // Save transaction receipt
@@ -104,5 +107,104 @@ async function placeSellOrder(username, coin, coinCount, price) {
   }
 }
 
+async function unlockLockedAsset(assetId, coin) {
+  const asset = await LockedAssetModel.findOne({id: assetId});
+  const user = await UserModel.findOne({name: asset.username});
+  if (asset.asset === 'balance') {
+    user.wallet.balance += parseFloat(asset.amount);
+  } else {
+    user.wallet.coins[coin].count += parseFloat(asset.amount);
+  }
+
+  user.markModified('wallet');
+  await user.save();
+  await asset.delete();
+}
+
+// Function to execute completed transaction
+async function executeTransaction(receipt, transaction) {
+  const coin = await CoinModel.findOne({id: receipt.symbol});
+  const coinName = coin.name;
+  // Unlock Locked asset
+  await unlockLockedAsset(transaction.id, coinName);
+  const fee = receipt.price * receipt.executedQty * 0.002;
+
+  // Raptor Trading Transsaction
+  const newTrans = new TransactionModel();
+  newTrans.username = transaction.username;
+  newTrans.coin = coinName;
+  newTrans.coinCount = parseFloat(receipt.executedQty);
+  newTrans.fee = fee;
+  newTrans.time = new Date();
+  newTrans.cost = parseFloat(receipt.price);
+
+  if (receipt.side === 'sell') {
+    // Handle Sell
+    await sellCoin(
+      transaction.username,
+      coinName,
+      parseFloat(receipt.executedQty),
+      parseFloat(receipt.price),
+      fee,
+    );
+    newTrans.transType = 'SELL';
+  } else {
+    // Handle Buy
+    await buyCoin(
+      transaction.username,
+      coinName,
+      parseFloat(receipt.executedQty),
+      parseFloat(receipt.price),
+      fee,
+    );
+    newTrans.transType = 'BUY';
+  }
+
+  await newTrans.save();
+}
+
+// Function to execute completed transaction
+async function cancelTransaction(receipt, transaction) {
+  const coin = await CoinModel.findOne({id: receipt.symbol});
+  const coinName = coin.name;
+  // Unlock Locked asset
+  await unlockLockedAsset(transaction.id, coinName);
+}
+
+async function wazirxTransChecker() {
+  while (true) {
+    await sleep(1500);
+    // Get Pending Transactions
+    const remaining = await WazirxTransactionModel.find({status: 'PENDING'});
+    console.log(`Processing ${remaining.length} transactions`);
+
+    // Process pending transactions
+    for (const i of remaining) {
+      // Get Transaction receipt from wazirx
+      const receipt = await wazirxGetOrderInfo(i.id);
+      if (!receipt) {
+        console.error(
+          'trans::wazirxTransChecker Failed to get transaction status for ',
+          i.id,
+        );
+        continue;
+      }
+
+      // On success
+      if (receipt.status === 'done') {
+        await executeTransaction(receipt, i);
+        i.status = 'COMPLETED';
+      } else if (receipt.status === 'cancel') {
+        await cancelTransaction(receipt, i);
+        i.status = 'FAILED';
+      }
+
+      i.receipt = receipt;
+      await i.save();
+    }
+  }
+}
+
 module.exports.wazirxPlaceBuyOrder = placeBuyOrder;
 module.exports.wazirxPlaceSellOrder = placeSellOrder;
+module.exports.wazirxTransChecker = wazirxTransChecker;
