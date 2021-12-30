@@ -173,7 +173,7 @@ async function cancelTransaction(receipt, transaction) {
 
 async function wazirxTransChecker() {
   while (true) {
-    await sleep(1500);
+    await sleep(1000);
     // Get Pending Transactions
     const remaining = await WazirxTransactionModel.find({status: 'PENDING'});
     console.log(`Processing ${remaining.length} transactions`);
@@ -201,6 +201,7 @@ async function wazirxTransChecker() {
 
       i.receipt = receipt;
       await i.save();
+      await sleep(250);
     }
   }
 }
