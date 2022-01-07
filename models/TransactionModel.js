@@ -4,7 +4,7 @@ const transModel = new mongoose.Schema({
   username: {
     type: String,
   },
-  coin: String,
+  coinId: String,
   coinCount: Number,
   cost: Number,
   transType: String,

@@ -1,7 +1,7 @@
 /* eslint-disable no-throw-literal */
 const UserModel = require('../../models/UserModel');
 
-async function buyCoin(username, coin, coinCount, price, fee, force) {
+async function buyCoin(username, coinId, coinCount, price, fee, force) {
   try {
     const user = await UserModel.findOne({name: username});
     let balance = user.wallet.balance;
@@ -15,10 +15,10 @@ async function buyCoin(username, coin, coinCount, price, fee, force) {
       user.wallet.coins = {};
     }
 
-    if (user.wallet.coins[coin]) {
-      user.wallet.coins[coin].count += coinCount;
+    if (user.wallet.coins[coinId]) {
+      user.wallet.coins[coinId] += coinCount;
     } else {
-      user.wallet.coins[coin] = {count: coinCount};
+      user.wallet.coins[coinId] = coinCount;
     }
     user.markModified('wallet');
     await user.save();
@@ -29,21 +29,17 @@ async function buyCoin(username, coin, coinCount, price, fee, force) {
   }
 }
 
-async function sellCoin(username, coin, coinCount, price, fee) {
+async function sellCoin(username, coinId, coinCount, price, fee) {
   try {
     const user = await UserModel.findOne({name: username});
 
     let balance = user.wallet.balance;
     balance += coinCount * price;
 
-    if (
-      user.wallet.coins &&
-      user.wallet.coins[coin] &&
-      user.wallet.coins[coin].count >= coinCount
-    ) {
-      user.wallet.coins[coin].count -= coinCount;
+    if (user.wallet.coins && user.wallet.coins[coinId] >= coinCount) {
+      user.wallet.coins[coinId] -= coinCount;
       user.wallet.balance = balance - fee;
-      console.log('Brr ', user.wallet);
+      console.log('user wallet ', user.wallet);
     } else {
       throw 'INSUFFICIENT COINS';
     }

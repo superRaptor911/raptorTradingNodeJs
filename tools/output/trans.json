@@ -1,0 +1,2054 @@
+[
+    {
+        "_id": {
+            "$oid": "617c1003f7790f0c091791cc"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 3,
+        "fee": 0,
+        "cost": 20.5,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1003f7790f0c091791d0"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 8,
+        "fee": 0,
+        "cost": 12.4,
+        "__v": 0,
+        "coinId": "trxinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1004f7790f0c091791d4"
+        },
+        "username": "Syam Suresh",
+        "transType": "BUY",
+        "coinCount": 7,
+        "fee": 0,
+        "cost": 21.3,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1004f7790f0c091791d8"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 17,
+        "fee": 0,
+        "cost": 24.352,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1004f7790f0c091791dc"
+        },
+        "username": "Syam Suresh",
+        "transType": "BUY",
+        "coinCount": 5,
+        "fee": 0,
+        "cost": 35,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1005f7790f0c091791e0"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 14,
+        "fee": 0,
+        "cost": 35.08,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1005f7790f0c091791e4"
+        },
+        "username": "Vyshnav KS",
+        "transType": "BUY",
+        "coinCount": 14,
+        "fee": 0,
+        "cost": 23.5,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1006f7790f0c091791e8"
+        },
+        "username": "Gokul AB",
+        "transType": "BUY",
+        "coinCount": 10,
+        "fee": 0,
+        "cost": 23.5,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1006f7790f0c091791ec"
+        },
+        "username": "Nived P",
+        "transType": "BUY",
+        "coinCount": 21,
+        "fee": 0,
+        "cost": 23.5,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1007f7790f0c091791f0"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 3,
+        "fee": 0,
+        "cost": 31.8,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1007f7790f0c091791f4"
+        },
+        "username": "Mesmin PJ",
+        "transType": "BUY",
+        "coinCount": 3,
+        "fee": 0,
+        "cost": 31.8,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1007f7790f0c091791f8"
+        },
+        "username": "Binil biju",
+        "transType": "BUY",
+        "coinCount": 3,
+        "fee": 0,
+        "cost": 31.7,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1008f7790f0c091791fc"
+        },
+        "username": "Mahadevan Aravind",
+        "transType": "BUY",
+        "coinCount": 6,
+        "fee": 0,
+        "cost": 31.65,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1008f7790f0c09179200"
+        },
+        "username": "Vyshnav KS",
+        "transType": "BUY",
+        "coinCount": 10,
+        "fee": 0,
+        "cost": 30.7,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1008f7790f0c09179204"
+        },
+        "username": "Thejus",
+        "transType": "BUY",
+        "coinCount": 3,
+        "fee": 0,
+        "cost": 30.5,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1009f7790f0c09179208"
+        },
+        "username": "Midhun Krishna",
+        "transType": "BUY",
+        "coinCount": 9,
+        "fee": 0,
+        "cost": 30.45,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1009f7790f0c0917920c"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 3,
+        "fee": 0,
+        "cost": 28.7,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1009f7790f0c09179210"
+        },
+        "username": "Syam Suresh",
+        "transType": "BUY",
+        "coinCount": 4,
+        "fee": 0.18096,
+        "cost": 22.62,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c100af7790f0c09179214"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 6,
+        "fee": 0.27096,
+        "cost": 22.58,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c100af7790f0c09179218"
+        },
+        "username": "Nived P",
+        "transType": "BUY",
+        "coinCount": 3,
+        "fee": 0.14,
+        "cost": 23.4935,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c100bf7790f0c0917921c"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 4,
+        "fee": 0.17112,
+        "cost": 21.39,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c100bf7790f0c09179220"
+        },
+        "username": "Shine Joseph",
+        "transType": "BUY",
+        "coinCount": 21,
+        "fee": 0.96138,
+        "cost": 22.89,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c100cf7790f0c09179224"
+        },
+        "username": "Gokul AB",
+        "transType": "BUY",
+        "coinCount": 180,
+        "fee": 0.47484,
+        "cost": 1.319,
+        "__v": 0,
+        "coinId": "hotinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c100cf7790f0c09179228"
+        },
+        "username": "Aditya Aravind",
+        "transType": "SELL",
+        "coinCount": 10,
+        "fee": 0.520264,
+        "cost": 26.0132,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c100cf7790f0c0917922c"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 87,
+        "fee": 0.213672,
+        "cost": 1.228,
+        "__v": 0,
+        "coinId": "hotinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c100df7790f0c09179230"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 2.5,
+        "fee": 0.5175,
+        "cost": 103.5,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c100df7790f0c09179234"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 4.5,
+        "fee": 0.976222,
+        "cost": 108.469,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c100ef7790f0c09179238"
+        },
+        "username": "Syam Suresh",
+        "transType": "BUY",
+        "coinCount": 2.2,
+        "fee": 0.4763,
+        "cost": 108.25,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c100ef7790f0c0917923c"
+        },
+        "username": "Vyshnav KS",
+        "transType": "SELL",
+        "coinCount": 24,
+        "fee": 1.3541,
+        "cost": 28.2105,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c100ff7790f0c09179240"
+        },
+        "username": "Gokul AB",
+        "transType": "SELL",
+        "coinCount": 10,
+        "fee": 0.559572,
+        "cost": 27.9786,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c100ff7790f0c09179244"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 3.8,
+        "fee": 0.788166,
+        "cost": 103.706,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1010f7790f0c09179248"
+        },
+        "username": "HighRanger11",
+        "transType": "BUY",
+        "coinCount": 3,
+        "fee": 0.180641,
+        "cost": 30.1068,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1010f7790f0c0917924c"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 0.2,
+        "fee": 1.17999,
+        "cost": 2949.98,
+        "__v": 0,
+        "coinId": "dotinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1011f7790f0c09179250"
+        },
+        "username": "Nived P",
+        "transType": "SELL",
+        "coinCount": 10,
+        "fee": 0.696,
+        "cost": 34.8,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1011f7790f0c09179254"
+        },
+        "username": "Binil biju",
+        "transType": "SELL",
+        "coinCount": 3,
+        "fee": 0.21012,
+        "cost": 35.02,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1011f7790f0c09179258"
+        },
+        "username": "Neeraj N",
+        "transType": "SELL",
+        "coinCount": 15,
+        "fee": 1.164,
+        "cost": 38.8,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1012f7790f0c0917925c"
+        },
+        "username": "Thejus",
+        "transType": "SELL",
+        "coinCount": 3,
+        "fee": 0.23292,
+        "cost": 38.82,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1013f7790f0c09179260"
+        },
+        "username": "Shine Joseph",
+        "transType": "SELL",
+        "coinCount": 10,
+        "fee": 0.762,
+        "cost": 38.1,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1013f7790f0c09179264"
+        },
+        "username": "Aditya Aravind",
+        "transType": "SELL",
+        "coinCount": 15,
+        "fee": 1.1565,
+        "cost": 38.55,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1013f7790f0c09179268"
+        },
+        "username": "V Lakshmi",
+        "transType": "BUY",
+        "coinCount": 9.7,
+        "fee": 1.9788,
+        "cost": 102,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1014f7790f0c0917926c"
+        },
+        "username": "Shine Joseph",
+        "transType": "BUY",
+        "coinCount": 2.4,
+        "fee": 0.4896,
+        "cost": 102,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1014f7790f0c09179270"
+        },
+        "username": "Shine Joseph",
+        "transType": "BUY",
+        "coinCount": 0.09,
+        "fee": 0.511504,
+        "cost": 2841.69,
+        "__v": 0,
+        "coinId": "dotinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1014f7790f0c09179274"
+        },
+        "username": "Vyshnav KS",
+        "transType": "BUY",
+        "coinCount": 3.9,
+        "fee": 0.7956,
+        "cost": 102,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1015f7790f0c09179278"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 0.0075,
+        "fee": 3.9701,
+        "cost": 264673,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1015f7790f0c0917927c"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 5.6,
+        "fee": 1.17264,
+        "cost": 104.7,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1016f7790f0c09179280"
+        },
+        "username": "HighRanger11",
+        "transType": "SELL",
+        "coinCount": 3,
+        "fee": 0.3042,
+        "cost": 50.7,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1016f7790f0c09179284"
+        },
+        "username": "Rohit J",
+        "transType": "BUY",
+        "coinCount": 2,
+        "fee": 0.217964,
+        "cost": 54.491,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1017f7790f0c09179288"
+        },
+        "username": "Aswin Chandra",
+        "transType": "BUY",
+        "coinCount": 1,
+        "fee": 0.1088,
+        "cost": 54.4,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1018f7790f0c0917928c"
+        },
+        "username": "Yaseen",
+        "transType": "BUY",
+        "coinCount": 4,
+        "fee": 0.432,
+        "cost": 54,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1018f7790f0c09179290"
+        },
+        "username": "Thejus",
+        "transType": "BUY",
+        "coinCount": 12,
+        "fee": 1.2936,
+        "cost": 53.9,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1018f7790f0c09179294"
+        },
+        "username": "Yaseen",
+        "transType": "BUY",
+        "coinCount": 3.7,
+        "fee": 0.782391,
+        "cost": 105.729,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1019f7790f0c09179298"
+        },
+        "username": "Yaseen",
+        "transType": "BUY",
+        "coinCount": 0.0014,
+        "fee": 0.74368,
+        "cost": 265600,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1019f7790f0c0917929c"
+        },
+        "username": "Rohit J",
+        "transType": "BUY",
+        "coinCount": 2.9,
+        "fee": 0.627618,
+        "cost": 108.21,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1019f7790f0c091792a0"
+        },
+        "username": "Binil biju",
+        "transType": "BUY",
+        "coinCount": 2,
+        "fee": 0.200344,
+        "cost": 50.0859,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101af7790f0c091792a4"
+        },
+        "username": "Vyshnav KS",
+        "transType": "BUY",
+        "coinCount": 0.0018,
+        "fee": 0.94716,
+        "cost": 263100,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101af7790f0c091792a8"
+        },
+        "username": "Mesmin PJ",
+        "transType": "BUY",
+        "coinCount": 0.8,
+        "fee": 0.17367,
+        "cost": 108.544,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101bf7790f0c091792ac"
+        },
+        "username": "Rohit J",
+        "transType": "BUY",
+        "coinCount": 1,
+        "fee": 0.235,
+        "cost": 117.5,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101bf7790f0c091792b0"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 1.7,
+        "fee": 0.397766,
+        "cost": 116.99,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101bf7790f0c091792b4"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 0.0014,
+        "fee": 0.752528,
+        "cost": 268760,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101bf7790f0c091792b8"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 0.11,
+        "fee": 0.6688,
+        "cost": 3040,
+        "__v": 0,
+        "coinId": "dotinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101cf7790f0c091792bc"
+        },
+        "username": "Aaron Paul",
+        "transType": "BUY",
+        "coinCount": 1.5,
+        "fee": 0.366,
+        "cost": 122,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101cf7790f0c091792c0"
+        },
+        "username": "Vyshnav KS",
+        "transType": "BUY",
+        "coinCount": 0.01,
+        "fee": 0.269998,
+        "cost": 13500,
+        "__v": 0,
+        "coinId": "etcinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101cf7790f0c091792c4"
+        },
+        "username": "Rohit J",
+        "transType": "BUY",
+        "coinCount": 0.0008,
+        "fee": 0.425552,
+        "cost": 265970,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101df7790f0c091792c8"
+        },
+        "username": "Rohit J",
+        "transType": "BUY",
+        "coinCount": 5,
+        "fee": 0.1151,
+        "cost": 11.51,
+        "__v": 0,
+        "coinId": "trxinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101df7790f0c091792cc"
+        },
+        "username": "Aswin Chandra",
+        "transType": "BUY",
+        "coinCount": 8,
+        "fee": 0.185606,
+        "cost": 11.6004,
+        "__v": 0,
+        "coinId": "trxinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101ef7790f0c091792d0"
+        },
+        "username": "Binil biju",
+        "transType": "SELL",
+        "coinCount": 2,
+        "fee": 0.22051,
+        "cost": 55.1276,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101ef7790f0c091792d4"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 1.6,
+        "fee": 0.39744,
+        "cost": 124.2,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101ff7790f0c091792d8"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 0.09,
+        "fee": 0.5544,
+        "cost": 3080,
+        "__v": 0,
+        "coinId": "dotinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c101ff7790f0c091792dc"
+        },
+        "username": "Binil biju",
+        "transType": "BUY",
+        "coinCount": 84,
+        "fee": 0.198408,
+        "cost": 1.181,
+        "__v": 0,
+        "coinId": "hotinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1020f7790f0c091792e0"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 0.001,
+        "fee": 0.595356,
+        "cost": 297678,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1020f7790f0c091792e4"
+        },
+        "username": "Sudev T",
+        "transType": "BUY",
+        "coinCount": 0.0006,
+        "fee": 0.357036,
+        "cost": 297530,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1020f7790f0c091792e8"
+        },
+        "username": "Binil biju",
+        "transType": "SELL",
+        "coinCount": 84,
+        "fee": 0.190512,
+        "cost": 1.134,
+        "__v": 0,
+        "coinId": "hotinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1021f7790f0c091792ec"
+        },
+        "username": "Rohit J",
+        "transType": "BUY",
+        "coinCount": 3,
+        "fee": 0.2226,
+        "cost": 37.1,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1021f7790f0c091792f0"
+        },
+        "username": "HighRanger11",
+        "transType": "BUY",
+        "coinCount": 4,
+        "fee": 0.31,
+        "cost": 37.5058,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1021f7790f0c091792f4"
+        },
+        "username": "Binil biju",
+        "transType": "BUY",
+        "coinCount": 2,
+        "fee": 0.150023,
+        "cost": 37.5058,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1022f7790f0c091792f8"
+        },
+        "username": "Fawaz Ahmed",
+        "transType": "BUY",
+        "coinCount": 12,
+        "fee": 0.90048,
+        "cost": 37.52,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1022f7790f0c091792fc"
+        },
+        "username": "Balu",
+        "transType": "BUY",
+        "coinCount": 0.0006,
+        "fee": 0.35988,
+        "cost": 299900,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1023f7790f0c09179300"
+        },
+        "username": "Fawaz Ahmed",
+        "transType": "BUY",
+        "coinCount": 2,
+        "fee": 0.16992,
+        "cost": 42.48,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1023f7790f0c09179304"
+        },
+        "username": "Thejus",
+        "transType": "BUY",
+        "coinCount": 8,
+        "fee": 0.6736,
+        "cost": 42.1,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1023f7790f0c09179308"
+        },
+        "username": "Vyshnav KS",
+        "transType": "BUY",
+        "coinCount": 2,
+        "fee": 0.5464,
+        "cost": 136.6,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1023f7790f0c0917930c"
+        },
+        "username": "Vyshnav KS",
+        "transType": "BUY",
+        "coinCount": 1,
+        "fee": 0.2258,
+        "cost": 112.9,
+        "__v": 0,
+        "coinId": "xrpinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1024f7790f0c09179310"
+        },
+        "username": "Binil biju",
+        "transType": "SELL",
+        "coinCount": 2,
+        "fee": 0.14,
+        "cost": 34.5502,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1024f7790f0c09179314"
+        },
+        "username": "Binil biju",
+        "transType": "BUY",
+        "coinCount": 3,
+        "fee": 0.2,
+        "cost": 31.8,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1025f7790f0c09179318"
+        },
+        "username": "HighRanger11",
+        "transType": "BUY",
+        "coinCount": 11,
+        "fee": 0.21846,
+        "cost": 9.93,
+        "__v": 0,
+        "coinId": "trxinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1025f7790f0c0917931c"
+        },
+        "username": "Binil biju",
+        "transType": "SELL",
+        "coinCount": 3,
+        "fee": 0.24,
+        "cost": 39.94,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1026f7790f0c09179320"
+        },
+        "username": "Aravindan M",
+        "transType": "BUY",
+        "coinCount": 0.0062,
+        "fee": 4,
+        "cost": 322021,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1026f7790f0c09179324"
+        },
+        "username": "Aravindan M",
+        "transType": "BUY",
+        "coinCount": 0.38,
+        "fee": 3,
+        "cost": 3890,
+        "__v": 0,
+        "coinId": "dotinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1027f7790f0c09179328"
+        },
+        "username": "Aravindan M",
+        "transType": "BUY",
+        "coinCount": 8.6,
+        "fee": 3,
+        "cost": 173,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1028f7790f0c0917932c"
+        },
+        "username": "Syam Suresh",
+        "transType": "BUY",
+        "coinCount": 95305,
+        "fee": 0.267807,
+        "cost": 0.001405,
+        "__v": 0,
+        "coinId": "shibinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1028f7790f0c09179330"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 71530,
+        "fee": 0.2,
+        "cost": 0.0014,
+        "__v": 0,
+        "coinId": "shibinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1028f7790f0c09179334"
+        },
+        "username": "Binil biju",
+        "transType": "BUY",
+        "coinCount": 36221,
+        "fee": 0.12,
+        "cost": 0.001408,
+        "__v": 0,
+        "coinId": "shibinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1029f7790f0c09179338"
+        },
+        "username": "Binil biju",
+        "transType": "BUY",
+        "coinCount": 0.0002,
+        "fee": 0.1096,
+        "cost": 274000,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1029f7790f0c0917933c"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 0.002,
+        "fee": 1.0941,
+        "cost": 273526,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1029f7790f0c09179340"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 45864,
+        "fee": 0.1,
+        "cost": 1e-08,
+        "__v": 0,
+        "coinId": "shibinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c102af7790f0c09179344"
+        },
+        "username": "HighRanger11",
+        "transType": "SELL",
+        "coinCount": 2,
+        "fee": 0.161064,
+        "cost": 40.2659,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c102af7790f0c09179348"
+        },
+        "username": "HighRanger11",
+        "transType": "BUY",
+        "coinCount": 61818,
+        "fee": 0.169999,
+        "cost": 0.001375,
+        "__v": 0,
+        "coinId": "shibinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c102bf7790f0c0917934c"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 0.13,
+        "fee": 0.58656,
+        "cost": 2256,
+        "__v": 0,
+        "coinId": "dotinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c102bf7790f0c09179350"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 1.7,
+        "fee": 0.436917,
+        "cost": 128.505,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c102bf7790f0c09179354"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 4,
+        "fee": 1.00409,
+        "cost": 125.511,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c102cf7790f0c09179358"
+        },
+        "username": "Vyshnav KS",
+        "transType": "BUY",
+        "coinCount": 0.0011,
+        "fee": 0.466357,
+        "cost": 211981,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c102cf7790f0c0917935c"
+        },
+        "username": "Shine Joseph",
+        "transType": "BUY",
+        "coinCount": 0.0014,
+        "fee": 0.590796,
+        "cost": 210998,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c102df7790f0c09179360"
+        },
+        "username": "HighRanger11",
+        "transType": "BUY",
+        "coinCount": 1,
+        "fee": 0.24,
+        "cost": 120,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c102df7790f0c09179364"
+        },
+        "username": "HighRanger11",
+        "transType": "BUY",
+        "coinCount": 0.0004,
+        "fee": 0.172,
+        "cost": 215000,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c102ef7790f0c09179368"
+        },
+        "username": "Nakul menon",
+        "transType": "BUY",
+        "coinCount": 2.1,
+        "fee": 0.581378,
+        "cost": 138.423,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c102ef7790f0c0917936c"
+        },
+        "username": "Nakul menon",
+        "transType": "BUY",
+        "coinCount": 0.0013,
+        "fee": 0.577197,
+        "cost": 221999,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c102ff7790f0c09179370"
+        },
+        "username": "Binil biju",
+        "transType": "BUY",
+        "coinCount": 2,
+        "fee": 0.13953,
+        "cost": 34.8825,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c102ff7790f0c09179374"
+        },
+        "username": "Binil biju",
+        "transType": "BUY",
+        "coinCount": 48,
+        "fee": 0.4896,
+        "cost": 5.1,
+        "__v": 0,
+        "coinId": "trxinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1030f7790f0c09179378"
+        },
+        "username": "Athira",
+        "transType": "BUY",
+        "coinCount": 0.7,
+        "fee": 0.189,
+        "cost": 135,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1030f7790f0c0917937c"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 1,
+        "fee": 0.276,
+        "cost": 138,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1030f7790f0c09179380"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 1,
+        "fee": 0.25022,
+        "cost": 125.11,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1031f7790f0c09179384"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 2,
+        "fee": 0.402704,
+        "cost": 100.676,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1031f7790f0c09179388"
+        },
+        "username": "Mahadevan Aravind",
+        "transType": "BUY",
+        "coinCount": 8,
+        "fee": 0.36816,
+        "cost": 23.01,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1032f7790f0c0917938c"
+        },
+        "username": "Aaron Paul",
+        "transType": "BUY",
+        "coinCount": 0.001,
+        "fee": 0.364972,
+        "cost": 182486,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1032f7790f0c09179390"
+        },
+        "username": "Athira",
+        "transType": "BUY",
+        "coinCount": 1,
+        "fee": 0.223002,
+        "cost": 111.501,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1032f7790f0c09179394"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 0.0048,
+        "fee": 1.66911,
+        "cost": 173866,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1033f7790f0c09179398"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 3,
+        "fee": 0.62994,
+        "cost": 104.99,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1033f7790f0c0917939c"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 1.6,
+        "fee": 0.348771,
+        "cost": 108.991,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1034f7790f0c091793a0"
+        },
+        "username": "Sidharth R",
+        "transType": "BUY",
+        "coinCount": 1,
+        "fee": 0.1952,
+        "cost": 97.6,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1034f7790f0c091793a4"
+        },
+        "username": "Aaron Paul",
+        "transType": "BUY",
+        "coinCount": 2,
+        "fee": 0.374,
+        "cost": 93.5,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1035f7790f0c091793a8"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 5,
+        "fee": 0.92805,
+        "cost": 92.805,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1035f7790f0c091793ac"
+        },
+        "username": "Aaron Paul",
+        "transType": "BUY",
+        "coinCount": 1,
+        "fee": 0.18877,
+        "cost": 94.385,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1036f7790f0c091793b0"
+        },
+        "username": "Aaron Paul",
+        "transType": "BUY",
+        "coinCount": 1,
+        "fee": 0.264,
+        "cost": 132,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1036f7790f0c091793b4"
+        },
+        "username": "Syam Suresh",
+        "transType": "BUY",
+        "coinCount": 4,
+        "fee": 0.808632,
+        "cost": 101.079,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1037f7790f0c091793b8"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 5,
+        "fee": 1.12627,
+        "cost": 112.627,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1037f7790f0c091793bc"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 7,
+        "fee": 1.55876,
+        "cost": 111.34,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1038f7790f0c091793c0"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 0.13,
+        "fee": 0.462787,
+        "cost": 1779.95,
+        "__v": 0,
+        "coinId": "dotinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1038f7790f0c091793c4"
+        },
+        "username": "Aaron Paul",
+        "transType": "BUY",
+        "coinCount": 0.03,
+        "fee": 0.303479,
+        "cost": 5057.99,
+        "__v": 0,
+        "coinId": "etcinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1038f7790f0c091793c8"
+        },
+        "username": "V Lakshmi",
+        "transType": "SELL",
+        "coinCount": 5.2,
+        "fee": 2.0176,
+        "cost": 194,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1039f7790f0c091793cc"
+        },
+        "username": "Binil biju",
+        "transType": "SELL",
+        "coinCount": 48,
+        "fee": 0.659866,
+        "cost": 6.8736,
+        "__v": 0,
+        "coinId": "trxinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1039f7790f0c091793d0"
+        },
+        "username": "Binil biju",
+        "transType": "BUY",
+        "coinCount": 0.0002,
+        "fee": 0.102,
+        "cost": 255000,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1039f7790f0c091793d4"
+        },
+        "username": "Binil biju",
+        "transType": "SELL",
+        "coinCount": 0.0004,
+        "fee": 0.102,
+        "cost": 255000,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c103af7790f0c091793d8"
+        },
+        "username": "Fawaz Ahmed",
+        "transType": "SELL",
+        "coinCount": 14,
+        "fee": 0.68768,
+        "cost": 24.56,
+        "__v": 0,
+        "coinId": "dogeinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c103af7790f0c091793dc"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 8,
+        "fee": 2.00235,
+        "cost": 125.147,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c103bf7790f0c091793e0"
+        },
+        "username": "Aaron Paul",
+        "transType": "BUY",
+        "coinCount": 2.5,
+        "fee": 1.0755,
+        "cost": 215.1,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c103bf7790f0c091793e4"
+        },
+        "username": "Fawaz Ahmed",
+        "transType": "BUY",
+        "coinCount": 2,
+        "fee": 0.503604,
+        "cost": 125.901,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c103cf7790f0c091793e8"
+        },
+        "username": "Fawaz Ahmed",
+        "transType": "BUY",
+        "coinCount": 0.24,
+        "fee": 0.184216,
+        "cost": 383.783,
+        "__v": 0,
+        "coinId": "pushinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c103cf7790f0c091793ec"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 3,
+        "fee": 0.63,
+        "cost": 105,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c103df7790f0c091793f0"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 0.38,
+        "fee": 1.91303,
+        "cost": 2517.15,
+        "__v": 0,
+        "coinId": "dotinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c103df7790f0c091793f4"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 9,
+        "fee": 1.998,
+        "cost": 111,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c103ef7790f0c091793f8"
+        },
+        "username": "Neeraj N",
+        "transType": "SELL",
+        "coinCount": 87,
+        "fee": 0.166692,
+        "cost": 0.958,
+        "__v": 0,
+        "coinId": "hotinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c103ef7790f0c091793fc"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 2,
+        "fee": 0.44504,
+        "cost": 111.26,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c103ff7790f0c09179400"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 30,
+        "fee": 5.988,
+        "cost": 99.8,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "617c103ff7790f0c09179404"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 10.6,
+        "fee": 3.99832,
+        "cost": 188.6,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "617c1040f7790f0c09179408"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 0.0073,
+        "fee": 3.77922,
+        "cost": 258851,
+        "__v": 0,
+        "coinId": "ethinr"
+    },
+    {
+        "_id": {
+            "$oid": "618f716db1204cb74b46db50"
+        },
+        "username": "Binil biju",
+        "transType": "SELL",
+        "coinCount": 36221,
+        "fee": 0.318165264,
+        "cost": 0.004392,
+        "__v": 0,
+        "coinId": "shibinr"
+    },
+    {
+        "_id": {
+            "$oid": "61c854b0d01f62acf786189d"
+        },
+        "username": "Aditya Aravind",
+        "transType": "SELL",
+        "coinCount": 30,
+        "fee": 13.122,
+        "cost": 218.7,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "61c95c236456d116f1b888ad"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 56.1,
+        "fee": 13.113958440000001,
+        "cost": 116.8802,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "61c95e6d6456d116f1b88a06"
+        },
+        "username": "Neeraj N",
+        "transType": "SELL",
+        "coinCount": 7,
+        "fee": 3.1547460000000003,
+        "cost": 225.339,
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "61c95f386456d116f1b88a10"
+        },
+        "username": "Aditya Aravind",
+        "transType": "SELL",
+        "coinCount": 13.9,
+        "fee": 3.24704,
+        "cost": 116.8,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "61c95f696456d116f1b88a14"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 13.9,
+        "fee": 3.24824096,
+        "cost": 116.8432,
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "61c9617a6456d116f1b88a92"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 0.64,
+        "fee": 3.1981184000000002,
+        "cost": 2498.53,
+        "__v": 0,
+        "coinId": "dotinr"
+    },
+    {
+        "_id": {
+            "$oid": "61c9783097e0c18d9f127958"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 4.75,
+        "fee": 0,
+        "cost": 0,
+        "__v": 0,
+        "coinId": "batinr"
+    },
+    {
+        "_id": {
+            "$oid": "61cb3b1e3453b2864ccd3a90"
+        },
+        "username": "Neeraj N",
+        "transType": "BUY",
+        "coinCount": 1,
+        "fee": 0,
+        "cost": 0,
+        "__v": 0,
+        "coinId": "batinr"
+    },
+    {
+        "_id": {
+            "$oid": "61cdd9d046e02c42fa304aa3"
+        },
+        "username": "Aditya Aravind",
+        "coinCount": 1,
+        "fee": 0.190002,
+        "cost": 95.001,
+        "transType": "SELL",
+        "__v": 0,
+        "coinId": "batinr"
+    },
+    {
+        "_id": {
+            "$oid": "61cdda49f110fe497a6709c6"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 1,
+        "fee": 0.192,
+        "cost": 96,
+        "__v": 0,
+        "coinId": "batinr"
+    },
+    {
+        "_id": {
+            "$oid": "61cddd3946e02c42fa304ccf"
+        },
+        "username": "Aditya Aravind",
+        "coinCount": 1,
+        "fee": 0.19101400000000002,
+        "cost": 95.507,
+        "transType": "SELL",
+        "__v": 0,
+        "coinId": "batinr"
+    },
+    {
+        "_id": {
+            "$oid": "61cddf9ef110fe497a670bea"
+        },
+        "username": "Aditya Aravind",
+        "transType": "BUY",
+        "coinCount": 1,
+        "fee": 0.193112,
+        "cost": 96.556,
+        "__v": 0,
+        "coinId": "batinr"
+    },
+    {
+        "_id": {
+            "$oid": "61cde453f110fe497a670cc0"
+        },
+        "username": "Aditya Aravind",
+        "transType": "SELL",
+        "coinCount": 1,
+        "fee": 0.194,
+        "cost": 97,
+        "__v": 0,
+        "coinId": "batinr"
+    },
+    {
+        "_id": {
+            "$oid": "61cde5e346e02c42fa305328"
+        },
+        "username": "Aditya Aravind",
+        "coinCount": 1,
+        "fee": 0.19419999999999998,
+        "cost": 97.1,
+        "transType": "SELL",
+        "__v": 0,
+        "coinId": "batinr"
+    },
+    {
+        "_id": {
+            "$oid": "61cde7e746e02c42fa305494"
+        },
+        "username": "Aditya Aravind",
+        "coinCount": 2,
+        "fee": 0.38880000000000003,
+        "cost": 97.2,
+        "transType": "BUY",
+        "__v": 0,
+        "coinId": "batinr"
+    },
+    {
+        "_id": {
+            "$oid": "61cdf8f708de9c07e2d932cb"
+        },
+        "username": "Aditya Aravind",
+        "coinCount": 1,
+        "fee": 0.19201400000000002,
+        "cost": 96.007,
+        "transType": "SELL",
+        "__v": 0,
+        "coinId": "batinr"
+    },
+    {
+        "_id": {
+            "$oid": "61cdf93708de9c07e2d93357"
+        },
+        "username": "Aditya Aravind",
+        "coinCount": 1,
+        "fee": 0.19395400000000002,
+        "cost": 96.977,
+        "transType": "BUY",
+        "__v": 0,
+        "coinId": "batinr"
+    },
+    {
+        "_id": {
+            "$oid": "61cdfbc4499f8020b8bdf8db"
+        },
+        "username": "Aditya Aravind",
+        "coinCount": 1,
+        "fee": 0.19201400000000002,
+        "cost": 96.007,
+        "transType": "SELL",
+        "__v": 0,
+        "coinId": "batinr"
+    },
+    {
+        "_id": {
+            "$oid": "61cdfbe7499f8020b8bdf920"
+        },
+        "username": "Aditya Aravind",
+        "coinCount": 1,
+        "fee": 0.19395400000000002,
+        "cost": 96.977,
+        "transType": "BUY",
+        "__v": 0,
+        "coinId": "batinr"
+    },
+    {
+        "_id": {
+            "$oid": "61ce78c5c40a371469599e03"
+        },
+        "username": "Fawaz Ahmed",
+        "coinCount": 2,
+        "fee": 0.8075359999999999,
+        "cost": 201.884,
+        "transType": "SELL",
+        "__v": 0,
+        "coinId": "maticinr"
+    },
+    {
+        "_id": {
+            "$oid": "61d40a0134e4c9e47fef7bf4"
+        },
+        "username": "Neeraj N",
+        "coinCount": 0.24,
+        "fee": 1.1325071999999998,
+        "cost": 2359.39,
+        "transType": "SELL",
+        "__v": 0,
+        "coinId": "dotinr"
+    },
+    {
+        "_id": {
+            "$oid": "61d40a9e34e4c9e47fef7ddc"
+        },
+        "username": "Neeraj N",
+        "coinCount": 5,
+        "fee": 1.054,
+        "cost": 105.4,
+        "transType": "SELL",
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "61d40ad334e4c9e47fef7e7b"
+        },
+        "username": "Neeraj N",
+        "coinCount": 10,
+        "fee": 2.1138000000000003,
+        "cost": 105.69,
+        "transType": "BUY",
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "61d6c97ec5d2542f8479a904"
+        },
+        "username": "Ameeens",
+        "coinCount": 10.2,
+        "fee": 1.9990939199999997,
+        "cost": 97.9948,
+        "transType": "BUY",
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "61d6c9c8c5d2542f8479a9f7"
+        },
+        "username": "Ameeens",
+        "coinCount": 10.2,
+        "fee": 1.99908168,
+        "cost": 97.9942,
+        "transType": "BUY",
+        "__v": 0,
+        "coinId": "adainr"
+    },
+    {
+        "_id": {
+            "$oid": "61d6ca00c5d2542f8479aaae"
+        },
+        "username": "Ameeens",
+        "coinCount": 0.0072,
+        "fee": 3.9001464,
+        "cost": 270843.5,
+        "transType": "BUY",
+        "__v": 0,
+        "coinId": "ethinr"
+    }
+]

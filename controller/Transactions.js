@@ -7,28 +7,36 @@ async function addTransaction(req, res) {
     checkRequired(req.body, [
       'username',
       'transType',
-      'coin',
+      'coinId',
       'coinCount',
       'price',
       'fee',
     ]);
-    let {username, transType, coin, coinCount, price, fee, time, force} =
-      req.body;
+    let {
+      username,
+      transType,
+      coin: coinId,
+      coinCount,
+      price,
+      fee,
+      time,
+      force,
+    } = req.body;
 
     coinCount = parseFloat(coinCount);
     price = parseFloat(price);
     fee = parseFloat(fee);
 
     if (transType === 'SELL') {
-      await sellCoin(username, coin, coinCount, price, fee);
+      await sellCoin(username, coinId, coinCount, price, fee);
     } else {
-      await buyCoin(username, coin, coinCount, price, fee, force);
+      await buyCoin(username, coinId, coinCount, price, fee, force);
     }
 
     const newTrans = new TransactionModel();
     newTrans.username = username;
     newTrans.transType = transType;
-    newTrans.coin = coin;
+    newTrans.coinId = coinId;
     newTrans.coinCount = coinCount;
     newTrans.fee = fee;
     newTrans.time = time;
