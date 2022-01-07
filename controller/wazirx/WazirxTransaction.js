@@ -9,20 +9,20 @@ async function wazirxPlaceTransaction(req, res) {
     checkRequired(req.body, [
       'username',
       'transType',
-      'coin',
+      'coinId',
       'coinCount',
       'price',
     ]);
-    let {username, transType, coin, coinCount, price} = req.body;
+    let {username, transType, coinId, coinCount, price} = req.body;
 
     coinCount = parseFloat(coinCount);
     price = parseFloat(price);
 
     let orderId = '0';
     if (transType === 'SELL') {
-      orderId = await wazirxPlaceSellOrder(username, coin, coinCount, price);
+      orderId = await wazirxPlaceSellOrder(username, coinId, coinCount, price);
     } else {
-      orderId = await wazirxPlaceBuyOrder(username, coin, coinCount, price);
+      orderId = await wazirxPlaceBuyOrder(username, coinId, coinCount, price);
     }
     res.status(200).json({
       status: true,
@@ -40,7 +40,6 @@ async function wazirxCheckOrderStatus(req, res) {
     checkRequired(req.body, ['username', 'orderId']);
     const {username, orderId} = req.body;
 
-    console.log(username);
     const result = await wazirxGetOrderInfo(orderId);
     res.status(200).json({
       status: true,

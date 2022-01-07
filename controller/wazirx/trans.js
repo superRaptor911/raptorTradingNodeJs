@@ -1,5 +1,4 @@
 /* eslint-disable no-throw-literal */
-const CoinModel = require('../../models/CoinModel');
 const TransactionModel = require('../../models/TransactionModel');
 const UserModel = require('../../models/UserModel');
 const LockedAssetModel = require('../../models/wazirx/LockedAssetModel');
@@ -8,11 +7,9 @@ const {sleep} = require('../../Utility');
 const {wazirxOrderLimit, wazirxGetOrderInfo} = require('../../wazirx/api');
 const {sellCoin, buyCoin} = require('../transactions/trans');
 
-async function placeBuyOrder(username, coin, coinCount, price) {
+async function placeBuyOrder(username, coinId, coinCount, price) {
   try {
     const user = await UserModel.findOne({name: username});
-    const coinObj = await CoinModel.findOne({name: coin});
-    const coinId = coinObj.id;
 
     // check if transaction feasible
     let balance = user.wallet.balance;
@@ -56,23 +53,15 @@ async function placeBuyOrder(username, coin, coinCount, price) {
   }
 }
 
-async function placeSellOrder(username, coin, coinCount, price) {
+async function placeSellOrder(username, coinId, coinCount, price) {
   try {
     const user = await UserModel.findOne({name: username});
     // check if transaction feasible
-    if (
-      !(
-        user.wallet.coins &&
-        user.wallet.coins[coin] &&
-        user.wallet.coins[coin].count >= coinCount
-      )
-    ) {
+    if (!(user.wallet.coins && user.wallet.coins[coinId] >= coinCount)) {
       throw 'INSUFFICIENT COINS';
     }
 
-    user.wallet.coins[coin].count -= coinCount;
-    const coinObj = await CoinModel.findOne({name: coin});
-    const coinId = coinObj.id;
+    user.wallet.coins[coinId] -= coinCount;
 
     // Place order
     const result = await wazirxOrderLimit(coinId, coinCount, price, 'sell');
@@ -107,13 +96,13 @@ async function placeSellOrder(username, coin, coinCount, price) {
   }
 }
 
-async function unlockLockedAsset(assetId, coin) {
+async function unlockLockedAsset(assetId, coinId) {
   const asset = await LockedAssetModel.findOne({id: assetId});
   const user = await UserModel.findOne({name: asset.username});
   if (asset.asset === 'balance') {
     user.wallet.balance += parseFloat(asset.amount);
   } else {
-    user.wallet.coins[coin].count += parseFloat(asset.amount);
+    user.wallet.coins[coinId] += parseFloat(asset.amount);
   }
 
   user.markModified('wallet');
@@ -123,16 +112,15 @@ async function unlockLockedAsset(assetId, coin) {
 
 // Function to execute completed transaction
 async function executeTransaction(receipt, transaction) {
-  const coin = await CoinModel.findOne({id: receipt.symbol});
-  const coinName = coin.name;
+  const coinId = receipt.symbol;
   // Unlock Locked asset
-  await unlockLockedAsset(transaction.id, coinName);
+  await unlockLockedAsset(transaction.id, coinId);
   const fee = receipt.price * receipt.executedQty * 0.002;
 
   // Raptor Trading Transsaction
   const newTrans = new TransactionModel();
   newTrans.username = transaction.username;
-  newTrans.coin = coinName;
+  newTrans.coinId = coinId;
   newTrans.coinCount = parseFloat(receipt.executedQty);
   newTrans.fee = fee;
   newTrans.time = new Date();
@@ -142,7 +130,7 @@ async function executeTransaction(receipt, transaction) {
     // Handle Sell
     await sellCoin(
       transaction.username,
-      coinName,
+      coinId,
       parseFloat(receipt.executedQty),
       parseFloat(receipt.price),
       fee,
@@ -152,7 +140,7 @@ async function executeTransaction(receipt, transaction) {
     // Handle Buy
     await buyCoin(
       transaction.username,
-      coinName,
+      coinId,
       parseFloat(receipt.executedQty),
       parseFloat(receipt.price),
       fee,
@@ -165,10 +153,9 @@ async function executeTransaction(receipt, transaction) {
 
 // Function to execute completed transaction
 async function cancelTransaction(receipt, transaction) {
-  const coin = await CoinModel.findOne({id: receipt.symbol});
-  const coinName = coin.name;
+  const coinId = receipt.symbol;
   // Unlock Locked asset
-  await unlockLockedAsset(transaction.id, coinName);
+  await unlockLockedAsset(transaction.id, coinId);
 }
 
 async function wazirxTransChecker() {
@@ -183,10 +170,7 @@ async function wazirxTransChecker() {
       // Get Transaction receipt from wazirx
       const receipt = await wazirxGetOrderInfo(i.id);
       if (!receipt) {
-        console.error(
-          'trans::wazirxTransChecker Failed to get transaction status for ',
-          i.id,
-        );
+        console.error('trans::Failed to get transaction status for ', i.id);
         continue;
       }
 
