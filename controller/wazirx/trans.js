@@ -154,8 +154,15 @@ async function executeTransaction(receipt, transaction) {
 // Function to execute completed transaction
 async function cancelTransaction(receipt, transaction) {
   const coinId = receipt.symbol;
-  // Unlock Locked asset
-  await unlockLockedAsset(transaction.id, coinId);
+  const qty = parseFloat(receipt.executedQty);
+
+  if (qty > 0) {
+    // Execute if executed
+    await executeTransaction(receipt, transaction);
+  } else {
+    // Unlock Locked asset
+    await unlockLockedAsset(transaction.id, coinId);
+  }
 }
 
 async function wazirxTransChecker() {

@@ -2,8 +2,8 @@
 const {postRequest, getRequest} = require('../Utility');
 const {default: fetch} = require('node-fetch');
 
-// const server = 'https://raptor-trading.herokuapp.com';
-const server = 'http://localhost:8080';
+const server = 'https://raptor-trading.herokuapp.com';
+// const server = 'http://localhost:8080';
 
 function checkStatus(data) {
   if (data && data.status) {
@@ -123,7 +123,7 @@ async function deleteCoin(name) {
 async function coinPrice() {
   try {
     const data = await getRequest(server + '/coins/prices');
-    console.log('coinPrice ', data);
+    return data.data;
   } catch (e) {
     console.error('coinTest::coinPrice ', e);
   }
