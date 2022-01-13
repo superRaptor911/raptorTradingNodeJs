@@ -37,6 +37,7 @@ app.use(async (req, res, next) => {
     } catch (e) {
       /* handle error */
       res.status(500).json({status: false, message: e});
+      return;
     }
     next();
   } else {
@@ -49,6 +50,7 @@ app.use(async (req, res, next) => {
     } catch (e) {
       console.error('index::', e);
       res.status(500).json({status: false, message: e});
+      return;
     }
     next();
   }
