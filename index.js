@@ -14,6 +14,7 @@ const {TransactionRouter} = require('./routes/Transaction');
 const {WazirxRouter} = require('./routes/Wazirx');
 const {verifyUserAuth} = require('./controller/users/Users');
 const {wazirxTransChecker} = require('./controller/wazirx/trans');
+const {authorize} = require('./auth');
 
 const port = process.env.PORT;
 
@@ -25,36 +26,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 // parse application/json
 app.use(bodyParser.json());
 
-app.use(async (req, res, next) => {
-  // Login and Get req does not require auth
-  if (req.path === '/users/login' || req.method === 'GET') {
-    next();
-  } else if (req.path.split('/')[1] === 'wazirx') {
-    // User Auth
-    try {
-      const {username, password} = req.body;
-      verifyUserAuth(username, password);
-    } catch (e) {
-      /* handle error */
-      res.status(500).json({status: false, message: e});
-      return;
-    }
-    next();
-  } else {
-    // Admin Auth
-    try {
-      const {password} = req.body;
-      if (password !== process.env.PASS) {
-        throw 'Wrong Admin Password';
-      }
-    } catch (e) {
-      console.error('index::', e);
-      res.status(500).json({status: false, message: e});
-      return;
-    }
-    next();
-  }
-});
+app.use(authorize);
 
 app.get('/', (_req, res) => {
   res.send('Hello World!');
