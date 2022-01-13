@@ -19,9 +19,9 @@ async function transferFund(req, res) {
     donation = parseFloat(donation);
 
     if (transType === 'DEPOSIT') {
-      await depositFund(username, amount, fee);
+      await depositFund(username, amount, fee, donation);
     } else {
-      await withdrawFund(username, amount, fee, force);
+      await withdrawFund(username, amount, fee, donation, force);
     }
 
     const doc = new FundTransferModel();

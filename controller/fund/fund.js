@@ -1,12 +1,11 @@
 /* eslint-disable no-throw-literal */
-
 const DonationModel = require('../../models/DonationModel');
 const UserModel = require('../../models/UserModel');
 
-async function depositFund(username, amount, fee) {
+async function depositFund(username, amount, fee, donation) {
   try {
     const user = await UserModel.findOne({name: username});
-    user.wallet.balance += amount - fee;
+    user.wallet.balance += amount - fee - donation;
     user.wallet.investment += amount;
     await user.save();
   } catch (e) {
@@ -15,7 +14,7 @@ async function depositFund(username, amount, fee) {
   }
 }
 
-async function withdrawFund(username, amount, fee, force) {
+async function withdrawFund(username, amount, fee, donation, force) {
   try {
     const user = await UserModel.findOne({name: username});
     const balance = user.wallet.balance - amount;
@@ -24,7 +23,7 @@ async function withdrawFund(username, amount, fee, force) {
       throw 'Low balance';
     }
     user.wallet.balance = balance;
-    user.wallet.investment -= amount - fee;
+    user.wallet.investment -= amount - fee - donation;
     await user.save();
   } catch (e) {
     console.error('FundTransfer::withdrawFund ', e);
@@ -35,10 +34,6 @@ async function withdrawFund(username, amount, fee, force) {
 async function addDonation(username, amount, id) {
   if (amount > 0) {
     try {
-      const user = await UserModel.findOne({name: username});
-      user.wallet.balance -= amount;
-      await user.save();
-
       const doc = new DonationModel();
       doc.username = username;
       doc.amount = amount;

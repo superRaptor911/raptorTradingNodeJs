@@ -12,7 +12,6 @@ const {UserRouter} = require('./routes/User');
 const {FundTransferRouter} = require('./routes/FundTransfer');
 const {TransactionRouter} = require('./routes/Transaction');
 const {WazirxRouter} = require('./routes/Wazirx');
-const {verifyUserAuth} = require('./controller/users/Users');
 const {wazirxTransChecker} = require('./controller/wazirx/trans');
 const {authorize} = require('./auth');
 
@@ -26,11 +25,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 // parse application/json
 app.use(bodyParser.json());
 
+// Authorise request
 app.use(authorize);
 
-app.get('/', (_req, res) => {
-  res.send('Hello World!');
-});
+app.get('/', (_req, res) => res.send('Hello World!'));
 
 app.use('/coins', CoinRouter);
 app.use('/users', UserRouter);
