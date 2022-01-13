@@ -89,9 +89,14 @@ function sleep(ms) {
   });
 }
 
+function fixedNumber(num) {
+  return Number(parseFloat(num).toFixed(10));
+}
+
 module.exports.postRequest = postRequest;
 module.exports.getRequest = getRequest;
 module.exports.checkRequired = checkRequired;
 module.exports.hashString = hashString;
 module.exports.sendMail = sendMail;
 module.exports.sleep = sleep;
+module.exports.fixedNumber = fixedNumber;

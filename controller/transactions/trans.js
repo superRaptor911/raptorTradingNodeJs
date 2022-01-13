@@ -1,5 +1,6 @@
 /* eslint-disable no-throw-literal */
 const UserModel = require('../../models/UserModel');
+const {fixedNumber} = require('../../Utility');
 
 async function buyCoin(username, coinId, coinCount, price, fee, force) {
   try {
@@ -20,6 +21,8 @@ async function buyCoin(username, coinId, coinCount, price, fee, force) {
     } else {
       user.wallet.coins[coinId] = coinCount;
     }
+    // Remove floating point error
+    user.wallet.coins[coinId] = fixedNumber(user.wallet.coins[coinId]);
     user.markModified('wallet');
     await user.save();
   } catch (e) {
@@ -36,14 +39,20 @@ async function sellCoin(username, coinId, coinCount, price, fee) {
     let balance = user.wallet.balance;
     balance += coinCount * price;
 
-    if (user.wallet.coins && user.wallet.coins[coinId] >= coinCount) {
+    // fix any floating point error in coin balance
+    const coinBalance = user.wallet.coins
+      ? fixedNumber(user.wallet.coins[coinId])
+      : 0;
+
+    if (coinBalance >= coinCount) {
       user.wallet.coins[coinId] -= coinCount;
       user.wallet.balance = balance - fee;
-      console.log('user wallet ', user.wallet);
     } else {
       throw 'INSUFFICIENT COINS';
     }
 
+    // Remove floating point error
+    user.wallet.coins[coinId] = fixedNumber(user.wallet.coins[coinId]);
     user.markModified('wallet');
     await user.save();
   } catch (e) {
