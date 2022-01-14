@@ -3,7 +3,7 @@ const {hashString} = require('../../Utility');
 const UserModel = require('../../models/UserModel');
 
 async function verifyUser(username, password) {
-  const usr = await UserModel.findOne({username: username});
+  const usr = await UserModel.findOne({name: username});
   if (!usr) {
     throw 'Failed to find user';
   }

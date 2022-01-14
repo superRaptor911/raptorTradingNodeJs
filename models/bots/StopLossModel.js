@@ -9,7 +9,15 @@ const stopLossModel = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  coins: Object,
+  rules: [
+    {
+      coinId: String,
+      sellPrice: Number,
+      buyPrice: Number,
+      count: Number,
+      isExecuted: {type: Boolean, default: false},
+    },
+  ],
 });
 
 const StopLossModel = mongoose.model('StopLossModel', stopLossModel);
