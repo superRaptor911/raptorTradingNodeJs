@@ -15,7 +15,7 @@ const stopLossModel = new mongoose.Schema({
       sellPrice: Number,
       buyPrice: Number,
       count: Number,
-      isExecuted: {type: Boolean, default: false},
+      sellExecuted: {type: Boolean, default: false},
     },
   ],
 });

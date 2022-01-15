@@ -18,7 +18,7 @@ async function loginUser(req, res) {
 
 async function getAlluser(_req, res) {
   try {
-    const result = await UserModel.find({});
+    const result = await UserModel.find({}).sort({name: 1});
     res.status(200).json({status: true, data: result});
   } catch (e) {
     res.status(500).json({status: false, message: e});

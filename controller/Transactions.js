@@ -62,7 +62,7 @@ async function deleteTransaction(req, res) {
 async function listAll(_req, res) {
   try {
     const trans = await TransactionModel.find({});
-    res.status(200).json({status: true, data: trans});
+    res.status(200).json({status: true, data: trans.reverse()});
   } catch (e) {
     /* handle error */
     res.status(500).json({status: false, message: e});
