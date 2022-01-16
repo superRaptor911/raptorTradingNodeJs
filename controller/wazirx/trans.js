@@ -184,7 +184,8 @@ async function wazirxTransChecker() {
     await sleep(1000);
     // Get Pending Transactions
     const remaining = await WazirxTransactionModel.find({status: 'PENDING'});
-    console.log(`Processing ${remaining.length} transactions`);
+    remaining.length > 0 &&
+      console.log(`Processing ${remaining.length} transactions`);
 
     // Process pending transactions
     for (const i of remaining) {

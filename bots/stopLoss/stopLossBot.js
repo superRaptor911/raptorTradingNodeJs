@@ -5,6 +5,7 @@ const {
 const StopLossModel = require('../../models/bots/StopLossModel');
 const UserModel = require('../../models/UserModel');
 const {testCoinPrice} = require('../../tests/api');
+const {sendMail} = require('../../Utility');
 const {wazirxGetOrderInfo, wazirxCancelOrder} = require('../../wazirx/api');
 
 async function useAvailableCoins(username, coinId, count) {
@@ -73,6 +74,16 @@ async function stopLossBuy(username, coinId, count) {
   }
 }
 
+async function sendSuccessMail(rule) {
+  const user = await UserModel.findOne({name: rule.username});
+  await sendMail(
+    user.email,
+    'Stop Loss Bot Order Success',
+    'Stop Loss Bot successfully executed ' +
+      `${rule.transType} ${rule.count} ${rule.coinId} at ${rule.price}`,
+  );
+}
+
 async function execStopLoss() {
   const rules = await StopLossModel.find({isEnabled: true});
   let coinPrices = await testCoinPrice();
@@ -85,20 +96,16 @@ async function execStopLoss() {
 
     // Check if order placed or not
     if (!i.orderId) {
-      if (i.transType === 'SELL') {
-        if (price < i.price) {
-          // Place sell order
-          const orderId = await stopLossSell(i.username, i.coinId, i.count);
-          i.orderId = orderId;
-          await i.save();
-        }
-      } else {
-        if (price > i.price) {
-          // Place buy order
-          const orderId = await stopLossBuy(i.username, i.coinId, i.count);
-          i.orderId = orderId;
-          await i.save();
-        }
+      if (i.transType === 'SELL' && price < i.price) {
+        // Place sell order
+        const orderId = await stopLossSell(i.username, i.coinId, i.count);
+        i.orderId = orderId;
+        await i.save();
+      } else if (price > i.price) {
+        // Place buy order
+        const orderId = await stopLossBuy(i.username, i.coinId, i.count);
+        i.orderId = orderId;
+        await i.save();
       }
     } else {
       // Get Transaction receipt from wazirx
@@ -108,6 +115,7 @@ async function execStopLoss() {
         i.orderId = null;
         i.isEnabled = false;
         await i.save();
+        await sendSuccessMail(i);
       } else if (receipt.status === 'cancel') {
         console.log('Order Failed, retrying...');
         i.orderId = null;
