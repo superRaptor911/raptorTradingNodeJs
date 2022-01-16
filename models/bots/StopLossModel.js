@@ -9,18 +9,12 @@ const stopLossModel = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  rules: [
-    {
-      id: Number,
-      isEnabled: Boolean,
-      coinId: String,
-      transType: String,
-      price: Number,
-      count: Number,
-      orderId: {type: Number, default: 0},
-      placeTime: Date,
-    },
-  ],
+  coinId: String,
+  transType: String,
+  price: Number,
+  count: Number,
+  orderId: {type: String, default: null},
+  placeTime: Date,
 });
 
 const StopLossModel = mongoose.model('StopLossModel', stopLossModel);
