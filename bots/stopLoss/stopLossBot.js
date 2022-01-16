@@ -101,7 +101,7 @@ async function execStopLoss() {
         const orderId = await stopLossSell(i.username, i.coinId, i.count);
         i.orderId = orderId;
         await i.save();
-      } else if (price > i.price) {
+      } else if (i.transType === 'BUY' && price > i.price) {
         // Place buy order
         const orderId = await stopLossBuy(i.username, i.coinId, i.count);
         i.orderId = orderId;
