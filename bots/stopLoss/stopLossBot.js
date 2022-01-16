@@ -1,45 +1,120 @@
+const {
+  wazirxPlaceSellOrder,
+  wazirxPlaceBuyOrder,
+} = require('../../controller/wazirx/trans');
 const StopLossModel = require('../../models/bots/StopLossModel');
 const UserModel = require('../../models/UserModel');
 const {testCoinPrice} = require('../../tests/api');
+const {wazirxGetOrderInfo, wazirxCancelOrder} = require('../../wazirx/api');
 
 async function useAvailableCoins(username, coinId, count) {
-  const user = await UserModel.find({name: username});
+  const user = await UserModel.findOne({name: username});
   const coins = user.wallet.coins;
   const coinCount = coins && coins[coinId];
   return Math.min(coinCount, count);
 }
 
+async function getUserBalance(username) {
+  const user = await UserModel.findOne({name: username});
+  const inrBalance = user.wallet.balance;
+  return inrBalance;
+}
+
 async function stopLossSell(username, coinId, count) {
   try {
-    const fixedCount = await useAvailableCoins(username, coinId, count);
+    const coinCount = await useAvailableCoins(username, coinId, count);
+    const coinPrices = await testCoinPrice();
+    const price = coinPrices[coinId].buy;
+
+    const orderId = await wazirxPlaceSellOrder(
+      username,
+      coinId,
+      coinCount,
+      price,
+      'Placed By Stop Loss Bot',
+    );
+    console.log(
+      `Placing stop loss sell order for ${username} on ${coinCount} ${coinId}`,
+    );
+    console.log('Order id ', orderId);
+    return orderId;
   } catch (e) {
     /* handle error */
+    console.error('stopLossBot::Error', e);
+  }
+}
+
+async function stopLossBuy(username, coinId, count) {
+  try {
+    const balance = await getUserBalance(username);
+    if (balance < 50) {
+      console.log('Low Balance.. not placing order');
+      return;
+    }
+    const coinPrices = await testCoinPrice();
+    const price = coinPrices[coinId].sell;
+    const coinCount = Math.min(count, balance / price);
+    const orderId = await wazirxPlaceBuyOrder(
+      username,
+      coinId,
+      coinCount,
+      price,
+      'Placed By  StopLossBot',
+    );
+
+    console.log(
+      `Placing stop loss buy order for ${username} on ${coinCount} ${coinId}`,
+    );
+    console.log('Order id ', orderId);
+    return orderId;
+  } catch (e) {
+    /* handle error */
+    console.error('stopLossBot::Error', e);
   }
 }
 
 async function execStopLoss() {
-  const customers = await StopLossModel.find({isEnabled: true});
+  const rules = await StopLossModel.find({isEnabled: true});
   let coinPrices = await testCoinPrice();
 
-  if (!coinPrices) {
-    return;
-  }
+  if (!coinPrices) return;
 
-  for (const i of customers) {
+  for (const i of rules) {
     coinPrices = await testCoinPrice();
-    for (const rule of i.rules) {
-      if (rule.isEnabled) {
-        const price = coinPrices[rule.coinId].last;
+    const price = coinPrices[i.coinId].last;
 
-        if (rule.transType === 'SELL') {
-          if (price < rule.price) {
-            // Place sell order
-          }
-        } else {
-          if (price > rule.price) {
-            // Place buy order
-          }
+    // Check if order placed or not
+    if (!i.orderId) {
+      if (i.transType === 'SELL') {
+        if (price < i.price) {
+          // Place sell order
+          const orderId = await stopLossSell(i.username, i.coinId, i.count);
+          i.orderId = orderId;
+          await i.save();
         }
+      } else {
+        if (price > i.price) {
+          // Place buy order
+          const orderId = await stopLossBuy(i.username, i.coinId, i.count);
+          i.orderId = orderId;
+          await i.save();
+        }
+      }
+    } else {
+      // Get Transaction receipt from wazirx
+      const receipt = await wazirxGetOrderInfo(i.orderId);
+
+      if (receipt.status === 'done') {
+        i.orderId = null;
+        i.isEnabled = false;
+        await i.save();
+      } else if (receipt.status === 'cancel') {
+        console.log('Order Failed, retrying...');
+        i.orderId = null;
+        await i.save();
+      } else {
+        console.log('Order did not complete. canceling ...');
+        await wazirxCancelOrder(i.coinId, i.orderId);
       }
     }
   }

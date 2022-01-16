@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 
 const stopLossModel = new mongoose.Schema({
-  username: {
-    type: String,
-    unique: true,
-  },
+  username: String,
   isEnabled: {
     type: Boolean,
     default: false,

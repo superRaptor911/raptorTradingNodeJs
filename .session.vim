@@ -11,28 +11,30 @@ set shortmess=aoO
 argglobal
 %argdel
 $argadd index.js
-edit bots/stopLoss/stopLossBot.js
+edit controller/wazirx/StopLossBot.js
 argglobal
-let s:l = 14 - ((13 * winheight(0) + 22) / 45)
+balt routes/Wazirx.js
+let s:l = 9 - ((8 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 14
-normal! 05|
+keepjumps 9
+normal! 043|
 lcd ~/program/node/raptorTrading
 tabnext 1
-badd +14 ~/program/node/raptorTrading/bots/stopLoss/stopLossBot.js
-badd +29 ~/program/node/raptorTrading/index.js
-badd +15 ~/program/node/raptorTrading/models/bots/StopLossModel.js
+badd +21 ~/program/node/raptorTrading/routes/Wazirx.js
+badd +1 ~/program/node/raptorTrading/index.js
+badd +90 ~/program/node/raptorTrading/controller/wazirx/StopLossBot.js
+badd +17 ~/program/node/raptorTrading/bots/stopLoss/stopLossBot.js
+badd +12 ~/program/node/raptorTrading/models/bots/StopLossModel.js
 badd +49 ~/program/node/raptorTrading/controller/transactions/trans.js
 badd +92 ~/program/node/raptorTrading/Utility.js
-badd +68 ~/program/node/raptorTrading/controller/wazirx/trans.js
+badd +36 ~/program/node/raptorTrading/controller/wazirx/trans.js
 badd +46 ~/program/node/raptorTrading/wazirx/api.js
 badd +10 ~/program/node/raptorTrading/tests/bot/test.js
 badd +123 ~/program/node/raptorTrading/tests/api.js
 badd +23 ~/program/node/raptorTrading/controller/wazirx/WazirxTransaction.js
 badd +100 ~/program/node/raptorTrading/wazirx/request.js
-badd +11 ~/program/node/raptorTrading/routes/Wazirx.js
 badd +10 ~/program/node/raptorTrading/models/wazirx/LockedAssetModel.js
 badd +14 ~/program/node/raptorTrading/models/wazirx/WazirxTransactionModel.js
 badd +27 ~/program/node/raptorTrading/tools/UserPassword.js

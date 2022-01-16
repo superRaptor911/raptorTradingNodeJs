@@ -14,6 +14,7 @@ const {TransactionRouter} = require('./routes/Transaction');
 const {WazirxRouter} = require('./routes/Wazirx');
 const {wazirxTransChecker} = require('./controller/wazirx/trans');
 const {authorize} = require('./auth');
+const {execBots} = require('./bots/bots');
 
 const port = process.env.PORT;
 
@@ -41,3 +42,4 @@ app.listen(port, () => {
 });
 
 wazirxTransChecker();
+execBots();

@@ -1,6 +1,24 @@
 const StopLossModel = require('../../models/bots/StopLossModel');
 const {checkRequired} = require('../../Utility');
 
+async function stopLossListRules(req, res) {
+  try {
+    checkRequired(req.body, ['username']);
+
+    const {username} = req.body;
+    const rules = await StopLossModel.find({username: username});
+
+    res.status(200).json({
+      status: true,
+      message: 'GG',
+      data: rules,
+    });
+  } catch (e) {
+    /* handle error */
+    res.status(500).json({status: false, message: e});
+  }
+}
+
 async function stopLossAddRule(req, res) {
   try {
     checkRequired(req.body, [
@@ -67,5 +85,23 @@ async function stopLossEditRule(req, res) {
   }
 }
 
+async function stopLossDeleteRule(req, res) {
+  try {
+    checkRequired(req.body, ['id']);
+    const {id} = req.body;
+    await StopLossModel.deleteOne({_id: id});
+
+    res.status(200).json({
+      status: true,
+      message: 'GG',
+    });
+  } catch (e) {
+    /* handle error */
+    res.status(500).json({status: false, message: e});
+  }
+}
+
+module.exports.stopLossListRules = stopLossListRules;
 module.exports.stopLossAddRule = stopLossAddRule;
-module.exports.stopLossAddRule = stopLossEditRule;
+module.exports.stopLossEditRule = stopLossEditRule;
+module.exports.stopLossDeleteRule = stopLossDeleteRule;
