@@ -11,6 +11,10 @@ const wazirxTrans = new mongoose.Schema({
     default: 'PENDING',
   },
   receipt: Object,
+  remarks: {
+    type: String,
+    default: 'Placed By User',
+  },
 });
 
 const WazirxTransactionModel = mongoose.model(

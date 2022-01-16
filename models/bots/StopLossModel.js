@@ -11,11 +11,14 @@ const stopLossModel = new mongoose.Schema({
   },
   rules: [
     {
+      id: Number,
+      isEnabled: Boolean,
       coinId: String,
-      sellPrice: Number,
-      buyPrice: Number,
+      transType: String,
+      price: Number,
       count: Number,
-      sellExecuted: {type: Boolean, default: false},
+      orderId: {type: Number, default: 0},
+      placeTime: Date,
     },
   ],
 });

@@ -7,7 +7,13 @@ const {sleep} = require('../../Utility');
 const {wazirxOrderLimit, wazirxGetOrderInfo} = require('../../wazirx/api');
 const {sellCoin, buyCoin} = require('../transactions/trans');
 
-async function placeBuyOrder(username, coinId, coinCount, price) {
+async function placeBuyOrder(
+  username,
+  coinId,
+  coinCount,
+  price,
+  remarks = 'Placed By User',
+) {
   try {
     const user = await UserModel.findOne({name: username});
 
@@ -41,6 +47,7 @@ async function placeBuyOrder(username, coinId, coinCount, price) {
     wazirxTransaction.id = orderId;
     wazirxTransaction.status = 'PENDING';
     wazirxTransaction.receipt = result;
+    wazirxTransaction.remarks = remarks;
     await wazirxTransaction.save();
 
     user.markModified('wallet');
@@ -53,7 +60,13 @@ async function placeBuyOrder(username, coinId, coinCount, price) {
   }
 }
 
-async function placeSellOrder(username, coinId, coinCount, price) {
+async function placeSellOrder(
+  username,
+  coinId,
+  coinCount,
+  price,
+  remarks = 'Placed By User',
+) {
   try {
     const user = await UserModel.findOne({name: username});
     // check if transaction feasible
@@ -84,6 +97,7 @@ async function placeSellOrder(username, coinId, coinCount, price) {
     wazirxTransaction.id = orderId;
     wazirxTransaction.status = 'PENDING';
     wazirxTransaction.receipt = result;
+    wazirxTransaction.remarks = remarks;
     await wazirxTransaction.save();
 
     user.markModified('wallet');

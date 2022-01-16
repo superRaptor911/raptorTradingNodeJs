@@ -11,34 +11,33 @@ set shortmess=aoO
 argglobal
 %argdel
 $argadd index.js
-edit models/bots/StopLossModel.js
+edit bots/stopLoss/stopLossBot.js
 argglobal
-balt bots/stopLoss/stopLossBot.js
-let s:l = 16 - ((15 * winheight(0) + 22) / 45)
+let s:l = 14 - ((13 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 16
-normal! 07|
+keepjumps 14
+normal! 05|
 lcd ~/program/node/raptorTrading
 tabnext 1
-badd +15 ~/program/node/raptorTrading/bots/stopLoss/stopLossBot.js
+badd +14 ~/program/node/raptorTrading/bots/stopLoss/stopLossBot.js
 badd +29 ~/program/node/raptorTrading/index.js
-badd +18 ~/program/node/raptorTrading/models/bots/StopLossModel.js
-badd +62 ~/program/node/raptorTrading/controller/transactions/trans.js
+badd +15 ~/program/node/raptorTrading/models/bots/StopLossModel.js
+badd +49 ~/program/node/raptorTrading/controller/transactions/trans.js
 badd +92 ~/program/node/raptorTrading/Utility.js
-badd +150 ~/program/node/raptorTrading/controller/wazirx/trans.js
-badd +67 ~/program/node/raptorTrading/wazirx/api.js
+badd +68 ~/program/node/raptorTrading/controller/wazirx/trans.js
+badd +46 ~/program/node/raptorTrading/wazirx/api.js
 badd +10 ~/program/node/raptorTrading/tests/bot/test.js
 badd +123 ~/program/node/raptorTrading/tests/api.js
-badd +105 ~/program/node/raptorTrading/controller/wazirx/WazirxTransaction.js
+badd +23 ~/program/node/raptorTrading/controller/wazirx/WazirxTransaction.js
 badd +100 ~/program/node/raptorTrading/wazirx/request.js
 badd +11 ~/program/node/raptorTrading/routes/Wazirx.js
 badd +10 ~/program/node/raptorTrading/models/wazirx/LockedAssetModel.js
-badd +6 ~/program/node/raptorTrading/models/wazirx/WazirxTransactionModel.js
+badd +14 ~/program/node/raptorTrading/models/wazirx/WazirxTransactionModel.js
 badd +27 ~/program/node/raptorTrading/tools/UserPassword.js
-badd +11 ~/program/node/raptorTrading/controller/User.js
-badd +6 ~/program/node/raptorTrading/controller/users/Users.js
+badd +1 ~/program/node/raptorTrading/controller/User.js
+badd +9 ~/program/node/raptorTrading/controller/users/Users.js
 badd +10 ~/program/node/raptorTrading/routes/Coins.js
 badd +21 ~/program/node/raptorTrading/controller/Coins.js
 badd +8 ~/program/node/raptorTrading/db/db.js
@@ -61,6 +60,7 @@ badd +125 ~/program/node/raptorTrading/tools/recoverData.js
 badd +6 ~/program/node/raptorTrading/models/DonationModel.js
 badd +4 ~/program/node/raptorTrading/wazirx/tests/ordertest.js
 badd +8 ~/program/node/raptorTrading/auth.js
+badd +1 ~/program/node/raptorTrading/controller/users/helper.js
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
