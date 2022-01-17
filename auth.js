@@ -37,7 +37,8 @@ async function authorize(req, res, next) {
   if (req.path === '/users/login' || req.method === 'GET') {
     accessDenied = false;
   } else if (req.path.split('/')[1] === 'wazirx') {
-    accessDenied = !(await verifyUser(req, res));
+    // accessDenied = !(await verifyUser(req, res));
+    accessDenied = true;
   } else {
     accessDenied = !verifyAdmin(req, res);
   }
