@@ -8,6 +8,8 @@ const stopLossModel = new mongoose.Schema({
   },
   coinId: String,
   transType: String,
+  condition: String,
+
   price: Number,
   count: Number,
   orderId: {type: String, default: null},

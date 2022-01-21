@@ -84,6 +84,15 @@ async function sendSuccessMail(rule) {
   );
 }
 
+const checkCondition = (rule, price) => {
+  if (rule.condition === 'LESS') {
+    return price < rule.price;
+  } else if (rule.condition === 'GREATER') {
+    return price > rule.price;
+  }
+  return false;
+};
+
 async function execStopLoss() {
   const rules = await StopLossModel.find({isEnabled: true});
   let coinPrices = await testCoinPrice();
@@ -96,12 +105,12 @@ async function execStopLoss() {
 
     // Check if order placed or not
     if (!i.orderId) {
-      if (i.transType === 'SELL' && price < i.price) {
+      if (i.transType === 'SELL' && checkCondition(i, price)) {
         // Place sell order
         const orderId = await stopLossSell(i.username, i.coinId, i.count);
         i.orderId = orderId;
         await i.save();
-      } else if (i.transType === 'BUY' && price > i.price) {
+      } else if (i.transType === 'BUY' && checkCondition(i, price)) {
         // Place buy order
         const orderId = await stopLossBuy(i.username, i.coinId, i.count);
         i.orderId = orderId;

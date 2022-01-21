@@ -26,17 +26,20 @@ async function stopLossAddRule(req, res) {
       'isEnabled',
       'coinId',
       'transType',
+      'condition',
       'price',
       'count',
     ]);
 
-    const {username, isEnabled, coinId, transType, price, count} = req.body;
+    const {username, isEnabled, coinId, transType, condition, price, count} =
+      req.body;
 
     const mdl = new StopLossModel();
     mdl.username = username;
     mdl.isEnabled = isEnabled;
     mdl.coinId = coinId;
     mdl.transType = transType;
+    mdl.condition = condition;
     mdl.price = price;
     mdl.count = count;
     mdl.placeTime = new Date();
@@ -60,17 +63,28 @@ async function stopLossEditRule(req, res) {
       'isEnabled',
       'coinId',
       'transType',
+      'condition',
       'price',
       'count',
     ]);
 
-    const {id, username, isEnabled, coinId, transType, price, count} = req.body;
+    const {
+      id,
+      username,
+      isEnabled,
+      coinId,
+      transType,
+      condition,
+      price,
+      count,
+    } = req.body;
 
     const mdl = await StopLossModel.findOne({_id: id});
     mdl.username = username;
     mdl.isEnabled = isEnabled;
     mdl.coinId = coinId;
     mdl.transType = transType;
+    mdl.condition = condition;
     mdl.price = price;
     mdl.count = count;
     await mdl.save();
