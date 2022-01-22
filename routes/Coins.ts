@@ -1,10 +1,7 @@
-const {
-  coinRoot,
-  addCoin,
-  deleteCoin,
-  coinPrice,
-} = require('../controller/Coins');
-const router = require('express').Router();
+import {Router} from 'express';
+import {coinRoot, addCoin, deleteCoin, coinPrice} from '../controller/Coins';
+
+const router = Router();
 
 router.get('/', coinRoot);
 router.post('/add', addCoin);

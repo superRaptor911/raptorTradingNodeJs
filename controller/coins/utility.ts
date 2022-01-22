@@ -1,4 +1,6 @@
-function coinData2coinPriceList(coinData, coins) {
+import CoinModel from '../../models/CoinModel';
+
+export function coinData2coinPriceList(coinData, coins: typeof CoinModel[]) {
   const coinPriceList = {};
 
   coins.forEach(item => {
@@ -11,5 +13,3 @@ function coinData2coinPriceList(coinData, coins) {
 
   return coinPriceList;
 }
-
-module.exports.coinData2coinPriceList = coinData2coinPriceList;

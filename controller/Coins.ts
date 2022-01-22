@@ -1,8 +1,8 @@
-const CoinModel = require('../models/CoinModel');
-const {default: fetch} = require('node-fetch');
-const {coinData2coinPriceList} = require('./coins/utility');
+import CoinModel from '../models/CoinModel';
+import express from 'express';
+import {coinData2coinPriceList} from './coins/utility';
 
-async function coinRoot(_req, res) {
+export async function coinRoot(_req: express.Request, res: express.Response) {
   try {
     const result = await CoinModel.find({});
     res.status(200).json({status: true, data: result});
@@ -12,7 +12,7 @@ async function coinRoot(_req, res) {
   }
 }
 
-async function addCoin(req, res) {
+export async function addCoin(req: express.Request, res: express.Response) {
   try {
     const {name, id, avatar} = req.body;
 
@@ -29,7 +29,7 @@ async function addCoin(req, res) {
   }
 }
 
-async function deleteCoin(req, res) {
+export async function deleteCoin(req: express.Request, res: express.Response) {
   try {
     const coin = req.params.id;
     await CoinModel.deleteOne({name: coin});
@@ -39,7 +39,7 @@ async function deleteCoin(req, res) {
   }
 }
 
-async function coinPrice(_req, res) {
+export async function coinPrice(_req: express.Request, res: express.Response) {
   try {
     const apiPath = 'https://api.wazirx.com/api/v2/tickers';
     const response = await fetch(apiPath, {
@@ -53,8 +53,3 @@ async function coinPrice(_req, res) {
     res.status(500).json({status: false, message: e});
   }
 }
-
-module.exports.coinRoot = coinRoot;
-module.exports.addCoin = addCoin;
-module.exports.deleteCoin = deleteCoin;
-module.exports.coinPrice = coinPrice;
