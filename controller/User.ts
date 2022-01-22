@@ -1,7 +1,8 @@
-const UserModel = require('../models/UserModel');
-const {hashString} = require('../Utility');
+import UserModel from '../models/UserModel';
+import express from 'express';
+import {hashString} from '../Utility';
 
-async function loginUser(req, res) {
+export async function loginUser(req: express.Request, res: express.Response) {
   try {
     const {email, password} = req.body;
     const doc = await UserModel.findOne({email: email});
@@ -16,7 +17,7 @@ async function loginUser(req, res) {
   }
 }
 
-async function getAlluser(_req, res) {
+export async function getAlluser(_req: express.Request, res: express.Response) {
   try {
     const result = await UserModel.find({}).sort({name: 1});
     res.status(200).json({status: true, data: result});
@@ -25,7 +26,7 @@ async function getAlluser(_req, res) {
   }
 }
 
-async function addUser(req, res) {
+export async function addUser(req: express.Request, res: express.Response) {
   try {
     const {name, email, avatar} = req.body;
     const doc = new UserModel();
@@ -41,7 +42,7 @@ async function addUser(req, res) {
   }
 }
 
-async function getUser(req, res) {
+export async function getUser(req: express.Request, res: express.Response) {
   try {
     const name = req.params.id;
     const result = await UserModel.findOne({name: name});
@@ -58,7 +59,7 @@ async function getUser(req, res) {
   }
 }
 
-async function deleteUser(req, res) {
+export async function deleteUser(req: express.Request, res: express.Response) {
   try {
     const name = req.params.id;
     await UserModel.deleteOne({name: name});
@@ -67,9 +68,3 @@ async function deleteUser(req, res) {
     res.status(500).json({status: false, message: e});
   }
 }
-
-module.exports.loginUser = loginUser;
-module.exports.getAlluser = getAlluser;
-module.exports.addUser = addUser;
-module.exports.getUser = getUser;
-module.exports.deleteUser = deleteUser;

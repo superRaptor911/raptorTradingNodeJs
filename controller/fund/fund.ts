@@ -1,8 +1,13 @@
 /* eslint-disable no-throw-literal */
-const DonationModel = require('../../models/DonationModel');
-const UserModel = require('../../models/UserModel');
+import DonationModel from '../../models/DonationModel';
+import UserModel from '../../models/UserModel';
 
-async function depositFund(username, amount, fee, donation) {
+export async function depositFund(
+  username: string,
+  amount: number,
+  fee: number,
+  donation: number,
+) {
   try {
     const user = await UserModel.findOne({name: username});
     user.wallet.balance += amount - fee - donation;
@@ -14,7 +19,13 @@ async function depositFund(username, amount, fee, donation) {
   }
 }
 
-async function withdrawFund(username, amount, fee, donation, force) {
+export async function withdrawFund(
+  username: string,
+  amount: number,
+  fee: number,
+  donation: number,
+  force: boolean,
+) {
   try {
     const user = await UserModel.findOne({name: username});
     const balance = user.wallet.balance - amount;
@@ -31,7 +42,11 @@ async function withdrawFund(username, amount, fee, donation, force) {
   }
 }
 
-async function addDonation(username, amount, id) {
+export async function addDonation(
+  username: string,
+  amount: number,
+  id: string,
+) {
   if (amount > 0) {
     try {
       const doc = new DonationModel();
@@ -46,7 +61,3 @@ async function addDonation(username, amount, id) {
     }
   }
 }
-
-module.exports.depositFund = depositFund;
-module.exports.withdrawFund = withdrawFund;
-module.exports.addDonation = addDonation;

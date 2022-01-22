@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const donModel = new mongoose.Schema({
   username: String,
@@ -7,4 +7,5 @@ const donModel = new mongoose.Schema({
 });
 
 const DonationModel = mongoose.model('Donations', donModel);
-module.exports = DonationModel;
+export default DonationModel;
+// module.exports = DonationModel;

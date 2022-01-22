@@ -1,6 +1,5 @@
-/* eslint-disable no-throw-literal */
-const {default: fetch} = require('node-fetch');
-const sgMail = require('@sendgrid/mail');
+import sgMail from '@sendgrid/mail';
+import fetch from 'node-fetch';
 
 if (!process.env.SENDGRID_APIKEY) {
   console.log('loading ...');
@@ -8,9 +7,10 @@ if (!process.env.SENDGRID_APIKEY) {
   dotenv.config();
 }
 
-sgMail.setApiKey(process.env.SENDGRID_APIKEY);
+const apiKey = process.env.SENDGRID_APIKEY;
+apiKey && sgMail.setApiKey(apiKey);
 
-async function postRequest(url, data) {
+export async function postRequest(url: string, data: object) {
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -29,7 +29,7 @@ async function postRequest(url, data) {
   }
 }
 
-async function getRequest(url) {
+export async function getRequest(url: string) {
   try {
     const response = await fetch(url, {
       method: 'GET',
@@ -44,7 +44,7 @@ async function getRequest(url) {
   }
 }
 
-function checkRequired(obj, values) {
+export function checkRequired(obj: {[key: string]: any}, values: string[]) {
   values.forEach(item => {
     if (obj[item] === undefined) {
       throw `Error: ${item} not set`;
@@ -52,12 +52,11 @@ function checkRequired(obj, values) {
   });
 }
 
-function hashString(string) {
+export function hashString(string: string) {
   let hash = 0;
   let i;
   let chr;
 
-  if (this.length === 0) return hash;
   for (i = 0; i < string.length; i++) {
     chr = string.charCodeAt(i);
     hash = (hash << 5) - hash + chr;
@@ -66,7 +65,12 @@ function hashString(string) {
   return 'nt' + hash;
 }
 
-async function sendMail(to, subject, text, html = null) {
+export async function sendMail(
+  to: string,
+  subject: string,
+  text: string,
+  html = null,
+) {
   try {
     const msg = {
       to: to,
@@ -83,20 +87,12 @@ async function sendMail(to, subject, text, html = null) {
   }
 }
 
-function sleep(ms) {
+export function sleep(ms: number) {
   return new Promise(resolve => {
     setTimeout(resolve, ms);
   });
 }
 
-function fixedNumber(num) {
-  return Number(parseFloat(num).toFixed(10));
+export function fixedNumber(num: string | number) {
+  return Number(Number(num).toFixed(10));
 }
-
-module.exports.postRequest = postRequest;
-module.exports.getRequest = getRequest;
-module.exports.checkRequired = checkRequired;
-module.exports.hashString = hashString;
-module.exports.sendMail = sendMail;
-module.exports.sleep = sleep;
-module.exports.fixedNumber = fixedNumber;
