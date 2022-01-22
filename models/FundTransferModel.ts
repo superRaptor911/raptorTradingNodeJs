@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const fundTransfer = new mongoose.Schema({
   username: String,
@@ -10,4 +10,4 @@ const fundTransfer = new mongoose.Schema({
 });
 
 const FundTransferModel = mongoose.model('FundTransferModel', fundTransfer);
-module.exports = FundTransferModel;
+export default FundTransferModel;

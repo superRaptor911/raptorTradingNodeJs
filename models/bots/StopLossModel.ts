@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const stopLossModel = new mongoose.Schema({
   username: String,
@@ -17,4 +17,4 @@ const stopLossModel = new mongoose.Schema({
 });
 
 const StopLossModel = mongoose.model('StopLossModel', stopLossModel);
-module.exports = StopLossModel;
+export default StopLossModel;

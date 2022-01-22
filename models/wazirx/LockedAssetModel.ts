@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const lokedAssetModel = new mongoose.Schema({
   username: String,
@@ -11,4 +11,4 @@ const lokedAssetModel = new mongoose.Schema({
 });
 
 const LockedAssetModel = mongoose.model('LockedAssetModel', lokedAssetModel);
-module.exports = LockedAssetModel;
+export default LockedAssetModel;

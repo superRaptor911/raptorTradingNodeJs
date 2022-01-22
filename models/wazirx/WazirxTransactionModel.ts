@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const wazirxTrans = new mongoose.Schema({
   username: String,
@@ -21,4 +21,4 @@ const WazirxTransactionModel = mongoose.model(
   'WazirxTransactionModel',
   wazirxTrans,
 );
-module.exports = WazirxTransactionModel;
+export default WazirxTransactionModel;

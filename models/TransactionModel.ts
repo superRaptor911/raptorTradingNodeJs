@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const transModel = new mongoose.Schema({
   username: {
@@ -13,4 +13,4 @@ const transModel = new mongoose.Schema({
 });
 
 const TransactionModel = mongoose.model('Transactions', transModel);
-module.exports = TransactionModel;
+export default TransactionModel;

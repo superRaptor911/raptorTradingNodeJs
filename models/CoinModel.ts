@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const coinModel = new mongoose.Schema({
   name: String,
@@ -10,4 +10,4 @@ const coinModel = new mongoose.Schema({
 });
 
 const CoinModel = mongoose.model('Coin', coinModel);
-module.exports = CoinModel;
+export default CoinModel;
