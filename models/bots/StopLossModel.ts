@@ -1,6 +1,18 @@
-import mongoose from 'mongoose';
+import {Document, model, Schema} from 'mongoose';
 
-const stopLossModel = new mongoose.Schema({
+export interface StopLoss extends Document {
+  username: string;
+  isEnabled: boolean;
+  coinId: string;
+  transType: string;
+  condition: string;
+  price: number;
+  count: number;
+  orderId?: string;
+  placeTime: Date;
+}
+
+const stopLossModel = new Schema<StopLoss>({
   username: String,
   isEnabled: {
     type: Boolean,
@@ -16,5 +28,4 @@ const stopLossModel = new mongoose.Schema({
   placeTime: Date,
 });
 
-const StopLossModel = mongoose.model('StopLossModel', stopLossModel);
-export default StopLossModel;
+export const StopLossModel = model<StopLoss>('StopLossModel', stopLossModel);

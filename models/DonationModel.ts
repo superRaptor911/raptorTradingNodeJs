@@ -1,11 +1,15 @@
-import mongoose from 'mongoose';
+import {Document, model, Schema} from 'mongoose';
 
-const donModel = new mongoose.Schema({
+export interface Donation extends Document {
+  username: string;
+  amount: number;
+  transId: string;
+}
+
+const donModel = new Schema<Donation>({
   username: String,
   amount: Number,
   transId: String,
 });
 
-const DonationModel = mongoose.model('Donations', donModel);
-export default DonationModel;
-// module.exports = DonationModel;
+export const DonationModel = model<Donation>('Donations', donModel);

@@ -1,6 +1,13 @@
-import mongoose from 'mongoose';
+import {Document, model, Schema} from 'mongoose';
 
-const lokedAssetModel = new mongoose.Schema({
+export interface LockedAsset extends Document {
+  username: string;
+  id: string;
+  asset: string;
+  amount: number;
+}
+
+const lokedAssetModel = new Schema<LockedAsset>({
   username: String,
   id: {
     type: String,
@@ -10,5 +17,7 @@ const lokedAssetModel = new mongoose.Schema({
   amount: Number,
 });
 
-const LockedAssetModel = mongoose.model('LockedAssetModel', lokedAssetModel);
-export default LockedAssetModel;
+export const LockedAssetModel = model<LockedAsset>(
+  'LockedAssetModel',
+  lokedAssetModel,
+);

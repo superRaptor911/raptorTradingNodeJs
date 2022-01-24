@@ -1,6 +1,14 @@
-import mongoose from 'mongoose';
+import {Document, model, Schema} from 'mongoose';
 
-const wazirxTrans = new mongoose.Schema({
+export interface WazirxTransaction extends Document {
+  username: string;
+  id: string;
+  status: string;
+  receipt: any;
+  remarks: string;
+}
+
+const wazirxTrans = new Schema<WazirxTransaction>({
   username: String,
   id: {
     type: String,
@@ -17,8 +25,7 @@ const wazirxTrans = new mongoose.Schema({
   },
 });
 
-const WazirxTransactionModel = mongoose.model(
+export const WazirxTransactionModel = model<WazirxTransaction>(
   'WazirxTransactionModel',
   wazirxTrans,
 );
-export default WazirxTransactionModel;

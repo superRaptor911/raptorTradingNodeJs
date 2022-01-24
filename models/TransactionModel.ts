@@ -1,6 +1,15 @@
-import mongoose from 'mongoose';
+import {Document, model, Schema} from 'mongoose';
 
-const transModel = new mongoose.Schema({
+export interface Transaction extends Document {
+  username: string;
+  coinId: string;
+  coinCount: number;
+  cost: number;
+  transType: string;
+  fee: number;
+  time: Date;
+}
+const transModel = new Schema<Transaction>({
   username: {
     type: String,
   },
@@ -12,5 +21,5 @@ const transModel = new mongoose.Schema({
   time: Date,
 });
 
-const TransactionModel = mongoose.model('Transactions', transModel);
+const TransactionModel = model<Transaction>('Transactions', transModel);
 export default TransactionModel;

@@ -1,6 +1,12 @@
-import mongoose from 'mongoose';
+import {Document, model, Schema} from 'mongoose';
 
-const coinModel = new mongoose.Schema({
+export interface Coin extends Document {
+  name: string;
+  id: string;
+  avatar: string;
+}
+
+const coinModel = new Schema<Coin>({
   name: String,
   id: {
     type: String,
@@ -9,5 +15,4 @@ const coinModel = new mongoose.Schema({
   avatar: String,
 });
 
-const CoinModel = mongoose.model('Coin', coinModel);
-export default CoinModel;
+export const CoinModel = model<Coin>('Coin', coinModel);

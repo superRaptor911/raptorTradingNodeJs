@@ -1,5 +1,6 @@
-import CoinModel from '../models/CoinModel';
 import express from 'express';
+import {CoinModel} from '../models/CoinModel';
+import {checkRequired} from '../Utility';
 import {coinData2coinPriceList} from './coins/utility';
 
 export async function coinRoot(_req: express.Request, res: express.Response) {
@@ -14,6 +15,7 @@ export async function coinRoot(_req: express.Request, res: express.Response) {
 
 export async function addCoin(req: express.Request, res: express.Response) {
   try {
+    checkRequired(req.body, ['name', 'id', 'avatar']);
     const {name, id, avatar} = req.body;
 
     const doc = new CoinModel();

@@ -1,6 +1,20 @@
-import mongoose from 'mongoose';
+import {Document, model, Schema} from 'mongoose';
 
-const userModel = new mongoose.Schema({
+interface Wallet {
+  balance: number;
+  investment: number;
+  coins?: {[key: string]: number};
+}
+
+export interface User extends Document {
+  name: string;
+  email: string;
+  password: string;
+  avatar: string;
+  wallet: Wallet;
+}
+
+const userModel = new Schema<User>({
   name: {
     type: String,
     unique: true,
@@ -21,5 +35,4 @@ const userModel = new mongoose.Schema({
   },
 });
 
-const UserModel = mongoose.model('User', userModel);
-export default UserModel;
+export const UserModel = model<User>('User', userModel);

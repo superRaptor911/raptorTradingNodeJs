@@ -1,6 +1,15 @@
-import mongoose from 'mongoose';
+import {Document, model, Schema} from 'mongoose';
 
-const fundTransfer = new mongoose.Schema({
+export interface FundTransfer extends Document {
+  username: string;
+  amount: number;
+  transType: string;
+  fee: number;
+  donation: number;
+  time: Date;
+}
+
+const fundTransfer = new Schema({
   username: String,
   amount: Number,
   transType: String,
@@ -9,5 +18,9 @@ const fundTransfer = new mongoose.Schema({
   time: Date,
 });
 
-const FundTransferModel = mongoose.model('FundTransferModel', fundTransfer);
+const FundTransferModel = model<FundTransfer>(
+  'FundTransferModel',
+  fundTransfer,
+);
+
 export default FundTransferModel;
