@@ -8,7 +8,7 @@ export interface StopLoss extends Document {
   condition: string;
   price: number;
   count: number;
-  orderId?: string;
+  orderId?: string | null;
   placeTime: Date;
 }
 

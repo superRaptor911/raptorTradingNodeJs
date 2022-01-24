@@ -1,30 +1,52 @@
-const {
+import {
   wazirxPlaceSellOrder,
   wazirxPlaceBuyOrder,
-} = require('../../controller/wazirx/trans');
-const StopLossModel = require('../../models/bots/StopLossModel');
-const UserModel = require('../../models/UserModel');
-const {testCoinPrice} = require('../../tests/api');
-const {sendMail} = require('../../Utility');
-const {wazirxGetOrderInfo, wazirxCancelOrder} = require('../../wazirx/api');
+} from '../../controller/wazirx/trans';
+import {StopLoss, StopLossModel} from '../../models/bots/StopLossModel';
+import {UserModel} from '../../models/UserModel';
+import {getRequest, sendMail} from '../../Utility';
+import {wazirxGetOrderInfo, wazirxCancelOrder} from '../../wazirx/api';
 
-async function useAvailableCoins(username, coinId, count) {
-  const user = await UserModel.findOne({name: username});
-  const coins = user.wallet.coins;
-  const coinCount = coins && coins[coinId];
-  return Math.min(coinCount, count);
+const server = 'https://raptor-trading.herokuapp.com';
+
+async function coinPrice() {
+  try {
+    const data: any = await getRequest(server + '/coins/prices');
+    return data.data;
+  } catch (e) {
+    console.error('coinTest::coinPrice ', e);
+  }
 }
 
-async function getUserBalance(username) {
+async function useAvailableCoins(
+  username: string,
+  coinId: string,
+  count: number,
+) {
   const user = await UserModel.findOne({name: username});
-  const inrBalance = user.wallet.balance;
-  return inrBalance;
+  if (user) {
+    const coins = user.wallet.coins;
+    if (coins && coins[coinId]) {
+      const coinCount = coins[coinId];
+      return Math.min(coinCount, count);
+    }
+  }
+  return 0;
 }
 
-async function stopLossSell(username, coinId, count) {
+async function getUserBalance(username: string) {
+  const user = await UserModel.findOne({name: username});
+  if (user) {
+    const inrBalance = user.wallet.balance;
+    return inrBalance;
+  }
+  return 0;
+}
+
+async function stopLossSell(username: string, coinId: string, count: number) {
   try {
     const coinCount = await useAvailableCoins(username, coinId, count);
-    const coinPrices = await testCoinPrice();
+    const coinPrices = await coinPrice();
     const price = coinPrices[coinId].buy;
 
     const orderId = await wazirxPlaceSellOrder(
@@ -45,14 +67,14 @@ async function stopLossSell(username, coinId, count) {
   }
 }
 
-async function stopLossBuy(username, coinId, count) {
+async function stopLossBuy(username: string, coinId: string, count: number) {
   try {
     const balance = await getUserBalance(username);
     if (balance < 50) {
       console.log('Low Balance.. not placing order');
       return;
     }
-    const coinPrices = await testCoinPrice();
+    const coinPrices = await coinPrice();
     const price = coinPrices[coinId].sell;
     const coinCount = Math.min(count, balance / price);
     const orderId = await wazirxPlaceBuyOrder(
@@ -74,17 +96,18 @@ async function stopLossBuy(username, coinId, count) {
   }
 }
 
-async function sendSuccessMail(rule) {
+async function sendSuccessMail(rule: StopLoss) {
   const user = await UserModel.findOne({name: rule.username});
-  await sendMail(
-    user.email,
-    'Stop Loss Bot Order Success',
-    'Stop Loss Bot successfully executed ' +
-      `${rule.transType} ${rule.count} ${rule.coinId} at ${rule.price}`,
-  );
+  user &&
+    (await sendMail(
+      user.email,
+      'Stop Loss Bot Order Success',
+      'Stop Loss Bot successfully executed ' +
+        `${rule.transType} ${rule.count} ${rule.coinId} at ${rule.price}`,
+    ));
 }
 
-const checkCondition = (rule, price) => {
+const checkCondition = (rule: StopLoss, price: number) => {
   if (rule.condition === 'LESS') {
     return price < rule.price;
   } else if (rule.condition === 'GREATER') {
@@ -93,14 +116,14 @@ const checkCondition = (rule, price) => {
   return false;
 };
 
-async function execStopLoss() {
+export async function execStopLoss() {
   const rules = await StopLossModel.find({isEnabled: true});
-  let coinPrices = await testCoinPrice();
+  let coinPrices = await coinPrice();
 
   if (!coinPrices) return;
 
   for (const i of rules) {
-    coinPrices = await testCoinPrice();
+    coinPrices = await coinPrice();
     const price = coinPrices[i.coinId].last;
 
     // Check if order placed or not
@@ -118,7 +141,7 @@ async function execStopLoss() {
       }
     } else {
       // Get Transaction receipt from wazirx
-      const receipt = await wazirxGetOrderInfo(i.orderId);
+      const receipt: any = await wazirxGetOrderInfo(i.orderId);
 
       if (receipt.status === 'done') {
         i.orderId = null;
@@ -136,5 +159,3 @@ async function execStopLoss() {
     }
   }
 }
-
-module.exports.execStopLoss = execStopLoss;
