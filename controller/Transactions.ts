@@ -52,7 +52,7 @@ export async function deleteTransaction(req: Request, res: Response) {
   }
 }
 
-export async function listAll(_req: Request, res: Response) {
+export async function listAllTransactions(_req: Request, res: Response) {
   try {
     const trans = await TransactionModel.find({});
     res.status(200).json({status: true, data: trans.reverse()});

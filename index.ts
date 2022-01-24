@@ -1,20 +1,20 @@
-/* eslint-disable no-throw-literal */
-const bodyParser = require('body-parser');
-const express = require('express');
-const dotenv = require('dotenv');
-const cors = require('cors');
+import bodyParser from 'body-parser';
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
 
 dotenv.config();
-require('./db/db');
+initDB();
 
-const {CoinRouter} = require('./routes/Coins');
-const {UserRouter} = require('./routes/User');
-const {FundTransferRouter} = require('./routes/FundTransfer');
-const {TransactionRouter} = require('./routes/Transaction');
-const {WazirxRouter} = require('./routes/Wazirx');
-const {wazirxTransChecker} = require('./controller/wazirx/trans');
-const {authorize} = require('./auth');
-const {execBots} = require('./bots/bots');
+import {wazirxTransChecker} from './controller/wazirx/trans';
+import {authorize} from './auth';
+import {execBots} from './bots/bots';
+import {initDB} from './db/db';
+import CoinRouter from './routes/Coins';
+import FundTransferRouter from './routes/FundTransfer';
+import TransactionRouter from './routes/Transaction';
+import UserRouter from './routes/User';
+import WazirxRouter from './routes/Wazirx';
 
 const port = process.env.PORT;
 

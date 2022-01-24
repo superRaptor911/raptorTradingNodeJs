@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import fetch from 'node-fetch';
 
 if (!process.env.WAZIRX_SECRETKEY) {
   console.log('loading ...');

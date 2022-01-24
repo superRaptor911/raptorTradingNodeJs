@@ -1,11 +1,11 @@
 import {Router} from 'express';
 import {coinRoot, addCoin, deleteCoin, coinPrice} from '../controller/Coins';
 
-const router = Router();
+const CoinRouter = Router();
 
-router.get('/', coinRoot);
-router.post('/add', addCoin);
-router.delete('/delete/:id', deleteCoin);
-router.get('/prices', coinPrice);
+CoinRouter.get('/', coinRoot);
+CoinRouter.post('/add', addCoin);
+CoinRouter.delete('/delete/:id', deleteCoin);
+CoinRouter.get('/prices', coinPrice);
 
-module.exports.CoinRouter = router;
+export default CoinRouter;

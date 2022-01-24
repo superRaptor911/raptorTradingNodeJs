@@ -1,7 +1,8 @@
 /* eslint-disable no-throw-literal */
-const {verifyUserAuth} = require('./controller/users/Users');
+import {NextFunction, Request, Response} from 'express';
+import {verifyUserAuth} from './controller/users/Users';
 
-const verifyUser = async (req, res) => {
+const verifyUser = async (req: Request, res: Response) => {
   // User Auth
   try {
     const {username, password} = req.body;
@@ -15,7 +16,7 @@ const verifyUser = async (req, res) => {
   return true;
 };
 
-const verifyAdmin = (req, res) => {
+const verifyAdmin = (req: Request, res: Response) => {
   // Admin Auth
   try {
     const {password} = req.body;
@@ -31,7 +32,11 @@ const verifyAdmin = (req, res) => {
   return true;
 };
 
-async function authorize(req, res, next) {
+export async function authorize(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   let accessDenied = true;
   // Login and Get req does not require auth
   if (req.path === '/users/login' || req.method === 'GET') {
@@ -47,5 +52,3 @@ async function authorize(req, res, next) {
     next();
   }
 }
-
-module.exports.authorize = authorize;
