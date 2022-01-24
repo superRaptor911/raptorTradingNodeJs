@@ -1,8 +1,9 @@
-const TransactionModel = require('../models/TransactionModel');
-const {checkRequired} = require('../Utility');
-const {sellCoin, buyCoin} = require('./transactions/trans');
+import {Request, Response} from 'express';
+import {TransactionModel} from '../models/TransactionModel';
+import {checkRequired} from '../Utility';
+import {sellCoin, buyCoin} from './transactions/trans';
 
-async function addTransaction(req, res) {
+export async function addTransaction(req: Request, res: Response) {
   try {
     checkRequired(req.body, [
       'username',
@@ -12,16 +13,8 @@ async function addTransaction(req, res) {
       'price',
       'fee',
     ]);
-    let {
-      username,
-      transType,
-      coin: coinId,
-      coinCount,
-      price,
-      fee,
-      time,
-      force,
-    } = req.body;
+    let {username, transType, coinId, coinCount, price, fee, time, force} =
+      req.body;
 
     coinCount = parseFloat(coinCount);
     price = parseFloat(price);
@@ -49,7 +42,7 @@ async function addTransaction(req, res) {
   }
 }
 
-async function deleteTransaction(req, res) {
+export async function deleteTransaction(req: Request, res: Response) {
   try {
     const id = req.params.id;
     await TransactionModel.deleteOne({_id: id});
@@ -59,7 +52,7 @@ async function deleteTransaction(req, res) {
   }
 }
 
-async function listAll(_req, res) {
+export async function listAll(_req: Request, res: Response) {
   try {
     const trans = await TransactionModel.find({});
     res.status(200).json({status: true, data: trans.reverse()});
@@ -69,7 +62,7 @@ async function listAll(_req, res) {
   }
 }
 
-async function listUserTrans(req, res) {
+export async function listUserTrans(req: Request, res: Response) {
   try {
     const username = req.params.id;
     const trans = await TransactionModel.findOne({username: username});
@@ -79,7 +72,3 @@ async function listUserTrans(req, res) {
     res.status(500).json({status: false, message: e});
   }
 }
-module.exports.addTransaction = addTransaction;
-module.exports.deleteTransaction = deleteTransaction;
-module.exports.listAllTransactions = listAll;
-module.exports.listUserTrans = listUserTrans;

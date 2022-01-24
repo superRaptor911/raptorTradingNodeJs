@@ -11,53 +11,52 @@ set shortmess=aoO
 argglobal
 %argdel
 $argadd index.js
-edit models/wazirx/WazirxTransactionModel.ts
+edit controller/wazirx/WazirxTransaction.ts
 argglobal
-balt models/wazirx/LockedAssetModel.ts
-let s:l = 26 - ((25 * winheight(0) + 22) / 45)
+let s:l = 101 - ((44 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 26
-normal! 03|
+keepjumps 101
+normal! 0
 lcd ~/program/node/raptorTrading
 tabnext 1
-badd +16 ~/program/node/raptorTrading/controller/Coins.ts
+badd +248 ~/program/node/raptorTrading/controller/wazirx/trans.ts
 badd +44 ~/program/node/raptorTrading/index.js
+badd +1 ~/program/node/raptorTrading/controller/Coins.ts
 badd +3 ~/program/node/raptorTrading/controller/coins/utility.ts
 badd +33 ~/program/node/raptorTrading/models/UserModel.ts
-badd +1 ~/program/node/raptorTrading/models/TransactionModel.ts
-badd +33 ~/program/node/raptorTrading/controller/wazirx/trans.js
+badd +24 ~/program/node/raptorTrading/models/TransactionModel.ts
 badd +12 ~/program/node/raptorTrading/Utility.ts
 badd +1 ~/program/node/raptorTrading/controller/fund/fund.ts
 badd +5 ~/program/node/raptorTrading/models/DonationModel.ts
 badd +33 ~/program/node/raptorTrading/auth.js
 badd +33 ~/program/node/raptorTrading/bots/stopLoss/stopLossBot.js
 badd +6 ~/program/node/raptorTrading/bots/bots.js
-badd +2 ~/program/node/raptorTrading/controller/wazirx/StopLossBot.js
+badd +1 ~/program/node/raptorTrading/controller/wazirx/StopLossBot.ts
 badd +23 ~/program/node/raptorTrading/routes/Wazirx.js
 badd +1 ~/program/node/raptorTrading/models/bots/StopLossModel.ts
-badd +38 ~/program/node/raptorTrading/controller/transactions/trans.js
-badd +31 ~/program/node/raptorTrading/wazirx/api.js
+badd +11 ~/program/node/raptorTrading/controller/transactions/trans.ts
+badd +1 ~/program/node/raptorTrading/wazirx/api.ts
 badd +10 ~/program/node/raptorTrading/tests/bot/test.js
 badd +123 ~/program/node/raptorTrading/tests/api.js
-badd +23 ~/program/node/raptorTrading/controller/wazirx/WazirxTransaction.js
-badd +100 ~/program/node/raptorTrading/wazirx/request.js
+badd +101 ~/program/node/raptorTrading/controller/wazirx/WazirxTransaction.ts
+badd +106 ~/program/node/raptorTrading/wazirx/request.ts
 badd +1 ~/program/node/raptorTrading/models/wazirx/LockedAssetModel.ts
-badd +28 ~/program/node/raptorTrading/models/wazirx/WazirxTransactionModel.ts
+badd +20 ~/program/node/raptorTrading/models/wazirx/WazirxTransactionModel.ts
 badd +27 ~/program/node/raptorTrading/tools/UserPassword.js
-badd +2 ~/program/node/raptorTrading/controller/User.ts
-badd +9 ~/program/node/raptorTrading/controller/users/Users.js
+badd +1 ~/program/node/raptorTrading/controller/User.ts
+badd +14 ~/program/node/raptorTrading/controller/users/Users.ts
 badd +4 ~/program/node/raptorTrading/routes/Coins.ts
 badd +8 ~/program/node/raptorTrading/db/db.js
 badd +1 ~/program/node/raptorTrading/models/CoinModel.ts
 badd +13 ~/program/node/raptorTrading/tests/coinTest.js
 badd +12 ~/program/node/raptorTrading/routes/User.js
 badd +10 ~/program/node/raptorTrading/tests/userTest.js
-badd +13 ~/program/node/raptorTrading/models/FundTransferModel.ts
-badd +22 ~/program/node/raptorTrading/controller/FundTransfer.js
+badd +21 ~/program/node/raptorTrading/models/FundTransferModel.ts
+badd +27 ~/program/node/raptorTrading/controller/FundTransfer.ts
 badd +10 ~/program/node/raptorTrading/routes/FundTransfer.js
-badd +7 ~/program/node/raptorTrading/controller/Transactions.js
+badd +1 ~/program/node/raptorTrading/controller/Transactions.ts
 badd +12 ~/program/node/raptorTrading/tests/FundTest.js
 badd +19 ~/program/node/raptorTrading/tests/coinPurchaseTest.js
 badd +11 ~/program/node/raptorTrading/routes/Transaction.js

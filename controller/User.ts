@@ -1,15 +1,19 @@
-import UserModel from '../models/UserModel';
 import express from 'express';
+import {UserModel} from '../models/UserModel';
 import {hashString} from '../Utility';
 
 export async function loginUser(req: express.Request, res: express.Response) {
   try {
     const {email, password} = req.body;
     const doc = await UserModel.findOne({email: email});
-    if (hashString(password) === doc.password) {
-      res.status(200).json({status: true, message: 'Success'});
+    if (doc) {
+      if (hashString(password) === doc.password) {
+        res.status(200).json({status: true, message: 'Success'});
+      } else {
+        res.status(200).json({status: false, message: 'Wrong Password'});
+      }
     } else {
-      res.status(200).json({status: false, message: 'Wrong Password'});
+      throw 'User Not Found';
     }
   } catch (e) {
     console.error('User::addUser', e);

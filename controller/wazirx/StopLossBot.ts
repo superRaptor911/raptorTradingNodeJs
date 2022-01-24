@@ -1,7 +1,8 @@
-const StopLossModel = require('../../models/bots/StopLossModel');
-const {checkRequired} = require('../../Utility');
+import {Request, Response} from 'express';
+import {StopLossModel} from '../../models/bots/StopLossModel';
+import {checkRequired} from '../../Utility';
 
-async function stopLossListRules(req, res) {
+export async function stopLossListRules(req: Request, res: Response) {
   try {
     checkRequired(req.body, ['username']);
 
@@ -19,7 +20,7 @@ async function stopLossListRules(req, res) {
   }
 }
 
-async function stopLossAddRule(req, res) {
+export async function stopLossAddRule(req: Request, res: Response) {
   try {
     checkRequired(req.body, [
       'username',
@@ -55,7 +56,7 @@ async function stopLossAddRule(req, res) {
   }
 }
 
-async function stopLossEditRule(req, res) {
+export async function stopLossEditRule(req: Request, res: Response) {
   try {
     checkRequired(req.body, [
       'id',
@@ -80,26 +81,30 @@ async function stopLossEditRule(req, res) {
     } = req.body;
 
     const mdl = await StopLossModel.findOne({_id: id});
-    mdl.username = username;
-    mdl.isEnabled = isEnabled;
-    mdl.coinId = coinId;
-    mdl.transType = transType;
-    mdl.condition = condition;
-    mdl.price = price;
-    mdl.count = count;
-    await mdl.save();
+    if (mdl) {
+      mdl.username = username;
+      mdl.isEnabled = isEnabled;
+      mdl.coinId = coinId;
+      mdl.transType = transType;
+      mdl.condition = condition;
+      mdl.price = price;
+      mdl.count = count;
+      await mdl.save();
 
-    res.status(200).json({
-      status: true,
-      message: 'GG',
-    });
+      res.status(200).json({
+        status: true,
+        message: 'GG',
+      });
+    } else {
+      throw 'Model not found';
+    }
   } catch (e) {
     /* handle error */
     res.status(500).json({status: false, message: e});
   }
 }
 
-async function stopLossDeleteRule(req, res) {
+export async function stopLossDeleteRule(req: Request, res: Response) {
   try {
     checkRequired(req.body, ['id']);
     const {id} = req.body;
@@ -114,8 +119,3 @@ async function stopLossDeleteRule(req, res) {
     res.status(500).json({status: false, message: e});
   }
 }
-
-module.exports.stopLossListRules = stopLossListRules;
-module.exports.stopLossAddRule = stopLossAddRule;
-module.exports.stopLossEditRule = stopLossEditRule;
-module.exports.stopLossDeleteRule = stopLossDeleteRule;

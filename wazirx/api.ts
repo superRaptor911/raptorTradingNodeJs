@@ -1,10 +1,10 @@
-const {
+import {
   wazirxGetRequest,
   wazirxDeleteRequest,
   wazirxPostRequest,
-} = require('./request');
+} from './request';
 
-async function wazirxGetOrderInfo(orderId) {
+export async function wazirxGetOrderInfo(orderId: string) {
   try {
     const response = await wazirxGetRequest('/sapi/v1/order', {
       orderId: orderId,
@@ -16,7 +16,7 @@ async function wazirxGetOrderInfo(orderId) {
   }
 }
 
-async function wazirxGetAllOdersFor(symbol) {
+export async function wazirxGetAllOdersFor(symbol: string) {
   try {
     const response = await wazirxGetRequest('/sapi/v1/allOrders', {
       symbol: symbol,
@@ -28,7 +28,7 @@ async function wazirxGetAllOdersFor(symbol) {
   }
 }
 
-async function wazirxCancelOrder(symbol, orderId) {
+export async function wazirxCancelOrder(symbol: string, orderId: string) {
   try {
     const response = await wazirxDeleteRequest('/sapi/v1/order', {
       symbol: symbol,
@@ -41,7 +41,12 @@ async function wazirxCancelOrder(symbol, orderId) {
   }
 }
 
-async function wazirxOrderLimit(symbol, quantity, price, side) {
+export async function wazirxOrderLimit(
+  symbol: string,
+  quantity: number,
+  price: number,
+  side: string,
+) {
   try {
     const response = await wazirxPostRequest('/sapi/v1/order', {
       symbol: symbol,
@@ -57,7 +62,12 @@ async function wazirxOrderLimit(symbol, quantity, price, side) {
   }
 }
 
-async function wazirxOrderLimitTest(symbol, quantity, price, side) {
+export async function wazirxOrderLimitTest(
+  symbol: string,
+  quantity: number,
+  price: number,
+  side: string,
+) {
   try {
     const response = await wazirxPostRequest('/sapi/v1/order/test', {
       symbol: symbol,
@@ -72,9 +82,3 @@ async function wazirxOrderLimitTest(symbol, quantity, price, side) {
     console.error('api::wazirxOrderLimitTest', e);
   }
 }
-
-module.exports.wazirxGetOrderInfo = wazirxGetOrderInfo;
-module.exports.wazirxGetAllOdersFor = wazirxGetAllOdersFor;
-module.exports.wazirxCancelOrder = wazirxCancelOrder;
-module.exports.wazirxOrderLimit = wazirxOrderLimit;
-module.exports.wazirxOrderLimitTest = wazirxOrderLimitTest;

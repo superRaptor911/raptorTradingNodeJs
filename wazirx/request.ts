@@ -1,5 +1,4 @@
-const crypto = require('crypto');
-const {default: fetch} = require('node-fetch');
+import crypto from 'crypto';
 
 if (!process.env.WAZIRX_SECRETKEY) {
   console.log('loading ...');
@@ -11,7 +10,7 @@ const secretKey = process.env.WAZIRX_SECRETKEY;
 const apiKey = process.env.WAZIRX_APIKEY;
 const server = 'https://api.wazirx.com';
 
-function getSignature(key, params) {
+function getSignature(key: string, params: any) {
   const qs = new URLSearchParams(params);
   const string = qs.toString();
   const hmac = crypto.createHmac('sha256', key);
@@ -20,7 +19,11 @@ function getSignature(key, params) {
   return genHmac;
 }
 
-async function wazirxPostRequest(endpoint, data) {
+export async function wazirxPostRequest(endpoint: string, data: any) {
+  if (!secretKey || !apiKey) {
+    throw 'API Keys not defined';
+  }
+
   data.timestamp = new Date().getTime();
   data.recvWindow = data.recvWindow ? data.recvWindow : 20000;
   data.signature = getSignature(secretKey, data);
@@ -44,7 +47,11 @@ async function wazirxPostRequest(endpoint, data) {
   }
 }
 
-async function wazirxDeleteRequest(endpoint, data) {
+export async function wazirxDeleteRequest(endpoint: string, data: any) {
+  if (!secretKey || !apiKey) {
+    throw 'API Keys not defined';
+  }
+
   data.timestamp = new Date().getTime();
   data.recvWindow = data.recvWindow ? data.recvWindow : 20000;
   data.signature = getSignature(secretKey, data);
@@ -68,7 +75,10 @@ async function wazirxDeleteRequest(endpoint, data) {
   }
 }
 
-async function wazirxGetRequest(endpoint, data) {
+export async function wazirxGetRequest(endpoint: string, data: any) {
+  if (!secretKey || !apiKey) {
+    throw 'API Keys not defined';
+  }
   data.timestamp = new Date().getTime();
   data.recvWindow = data.recvWindow ? data.recvWindow : 20000;
   data.signature = getSignature(secretKey, data);
@@ -94,7 +104,3 @@ async function wazirxGetRequest(endpoint, data) {
     throw e;
   }
 }
-
-module.exports.wazirxGetRequest = wazirxGetRequest;
-module.exports.wazirxPostRequest = wazirxPostRequest;
-module.exports.wazirxDeleteRequest = wazirxDeleteRequest;

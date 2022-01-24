@@ -18,9 +18,7 @@ const fundTransfer = new Schema({
   time: Date,
 });
 
-const FundTransferModel = model<FundTransfer>(
+export const FundTransferModel = model<FundTransfer>(
   'FundTransferModel',
   fundTransfer,
 );
-
-export default FundTransferModel;

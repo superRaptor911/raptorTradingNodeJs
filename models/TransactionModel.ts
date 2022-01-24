@@ -21,5 +21,4 @@ const transModel = new Schema<Transaction>({
   time: Date,
 });
 
-const TransactionModel = model<Transaction>('Transactions', transModel);
-export default TransactionModel;
+export const TransactionModel = model<Transaction>('Transactions', transModel);

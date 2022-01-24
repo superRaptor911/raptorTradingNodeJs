@@ -1,8 +1,9 @@
-const FundTransferModel = require('../models/FundTransferModel');
-const {checkRequired} = require('../Utility');
-const {depositFund, withdrawFund, addDonation} = require('./fund/fund');
+import {Request, Response} from 'express';
+import {FundTransferModel} from '../models/FundTransferModel';
+import {checkRequired} from '../Utility';
+import {depositFund, withdrawFund, addDonation} from './fund/fund';
 
-async function transferFund(req, res) {
+export async function transferFund(req: Request, res: Response) {
   try {
     checkRequired(req.body, [
       'username',
@@ -32,6 +33,7 @@ async function transferFund(req, res) {
     doc.donation = donation;
     doc.time = time;
     await doc.save();
+
     await addDonation(username, donation, doc._id);
     res.status(200).json({status: true, message: 'Success'});
   } catch (e) {
@@ -40,7 +42,7 @@ async function transferFund(req, res) {
   }
 }
 
-async function deleteFundTransfer(req, res) {
+export async function deleteFundTransfer(req: Request, res: Response) {
   try {
     const id = req.params.id;
     await FundTransferModel.deleteOne({_id: id});
@@ -50,7 +52,7 @@ async function deleteFundTransfer(req, res) {
   }
 }
 
-async function listAll(_req, res) {
+export async function listAll(_req: Request, res: Response) {
   try {
     const transfers = await FundTransferModel.find({});
     res.status(200).json({status: true, data: transfers});
@@ -60,7 +62,7 @@ async function listAll(_req, res) {
   }
 }
 
-async function listUserTransfer(req, res) {
+export async function listUserTransfer(req: Request, res: Response) {
   try {
     const username = req.params.id;
     const transfers = await FundTransferModel.findOne({username: username});
@@ -70,8 +72,3 @@ async function listUserTransfer(req, res) {
     res.status(500).json({status: false, message: e});
   }
 }
-
-module.exports.transferFund = transferFund;
-module.exports.deleteFundTransfer = deleteFundTransfer;
-module.exports.listAll = listAll;
-module.exports.listUserTransfer = listUserTransfer;

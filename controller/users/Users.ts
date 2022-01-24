@@ -1,8 +1,8 @@
 /* eslint-disable no-throw-literal */
-const {hashString} = require('../../Utility');
-const UserModel = require('../../models/UserModel');
+import {UserModel} from '../../models/UserModel';
+import {hashString} from '../../Utility';
 
-async function verifyUser(username, password) {
+export async function verifyUserAuth(username: string, password: string) {
   const usr = await UserModel.findOne({name: username});
   if (!usr) {
     throw 'Failed to find user';
@@ -12,5 +12,3 @@ async function verifyUser(username, password) {
     throw 'Wrong Password';
   }
 }
-
-module.exports.verifyUserAuth = verifyUser;

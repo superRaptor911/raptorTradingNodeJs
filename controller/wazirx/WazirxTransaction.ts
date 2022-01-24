@@ -1,10 +1,11 @@
 /* eslint-disable no-throw-literal */
-const WazirxTransactionModel = require('../../models/wazirx/WazirxTransactionModel');
-const {checkRequired} = require('../../Utility');
-const {wazirxGetOrderInfo, wazirxCancelOrder} = require('../../wazirx/api');
-const {wazirxPlaceSellOrder, wazirxPlaceBuyOrder} = require('./trans');
+import {Request, Response} from 'express';
+import {WazirxTransactionModel} from '../../models/wazirx/WazirxTransactionModel';
+import {checkRequired} from '../../Utility';
+import {wazirxGetOrderInfo, wazirxCancelOrder} from '../../wazirx/api';
+import {wazirxPlaceSellOrder, wazirxPlaceBuyOrder} from './trans';
 
-async function wazirxPlaceTransaction(req, res) {
+export async function wazirxPlaceTransaction(req: Request, res: Response) {
   try {
     checkRequired(req.body, [
       'username',
@@ -35,10 +36,10 @@ async function wazirxPlaceTransaction(req, res) {
   }
 }
 
-async function wazirxCheckOrderStatus(req, res) {
+export async function wazirxCheckOrderStatus(req: Request, res: Response) {
   try {
     checkRequired(req.body, ['username', 'orderId']);
-    const {username, orderId} = req.body;
+    const {orderId} = req.body;
 
     const result = await wazirxGetOrderInfo(orderId);
     res.status(200).json({
@@ -51,7 +52,7 @@ async function wazirxCheckOrderStatus(req, res) {
   }
 }
 
-async function wazirxStopOrder(req, res) {
+export async function wazirxStopOrder(req: Request, res: Response) {
   try {
     checkRequired(req.body, ['username', 'orderId', 'coinId']);
     const {username, orderId, coinId} = req.body;
@@ -80,7 +81,7 @@ async function wazirxStopOrder(req, res) {
   }
 }
 
-async function wazirxGetTransactionList(req, res) {
+export async function wazirxGetTransactionList(req: Request, res: Response) {
   try {
     checkRequired(req.body, ['username']);
     const {username} = req.body;
@@ -98,8 +99,3 @@ async function wazirxGetTransactionList(req, res) {
     res.status(500).json({status: false, message: e});
   }
 }
-
-module.exports.wazirxPlaceTransaction = wazirxPlaceTransaction;
-module.exports.wazirxCheckOrderStatus = wazirxCheckOrderStatus;
-module.exports.wazirxStopOrder = wazirxStopOrder;
-module.exports.wazirxGetTransactionList = wazirxGetTransactionList;
