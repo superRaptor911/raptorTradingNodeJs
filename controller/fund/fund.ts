@@ -1,6 +1,5 @@
-/* eslint-disable no-throw-literal */
-import DonationModel from '../../models/DonationModel';
-import UserModel from '../../models/UserModel';
+import {DonationModel} from '../../models/DonationModel';
+import {UserModel} from '../../models/UserModel';
 
 export async function depositFund(
   username: string,
@@ -10,9 +9,13 @@ export async function depositFund(
 ) {
   try {
     const user = await UserModel.findOne({name: username});
-    user.wallet.balance += amount - fee - donation;
-    user.wallet.investment += amount;
-    await user.save();
+    if (user) {
+      user.wallet.balance += amount - fee - donation;
+      user.wallet.investment += amount;
+      await user.save();
+    } else {
+      throw 'User Not Found';
+    }
   } catch (e) {
     console.error('FundTransfer::depositFund ', e);
     throw e;
@@ -28,14 +31,18 @@ export async function withdrawFund(
 ) {
   try {
     const user = await UserModel.findOne({name: username});
-    const balance = user.wallet.balance - amount;
+    if (user) {
+      const balance = user.wallet.balance - amount;
 
-    if (!force && balance < 0) {
-      throw 'Low balance';
+      if (!force && balance < 0) {
+        throw 'Low balance';
+      }
+      user.wallet.balance = balance;
+      user.wallet.investment -= amount - fee - donation;
+      await user.save();
+    } else {
+      throw 'User Not Found';
     }
-    user.wallet.balance = balance;
-    user.wallet.investment -= amount - fee - donation;
-    await user.save();
   } catch (e) {
     console.error('FundTransfer::withdrawFund ', e);
     throw e;

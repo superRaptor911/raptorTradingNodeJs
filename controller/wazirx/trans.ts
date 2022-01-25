@@ -82,8 +82,13 @@ export async function wazirxPlaceBuyOrder(
       checkBalance(balance, amount);
 
       // Place order
-      const result = await wazirxOrderLimit(coinId, coinCount, price, 'buy');
-      if (!result.id) {
+      const result: any = await wazirxOrderLimit(
+        coinId,
+        coinCount,
+        price,
+        'buy',
+      );
+      if (!result || !result.id) {
         throw 'Failed to place order';
       }
 
@@ -117,8 +122,14 @@ export async function wazirxPlaceSellOrder(
         throw 'INSUFFICIENT COINS';
       }
       // Place order
-      const result = await wazirxOrderLimit(coinId, coinCount, price, 'sell');
-      if (!result.id) {
+      const result: any = await wazirxOrderLimit(
+        coinId,
+        coinCount,
+        price,
+        'sell',
+      );
+
+      if (!result || !result.id) {
         throw 'Failed to place order';
       }
       const orderId = result.id;
@@ -225,7 +236,7 @@ export async function wazirxTransChecker() {
     // Process pending transactions
     for (const i of remaining) {
       // Get Transaction receipt from wazirx
-      const receipt = await wazirxGetOrderInfo(i.id);
+      const receipt: any = await wazirxGetOrderInfo(i.id);
       if (!receipt) {
         console.error('trans::Failed to get transaction status for ', i.id);
         continue;

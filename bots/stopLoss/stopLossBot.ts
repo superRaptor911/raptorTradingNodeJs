@@ -97,14 +97,19 @@ async function stopLossBuy(username: string, coinId: string, count: number) {
 }
 
 async function sendSuccessMail(rule: StopLoss) {
-  const user = await UserModel.findOne({name: rule.username});
-  user &&
-    (await sendMail(
-      user.email,
-      'Stop Loss Bot Order Success',
-      'Stop Loss Bot successfully executed ' +
-        `${rule.transType} ${rule.count} ${rule.coinId} at ${rule.price}`,
-    ));
+  try {
+    const user = await UserModel.findOne({name: rule.username});
+    user &&
+      (await sendMail(
+        user.email,
+        'Stop Loss Bot Order Success',
+        'Stop Loss Bot successfully executed ' +
+          `${rule.transType} ${rule.count} ${rule.coinId} at ${rule.price}`,
+      ));
+  } catch (e) {
+    /* handle error */
+    console.error('stopLossBot::Failed To send Mail', e);
+  }
 }
 
 const checkCondition = (rule: StopLoss, price: number) => {

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-const DB = process.env.DB;
 
 export async function initDB() {
+  const DB = process.env.DB;
   if (DB) {
     try {
       await mongoose.connect(DB);

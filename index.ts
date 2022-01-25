@@ -2,6 +2,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import {initDB} from './db/db';
 
 dotenv.config();
 initDB();
@@ -9,7 +10,6 @@ initDB();
 import {wazirxTransChecker} from './controller/wazirx/trans';
 import {authorize} from './auth';
 import {execBots} from './bots/bots';
-import {initDB} from './db/db';
 import CoinRouter from './routes/Coins';
 import FundTransferRouter from './routes/FundTransfer';
 import TransactionRouter from './routes/Transaction';

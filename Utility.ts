@@ -1,5 +1,5 @@
 import sgMail from '@sendgrid/mail';
-import fetch from 'node-fetch';
+import fetch from 'cross-fetch';
 
 if (!process.env.SENDGRID_APIKEY) {
   console.log('loading ...');
