@@ -1,3 +1,4 @@
+import fetch from 'cross-fetch';
 import express from 'express';
 import {CoinModel} from '../models/CoinModel';
 import {checkRequired} from '../Utility';
@@ -49,8 +50,13 @@ export async function coinPrice(_req: express.Request, res: express.Response) {
     });
     const coins = await CoinModel.find({});
     const coinData = await response.json();
-    const coinPriceList = coinData2coinPriceList(coinData, coins);
-    res.status(200).json({status: true, data: coinPriceList});
+
+    if (coins && coinData) {
+      const coinPriceList = coinData2coinPriceList(coinData, coins);
+      res.status(200).json({status: true, data: coinPriceList});
+    } else {
+      throw 'COINS NOT FOUND';
+    }
   } catch (e) {
     res.status(500).json({status: false, message: e});
   }

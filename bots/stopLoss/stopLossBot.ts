@@ -7,7 +7,8 @@ import {UserModel} from '../../models/UserModel';
 import {getRequest, sendMail} from '../../Utility';
 import {wazirxGetOrderInfo, wazirxCancelOrder} from '../../wazirx/api';
 
-const server = 'https://raptor-trading.herokuapp.com';
+const server = 'http://localhost:8080';
+// const server = 'https://raptor-trading.herokuapp.com';
 
 async function coinPrice() {
   try {

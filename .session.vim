@@ -11,25 +11,26 @@ set shortmess=aoO
 argglobal
 %argdel
 $argadd index.ts
-edit wazirx/request.ts
+edit bots/stopLoss/stopLossBot.ts
 argglobal
-balt Utility.ts
-let s:l = 2 - ((1 * winheight(0) + 22) / 45)
+balt bots/bots.ts
+let s:l = 10 - ((9 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 2
-normal! 024|
+keepjumps 10
+normal! 021|
 lcd ~/program/node/raptorTrading
 tabnext 1
+badd +11 ~/program/node/raptorTrading/wazirx/request.ts
 badd +5 ~/program/node/raptorTrading/index.ts
+badd +3 ~/program/node/raptorTrading/Utility.ts
 badd +6 ~/program/node/raptorTrading/bots/bots.ts
 badd +259 ~/program/node/raptorTrading/controller/wazirx/trans.ts
 badd +1 ~/program/node/raptorTrading/controller/Coins.ts
 badd +3 ~/program/node/raptorTrading/controller/coins/utility.ts
 badd +33 ~/program/node/raptorTrading/models/UserModel.ts
 badd +24 ~/program/node/raptorTrading/models/TransactionModel.ts
-badd +3 ~/program/node/raptorTrading/Utility.ts
 badd +61 ~/program/node/raptorTrading/controller/fund/fund.ts
 badd +5 ~/program/node/raptorTrading/models/DonationModel.ts
 badd +1 ~/program/node/raptorTrading/auth.ts
@@ -42,7 +43,6 @@ badd +33 ~/program/node/raptorTrading/wazirx/api.ts
 badd +10 ~/program/node/raptorTrading/tests/bot/test.js
 badd +5 ~/program/node/raptorTrading/tests/api.js
 badd +101 ~/program/node/raptorTrading/controller/wazirx/WazirxTransaction.ts
-badd +2 ~/program/node/raptorTrading/wazirx/request.ts
 badd +1 ~/program/node/raptorTrading/models/wazirx/LockedAssetModel.ts
 badd +20 ~/program/node/raptorTrading/models/wazirx/WazirxTransactionModel.ts
 badd +27 ~/program/node/raptorTrading/tools/UserPassword.js
