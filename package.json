@@ -5,7 +5,10 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "tsc && node dist/index.js"
+        "start": "node dist/index.js",
+        "postinstall": "tsc",
+        "watch-node": "nodemon dist/index.js",
+        "watch-ts": "tsc -w"
     },
     "author": "Raptor",
     "license": "ISC",
@@ -33,5 +36,8 @@
         "eslint-plugin-promise": "^5.1.0",
         "typescript": "^4.5.5"
     },
-    "type": "commonjs"
+    "type": "commonjs",
+    "engines": {
+        "node": "17.3.0"
+    }
 }
