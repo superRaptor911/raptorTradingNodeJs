@@ -154,7 +154,8 @@ async function unlockLockedAsset(orderId: string, coinId: string) {
     if (asset.asset === 'balance') {
       user.wallet.balance += asset.amount;
     } else {
-      if (user.wallet.coins && user.wallet.coins[coinId]) {
+      // Critical Bug fixed here
+      if (user.wallet.coins && user.wallet.coins[coinId] !== undefined) {
         user.wallet.coins[coinId] += asset.amount;
       }
     }
