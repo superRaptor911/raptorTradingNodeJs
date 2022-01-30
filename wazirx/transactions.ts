@@ -1,3 +1,4 @@
+import {TransactionRequest} from '../controller/wazirx/WazirxTransaction';
 import {UserModel} from '../models/UserModel';
 import {WazirxTransactionModel} from '../models/wazirx/WazirxTransactionModel';
 import {sleep} from '../Utility';
@@ -10,6 +11,25 @@ import {
   executeTransaction,
   cancelTransaction,
 } from './helper';
+
+let TransactionQueue: TransactionRequest[] = [];
+
+export function addTraqnsactionToQ(
+  username: string,
+  transType: string,
+  coinId: string,
+  coinCount: number,
+  price: number,
+) {
+  TransactionQueue.push({
+    username: username,
+    transType: transType,
+    coinId: coinId,
+    coinCount: coinCount,
+    price: price,
+    isPlaced: false,
+  });
+}
 
 // funtion to place buy order in wazirx
 export async function wazirxPlaceBuyOrder(
@@ -92,9 +112,29 @@ export async function wazirxPlaceSellOrder(
   }
 }
 
+async function placeOrdersInQueue() {
+  TransactionQueue = TransactionQueue.filter(item => !item.isPlaced);
+
+  for (let i of TransactionQueue) {
+    try {
+      if (i.transType === 'SELL') {
+        await wazirxPlaceSellOrder(i.username, i.coinId, i.coinCount, i.price);
+      } else {
+        await wazirxPlaceBuyOrder(i.username, i.coinId, i.coinCount, i.price);
+      }
+    } catch (e) {
+      /* handle error */
+      console.error('transactions::placeOrdersInQueue', e);
+    }
+    i.isPlaced = true;
+  }
+}
+
 export async function wazirxTransChecker() {
   while (true) {
     await sleep(1000);
+    await placeOrdersInQueue();
+
     // Get Pending Transactions
     const remaining = await WazirxTransactionModel.find({status: 'PENDING'});
     remaining.length > 0 &&

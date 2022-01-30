@@ -1,12 +1,17 @@
-/* eslint-disable no-throw-literal */
 import {Request, Response} from 'express';
 import {WazirxTransactionModel} from '../../models/wazirx/WazirxTransactionModel';
 import {checkRequired} from '../../Utility';
 import {wazirxGetOrderInfo, wazirxCancelOrder} from '../../wazirx/api';
-import {
-  wazirxPlaceSellOrder,
-  wazirxPlaceBuyOrder,
-} from '../../wazirx/transactions';
+import {addTraqnsactionToQ} from '../../wazirx/transactions';
+
+export interface TransactionRequest {
+  username: string;
+  transType: string;
+  coinId: string;
+  coinCount: number;
+  price: number;
+  isPlaced: boolean;
+}
 
 export async function wazirxPlaceTransaction(req: Request, res: Response) {
   try {
@@ -26,16 +31,11 @@ export async function wazirxPlaceTransaction(req: Request, res: Response) {
       throw 'Please place more than 50';
     }
 
-    let orderId = '0';
-    if (transType === 'SELL') {
-      orderId = await wazirxPlaceSellOrder(username, coinId, coinCount, price);
-    } else {
-      orderId = await wazirxPlaceBuyOrder(username, coinId, coinCount, price);
-    }
+    addTraqnsactionToQ(username, transType, coinId, coinCount, price);
+
     res.status(200).json({
       status: true,
-      orderId: orderId,
-      message: 'Successfully Placed order ' + orderId,
+      message: 'Placed order',
     });
   } catch (e) {
     /* handle error */
