@@ -34,10 +34,10 @@ export async function wazirxPlaceTransaction(req: Request, res: Response) {
 
     addTraqnsactionToQ(username, transType, coinId, coinCount, price, res);
 
-    res.status(200).json({
-      status: true,
-      message: 'Placed order',
-    });
+    // res.status(200).json({
+    //   status: true,
+    //   message: 'Placed order',
+    // });
   } catch (e) {
     /* handle error */
     res.status(500).json({status: false, message: e});
