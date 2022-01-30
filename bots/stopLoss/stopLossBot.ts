@@ -1,11 +1,11 @@
-import {
-  wazirxPlaceSellOrder,
-  wazirxPlaceBuyOrder,
-} from '../../controller/wazirx/trans';
 import {StopLoss, StopLossModel} from '../../models/bots/StopLossModel';
 import {UserModel} from '../../models/UserModel';
 import {getRequest, sendMail} from '../../Utility';
 import {wazirxGetOrderInfo, wazirxCancelOrder} from '../../wazirx/api';
+import {
+  wazirxPlaceSellOrder,
+  wazirxPlaceBuyOrder,
+} from '../../wazirx/transactions';
 
 // const server = 'http://localhost:8080';
 const server = 'https://raptor-trading.herokuapp.com';
