@@ -11,6 +11,7 @@ export interface TransactionRequest {
   coinCount: number;
   price: number;
   isPlaced: boolean;
+  res: Response;
 }
 
 export async function wazirxPlaceTransaction(req: Request, res: Response) {
@@ -31,7 +32,7 @@ export async function wazirxPlaceTransaction(req: Request, res: Response) {
       throw 'Please place more than 50';
     }
 
-    addTraqnsactionToQ(username, transType, coinId, coinCount, price);
+    addTraqnsactionToQ(username, transType, coinId, coinCount, price, res);
 
     res.status(200).json({
       status: true,

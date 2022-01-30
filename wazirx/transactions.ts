@@ -1,3 +1,4 @@
+import {Response} from 'express';
 import {TransactionRequest} from '../controller/wazirx/WazirxTransaction';
 import {UserModel} from '../models/UserModel';
 import {WazirxTransactionModel} from '../models/wazirx/WazirxTransactionModel';
@@ -20,6 +21,7 @@ export function addTraqnsactionToQ(
   coinId: string,
   coinCount: number,
   price: number,
+  res: Response,
 ) {
   TransactionQueue.push({
     username: username,
@@ -28,6 +30,7 @@ export function addTraqnsactionToQ(
     coinCount: coinCount,
     price: price,
     isPlaced: false,
+    res: res,
   });
 }
 
@@ -117,14 +120,32 @@ async function placeOrdersInQueue() {
 
   for (let i of TransactionQueue) {
     try {
+      let orderId = '0';
       if (i.transType === 'SELL') {
-        await wazirxPlaceSellOrder(i.username, i.coinId, i.coinCount, i.price);
+        orderId = await wazirxPlaceSellOrder(
+          i.username,
+          i.coinId,
+          i.coinCount,
+          i.price,
+        );
       } else {
-        await wazirxPlaceBuyOrder(i.username, i.coinId, i.coinCount, i.price);
+        orderId = await wazirxPlaceBuyOrder(
+          i.username,
+          i.coinId,
+          i.coinCount,
+          i.price,
+        );
       }
+
+      i.res.status(200).json({
+        status: true,
+        orderId: orderId,
+        message: 'Successfully Placed order ' + orderId,
+      });
     } catch (e) {
       /* handle error */
       console.error('transactions::placeOrdersInQueue', e);
+      i.res.status(500).json({status: false, message: e});
     }
     i.isPlaced = true;
   }
