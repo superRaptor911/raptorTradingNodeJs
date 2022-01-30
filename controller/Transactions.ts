@@ -3,6 +3,7 @@ import {TransactionModel} from '../models/TransactionModel';
 import {checkRequired} from '../Utility';
 import {sellCoin, buyCoin} from './transactions/trans';
 
+// Function to add new transaction
 export async function addTransaction(req: Request, res: Response) {
   try {
     checkRequired(req.body, [

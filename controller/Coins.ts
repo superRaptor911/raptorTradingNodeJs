@@ -4,6 +4,7 @@ import {CoinModel} from '../models/CoinModel';
 import {checkRequired} from '../Utility';
 import {coinData2coinPriceList} from './coins/utility';
 
+// Get List of coins
 export async function coinRoot(_req: express.Request, res: express.Response) {
   try {
     const result = await CoinModel.find({});
@@ -14,6 +15,7 @@ export async function coinRoot(_req: express.Request, res: express.Response) {
   }
 }
 
+// Add a coin
 export async function addCoin(req: express.Request, res: express.Response) {
   try {
     checkRequired(req.body, ['name', 'id', 'avatar']);
@@ -48,8 +50,8 @@ export async function coinPrice(_req: express.Request, res: express.Response) {
     const response = await fetch(apiPath, {
       method: 'GET',
     });
-    const coins = await CoinModel.find({});
     const coinData = await response.json();
+    const coins = await CoinModel.find({});
 
     if (coins && coinData) {
       const coinPriceList = coinData2coinPriceList(coinData, coins);

@@ -11,28 +11,29 @@ set shortmess=aoO
 argglobal
 %argdel
 $argadd index.ts
-edit bots/stopLoss/stopLossBot.ts
+edit controller/Transactions.ts
 argglobal
-balt Utility.ts
-let s:l = 20 - ((19 * winheight(0) + 22) / 45)
+balt controller/fund/fund.ts
+let s:l = 75 - ((44 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 20
+keepjumps 75
 normal! 0
 lcd ~/program/node/raptorTrading
 tabnext 1
-badd +10 ~/program/node/raptorTrading/bots/stopLoss/stopLossBot.ts
+badd +24 ~/program/node/raptorTrading/controller/FundTransfer.ts
 badd +5 ~/program/node/raptorTrading/index.ts
+badd +168 ~/program/node/raptorTrading/controller/wazirx/trans.ts
+badd +20 ~/program/node/raptorTrading/bots/stopLoss/stopLossBot.ts
+badd +1 ~/program/node/raptorTrading/Utility.ts
 badd +6 ~/program/node/raptorTrading/bots/bots.ts
 badd +2 ~/program/node/raptorTrading/wazirx/request.ts
-badd +1 ~/program/node/raptorTrading/Utility.ts
-badd +259 ~/program/node/raptorTrading/controller/wazirx/trans.ts
 badd +1 ~/program/node/raptorTrading/controller/Coins.ts
 badd +6 ~/program/node/raptorTrading/controller/coins/utility.ts
 badd +33 ~/program/node/raptorTrading/models/UserModel.ts
 badd +24 ~/program/node/raptorTrading/models/TransactionModel.ts
-badd +61 ~/program/node/raptorTrading/controller/fund/fund.ts
+badd +70 ~/program/node/raptorTrading/controller/fund/fund.ts
 badd +5 ~/program/node/raptorTrading/models/DonationModel.ts
 badd +1 ~/program/node/raptorTrading/auth.ts
 badd +1 ~/program/node/raptorTrading/controller/wazirx/StopLossBot.ts
@@ -55,7 +56,6 @@ badd +13 ~/program/node/raptorTrading/tests/coinTest.js
 badd +18 ~/program/node/raptorTrading/routes/User.ts
 badd +10 ~/program/node/raptorTrading/tests/userTest.js
 badd +21 ~/program/node/raptorTrading/models/FundTransferModel.ts
-badd +6 ~/program/node/raptorTrading/controller/FundTransfer.ts
 badd +16 ~/program/node/raptorTrading/routes/FundTransfer.ts
 badd +55 ~/program/node/raptorTrading/controller/Transactions.ts
 badd +12 ~/program/node/raptorTrading/tests/FundTest.js

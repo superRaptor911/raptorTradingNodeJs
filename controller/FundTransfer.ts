@@ -3,6 +3,7 @@ import {FundTransferModel} from '../models/FundTransferModel';
 import {checkRequired} from '../Utility';
 import {depositFund, withdrawFund, addDonation} from './fund/fund';
 
+// Transfer fund to account
 export async function transferFund(req: Request, res: Response) {
   try {
     checkRequired(req.body, [
@@ -25,6 +26,7 @@ export async function transferFund(req: Request, res: Response) {
       await withdrawFund(username, amount, fee, donation, force);
     }
 
+    // Save receipt
     const doc = new FundTransferModel();
     doc.username = username;
     doc.transType = transType;
