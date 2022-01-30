@@ -3,7 +3,10 @@ import {Request, Response} from 'express';
 import {WazirxTransactionModel} from '../../models/wazirx/WazirxTransactionModel';
 import {checkRequired} from '../../Utility';
 import {wazirxGetOrderInfo, wazirxCancelOrder} from '../../wazirx/api';
-import {wazirxPlaceSellOrder, wazirxPlaceBuyOrder} from './trans';
+import {
+  wazirxPlaceSellOrder,
+  wazirxPlaceBuyOrder,
+} from '../../wazirx/transactions';
 
 export async function wazirxPlaceTransaction(req: Request, res: Response) {
   try {

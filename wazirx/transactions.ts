@@ -1,14 +1,13 @@
-/* eslint-disable no-throw-literal */
-import {TransactionModel} from '../../models/TransactionModel';
-import {User, UserModel} from '../../models/UserModel';
-import {LockedAssetModel} from '../../models/wazirx/LockedAssetModel';
+import {sellCoin, buyCoin} from '../controller/transactions/trans';
+import {TransactionModel} from '../models/TransactionModel';
+import {User, UserModel} from '../models/UserModel';
+import {LockedAssetModel} from '../models/wazirx/LockedAssetModel';
 import {
-  WazirxTransaction,
   WazirxTransactionModel,
-} from '../../models/wazirx/WazirxTransactionModel';
-import {sleep} from '../../Utility';
-import {wazirxOrderLimit, wazirxGetOrderInfo} from '../../wazirx/api';
-import {sellCoin, buyCoin} from '../transactions/trans';
+  WazirxTransaction,
+} from '../models/wazirx/WazirxTransactionModel';
+import {sleep} from '../Utility';
+import {wazirxOrderLimit, wazirxGetOrderInfo} from './api';
 
 // Function to check balance before transaction
 function checkBalance(balance: number, sum: number) {

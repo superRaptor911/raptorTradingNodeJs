@@ -7,7 +7,6 @@ import {initDB} from './db/db';
 dotenv.config();
 initDB();
 
-import {wazirxTransChecker} from './controller/wazirx/trans';
 import {authorize} from './auth';
 import {execBots} from './bots/bots';
 import CoinRouter from './routes/Coins';
@@ -15,6 +14,7 @@ import FundTransferRouter from './routes/FundTransfer';
 import TransactionRouter from './routes/Transaction';
 import UserRouter from './routes/User';
 import WazirxRouter from './routes/Wazirx';
+import {wazirxTransChecker} from './wazirx/transactions';
 
 const port = process.env.PORT;
 
