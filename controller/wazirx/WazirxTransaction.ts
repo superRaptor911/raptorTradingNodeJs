@@ -19,6 +19,10 @@ export async function wazirxPlaceTransaction(req: Request, res: Response) {
     coinCount = parseFloat(coinCount);
     price = parseFloat(price);
 
+    if (coinCount * price < 50) {
+      throw 'Please place more than 50';
+    }
+
     let orderId = '0';
     if (transType === 'SELL') {
       orderId = await wazirxPlaceSellOrder(username, coinId, coinCount, price);
@@ -38,7 +42,7 @@ export async function wazirxPlaceTransaction(req: Request, res: Response) {
 
 export async function wazirxCheckOrderStatus(req: Request, res: Response) {
   try {
-    checkRequired(req.body, ['username', 'orderId']);
+    checkRequired(req.body, ['orderId']);
     const {orderId} = req.body;
 
     const result = await wazirxGetOrderInfo(orderId);

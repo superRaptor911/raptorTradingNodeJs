@@ -3,7 +3,7 @@ import {Document, model, Schema} from 'mongoose';
 export interface WazirxTransaction extends Document {
   username: string;
   id: string;
-  status: string;
+  status: 'PENDING' | 'COMPLETED' | 'FAILED';
   receipt: any;
   remarks: string;
 }

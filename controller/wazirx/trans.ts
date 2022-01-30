@@ -96,7 +96,7 @@ export async function wazirxPlaceBuyOrder(
       await lockBalance(user, amount, orderId);
 
       // Save transaction receipt
-      saveWazirxTransaction(username, orderId, result, remarks);
+      await saveWazirxTransaction(username, orderId, result, remarks);
       return orderId;
     }
     return null;
@@ -134,9 +134,9 @@ export async function wazirxPlaceSellOrder(
       }
       const orderId = result.id;
       // Lock coin till wazirx completes transaction
-      lockAsset(user, coinId, coinCount, orderId);
+      await lockAsset(user, coinId, coinCount, orderId);
       // Save transaction receipt
-      saveWazirxTransaction(username, orderId, result, remarks);
+      await saveWazirxTransaction(username, orderId, result, remarks);
       return orderId;
     }
     return null;
