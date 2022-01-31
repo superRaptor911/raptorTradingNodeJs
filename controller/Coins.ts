@@ -7,7 +7,7 @@ import {coinData2coinPriceList} from './coins/utility';
 // Get List of coins
 export async function coinRoot(_req: express.Request, res: express.Response) {
   try {
-    const result = await CoinModel.find({});
+    const result = await CoinModel.find({}).sort({name: 1});
     res.status(200).json({status: true, data: result});
   } catch (e) {
     console.error('Coins::coinRoot ', e);
