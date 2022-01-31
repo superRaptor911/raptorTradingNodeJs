@@ -1,23 +1,12 @@
 import {StopLoss, StopLossModel} from '../../models/bots/StopLossModel';
 import {UserModel} from '../../models/UserModel';
-import {getRequest, sendMail} from '../../Utility';
+import {sendMail} from '../../Utility';
 import {wazirxGetOrderInfo, wazirxCancelOrder} from '../../wazirx/api';
 import {
   wazirxPlaceSellOrder,
   wazirxPlaceBuyOrder,
 } from '../../wazirx/transactions';
-
-// const server = 'http://localhost:8080';
-const server = 'https://raptor-trading.herokuapp.com';
-
-async function coinPrice() {
-  try {
-    const data: any = await getRequest(server + '/coins/prices');
-    return data.data;
-  } catch (e) {
-    console.error('coinTest::coinPrice ', e);
-  }
-}
+import {api_getCoinPrices} from '../helper';
 
 async function useAvailableCoins(
   username: string,
@@ -47,7 +36,7 @@ async function getUserBalance(username: string) {
 async function stopLossSell(username: string, coinId: string, count: number) {
   try {
     const coinCount = await useAvailableCoins(username, coinId, count);
-    const coinPrices = await coinPrice();
+    const coinPrices = await api_getCoinPrices();
     const price = coinPrices[coinId].buy;
 
     const orderId = await wazirxPlaceSellOrder(
@@ -75,7 +64,7 @@ async function stopLossBuy(username: string, coinId: string, count: number) {
       console.log('Low Balance.. not placing order');
       return;
     }
-    const coinPrices = await coinPrice();
+    const coinPrices = await api_getCoinPrices();
     const price = coinPrices[coinId].sell;
     const coinCount = Math.min(count, balance / price);
     const orderId = await wazirxPlaceBuyOrder(
@@ -124,12 +113,12 @@ const checkCondition = (rule: StopLoss, price: number) => {
 
 export async function execStopLoss() {
   const rules = await StopLossModel.find({isEnabled: true});
-  let coinPrices = await coinPrice();
+  let coinPrices = await api_getCoinPrices();
 
   if (!coinPrices) return;
 
   for (const i of rules) {
-    coinPrices = await coinPrice();
+    coinPrices = await api_getCoinPrices();
     const price = coinPrices[i.coinId].last;
 
     // Check if order placed or not
