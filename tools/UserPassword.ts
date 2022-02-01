@@ -1,14 +1,16 @@
-const UserModel = require('../models/UserModel');
-const {sendMail, hashString} = require('../Utility');
+import {initDB} from '../db/db';
+import {UserModel} from '../models/UserModel';
+import {sendMail, hashString} from '../Utility';
+
 if (!process.env.SENDGRID_APIKEY) {
   console.log('loading ...');
   const dotenv = require('dotenv');
   dotenv.config();
 }
 
-require('../db/db');
+initDB();
 
-function makePass(length) {
+function makePass(length: number) {
   let result = '';
   const characters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

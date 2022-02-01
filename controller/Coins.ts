@@ -63,3 +63,25 @@ export async function coinPrice(_req: express.Request, res: express.Response) {
     res.status(500).json({status: false, message: e});
   }
 }
+
+export async function coinPriceHistory(
+  req: express.Request,
+  res: express.Response,
+) {
+  try {
+    checkRequired(req.query, ['coinId']);
+    let {coinId, limit, period} = req.query;
+    limit = limit ? limit : '50';
+    period = period ? period : '60';
+
+    const apiPath = `https://x.wazirx.com/api/v2/k?market=${coinId}&period=${period}&limit=${limit}`;
+    const response = await fetch(apiPath, {
+      method: 'GET',
+    });
+
+    const coinPriceHistory = await response.json();
+    res.status(200).json({status: true, data: coinPriceHistory});
+  } catch (e) {
+    res.status(500).json({status: false, message: e});
+  }
+}

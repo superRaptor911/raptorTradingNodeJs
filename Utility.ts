@@ -69,7 +69,7 @@ export async function sendMail(
   to: string,
   subject: string,
   text: string,
-  html = null,
+  html: string | null = null,
 ) {
   try {
     const msg = {
