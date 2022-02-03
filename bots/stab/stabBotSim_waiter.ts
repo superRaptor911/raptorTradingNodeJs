@@ -1,44 +1,12 @@
-import {
-  api_getCoinPriceHistory,
-  getBuyPrice,
-  getCurPrice,
-  getSellPrice,
-  Point,
-} from '../helper';
-
-type coinID =
-  | 'adainr'
-  | 'maticinr'
-  | 'wrxinr'
-  | 'dotinr'
-  | 'batinr'
-  | 'arinr'
-  | 'btcinr'
-  | 'ethinr'
-  | 'pushinr'
-  | 'sandinr';
-
-const coins: coinID[] = [
-  'adainr',
-  'maticinr',
-  'wrxinr',
-  'dotinr',
-  'batinr',
-  'arinr',
-  'btcinr',
-  'ethinr',
-  'pushinr',
-  'sandinr',
-];
+import {changePercent} from '../../Utility';
+import {api_getCoinPriceHistory, getCurPrice, Point} from '../helper';
+import {COINS} from './stabConfig';
 
 let wallet: any = {
   balance: 0,
 };
 
-coins.forEach(item => (wallet[item] = 0));
-console.log(wallet);
-
-function sell(price: number, coinId: coinID, amount: number) {
+function sell(price: number, coinId: string, amount: number) {
   if (wallet[coinId] >= amount) {
     const total = amount * price;
     wallet.balance += total * 0.998;
@@ -48,7 +16,7 @@ function sell(price: number, coinId: coinID, amount: number) {
   return false;
 }
 
-function buy(price: number, coinId: coinID, amount: number) {
+function buy(price: number, coinId: string, amount: number) {
   amount = Math.min(wallet.balance, amount);
   if (amount > 50) {
     const count = amount / price;
@@ -59,7 +27,7 @@ function buy(price: number, coinId: coinID, amount: number) {
   return false;
 }
 
-function historyToPrice(historyItem: number[], coinId: coinID) {
+function historyToPrice(historyItem: number[], coinId: string) {
   const prices: any = {};
   prices[coinId] = {
     last: historyItem[3],
@@ -83,12 +51,8 @@ function calcAverage(points: Point[]) {
   return total / points.length;
 }
 
-function changePercent(n1: number, n2: number) {
-  return (100 * (n2 - n1)) / n1;
-}
-
 function getNetWorth(prices: any) {
-  coins.forEach(item => {
+  COINS.forEach(item => {
     sell(prices[item], item, wallet[item]);
   });
   const total = wallet.balance;
@@ -100,12 +64,12 @@ function resetWallet(balance: number) {
     balance: balance,
   };
 
-  coins.forEach(item => (wallet[item] = 0));
+  COINS.forEach(item => (wallet[item] = 0));
 }
 
 function logic(
   trans: transStruct[],
-  asset: coinID,
+  asset: string,
   price: number,
   change: number,
   bf: number,
@@ -138,7 +102,7 @@ function logic(
 }
 
 interface transStruct {
-  asset: coinID;
+  asset: string;
   price: number;
   isValid: boolean;
 }
@@ -155,12 +119,12 @@ function simulate(
   const coinPrices: any = {};
 
   let prevPoint: any = {};
-  coins.forEach(item => {
+  COINS.forEach(item => {
     prevPoint[item] = 0;
   });
 
   for (let i = 0; i < count; i++) {
-    for (let j of coins) {
+    for (let j of COINS) {
       const item = histories[j][i];
       const prices = historyToPrice(item, j);
       const price = getCurPrice(prices, j);
@@ -182,9 +146,10 @@ function simulate(
 // a[3] buy
 // a[4] sell
 async function mainFunc() {
+  resetWallet(1000);
   const count = 500;
   const histories: any = {};
-  for (const coinId of coins) {
+  for (const coinId of COINS) {
     const history = await api_getCoinPriceHistory(coinId, 5, count);
     histories[coinId] = history;
   }

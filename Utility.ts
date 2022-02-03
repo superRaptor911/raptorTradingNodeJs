@@ -96,3 +96,7 @@ export function sleep(ms: number) {
 export function fixedNumber(num: string | number) {
   return Number(Number(num).toFixed(10));
 }
+
+export function changePercent(n1: number, n2: number) {
+  return (100 * (n2 - n1)) / n1;
+}
