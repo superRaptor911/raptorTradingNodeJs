@@ -6,17 +6,37 @@ import {
   Point,
 } from '../helper';
 
-type coinID = 'adainr' | 'maticinr' | 'wrxinr' | 'dotinr' | 'batinr';
-const coins: coinID[] = ['adainr', 'maticinr', 'wrxinr', 'dotinr', 'batinr'];
+type coinID =
+  | 'adainr'
+  | 'maticinr'
+  | 'wrxinr'
+  | 'dotinr'
+  | 'batinr'
+  | 'arinr'
+  | 'btcinr'
+  | 'ethinr'
+  | 'pushinr'
+  | 'sandinr';
 
-let wallet = {
+const coins: coinID[] = [
+  'adainr',
+  'maticinr',
+  'wrxinr',
+  'dotinr',
+  'batinr',
+  'arinr',
+  'btcinr',
+  'ethinr',
+  'pushinr',
+  'sandinr',
+];
+
+let wallet: any = {
   balance: 0,
-  adainr: 0,
-  maticinr: 0,
-  wrxinr: 0,
-  dotinr: 0,
-  batinr: 0,
 };
+
+coins.forEach(item => (wallet[item] = 0));
+console.log(wallet);
 
 function sell(price: number, coinId: coinID, amount: number) {
   if (wallet[coinId] >= amount) {
@@ -78,12 +98,9 @@ function getNetWorth(prices: any) {
 function resetWallet(balance: number) {
   wallet = {
     balance: balance,
-    adainr: 0,
-    maticinr: 0,
-    wrxinr: 0,
-    dotinr: 0,
-    batinr: 0,
   };
+
+  coins.forEach(item => (wallet[item] = 0));
 }
 
 function logic(
@@ -100,13 +117,13 @@ function logic(
       assetAv = false;
       const changeSince = changePercent(i.price, price);
       // stop loss
-      if (changeSince < -3) {
-        // console.log(`Selling stop loss (${i.price},${price})`);
+      if (changeSince < -sf * 0.75) {
+        console.log(`Selling stop loss (${i.price},${price})`);
         sell(price, asset, wallet[asset]);
         i.isValid = false;
       }
       if (changeSince > sf) {
-        // console.log(`Selling profit (${i.price},${price})`);
+        console.log(`Selling profit (${i.price},${price})`);
         sell(price, asset, wallet[asset]);
         i.isValid = false;
       }
@@ -114,8 +131,8 @@ function logic(
   }
 
   if (assetAv && change > bf) {
-    // console.log(`--Buying ${asset}--`);
-    const result = buy(price, asset, 200);
+    console.log(`--Buying ${asset}--`);
+    const result = buy(price, asset, 300);
     trans.push({asset: asset, price: price, isValid: result});
   }
 }
@@ -157,7 +174,7 @@ function simulate(
       prevPoint[j] = price;
     }
   }
-
+  console.log(wallet);
   console.log('Wallet balance ', getNetWorth(coinPrices));
 }
 
@@ -165,7 +182,7 @@ function simulate(
 // a[3] buy
 // a[4] sell
 async function mainFunc() {
-  const count = 2000;
+  const count = 500;
   const histories: any = {};
   for (const coinId of coins) {
     const history = await api_getCoinPriceHistory(coinId, 5, count);
@@ -177,17 +194,17 @@ async function mainFunc() {
   const factor = 1;
   let buyFactor = 1;
 
-  // simulate(histories, count, 5, 3);
-  for (let i = 0; i < 15; i++) {
-    let sellFactor = 1;
-    for (let j = 0; j < 15; j++) {
-      // console.log([buyFactor, sellFactor]);
-      console.log(`(${i}, ${j})`);
-      simulate(histories, count, buyFactor, sellFactor);
-      sellFactor += factor;
-    }
-    buyFactor += factor;
-  }
+  simulate(histories, count, 4, 9);
+  // for (let i = 0; i < 15; i++) {
+  //   let sellFactor = 1;
+  //   for (let j = 0; j < 15; j++) {
+  //     // console.log([buyFactor, sellFactor]);
+  //     console.log(`(${buyFactor}, ${sellFactor})`);
+  //     simulate(histories, count, buyFactor, sellFactor);
+  //     sellFactor += factor;
+  //   }
+  //   buyFactor += factor;
+  // }
 }
 
 mainFunc();
