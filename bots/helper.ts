@@ -1,4 +1,4 @@
-import {getRequest} from '../Utility';
+import {getRequest, postRequest} from '../Utility';
 
 // const server = 'http://localhost:8080';
 const server = 'https://raptor-trading.herokuapp.com';
@@ -34,6 +34,54 @@ export async function api_getCoinPriceHistory(
     return data.data;
   } catch (e) {
     console.error('helper::api_getUser', e);
+  }
+}
+
+export async function api_placeBuyOrder(
+  username: string,
+  pass: string,
+  coinId: string,
+  count: number,
+  price: number,
+) {
+  try {
+    const data = {
+      username: username,
+      password: pass,
+      coinId: coinId,
+      coinCount: count,
+      price: price,
+      transType: 'BUY',
+    };
+    const result: any = await postRequest(server + '/wazirx/add', data);
+    return result;
+  } catch (e) {
+    console.error('helper::api_getCoinPrices', e);
+    return null;
+  }
+}
+
+export async function api_placeSellOrder(
+  username: string,
+  pass: string,
+  coinId: string,
+  count: number,
+  price: number,
+) {
+  try {
+    const data = {
+      username: username,
+      password: pass,
+      coinId: coinId,
+      coinCount: count,
+      price: price,
+      transType: 'SELL',
+    };
+    const result: any = await postRequest(server + '/wazirx/add', data);
+    return result;
+  } catch (e) {
+    console.error('helper::api_getCoinPrices', e);
+    return null;
   }
 }
 
