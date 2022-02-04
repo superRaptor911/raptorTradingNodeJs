@@ -104,6 +104,27 @@ export async function api_getOrderStatus(
   }
 }
 
+export async function api_cancelOrder(
+  username: string,
+  pass: string,
+  orderId: string,
+  coinId: string,
+) {
+  try {
+    const data = {
+      username: username,
+      password: pass,
+      orderId: orderId,
+      coinId: coinId,
+    };
+    const result: any = await postRequest(server + '/wazirx/cancel', data);
+    return result?.status;
+  } catch (e) {
+    console.error('helper::api_getCoinPrices', e);
+    return null;
+  }
+}
+
 export type Point = {
   x: number;
   y: number;

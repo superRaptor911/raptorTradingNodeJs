@@ -147,7 +147,7 @@ function simulate(
 // a[4] sell
 async function mainFunc() {
   resetWallet(1000);
-  const count = 500;
+  const count = 300;
   const histories: any = {};
   for (const coinId of COINS) {
     const history = await api_getCoinPriceHistory(coinId, 5, count);

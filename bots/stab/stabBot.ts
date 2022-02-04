@@ -1,103 +1,224 @@
-import {sleep} from '../../Utility';
-import {api_getCoinPrices} from '../helper';
+import {rmSync} from 'fs';
+import {changePercent, readJsonData, sleep, writeJsonData} from '../../Utility';
+import {
+  api_cancelOrder,
+  api_getCoinPrices,
+  api_getOrderStatus,
+  api_getUser,
+  api_placeBuyOrder,
+  api_placeSellOrder,
+  getBuyPrice,
+  getCurPrice,
+  getSellPrice,
+} from '../helper';
+import {StabKeys} from './botSecret';
+import {COINS} from './stabConfig';
 
-const sampleSize = 2;
-
-const coinId = 'wrxinr';
-
-const wallet = {
-  balance: 0,
-  adainr: 1,
+const botConfig = {
+  iterations: 300,
+  waitTime: 300000,
+  buyFactor: 4,
+  sellFactor: 9,
+  amount: 300,
+  transSavePath: 'temp/trans-rt.json',
+  walletSavePath: 'temp/wallet-rt.json',
+  name: StabKeys.username,
+  pass: StabKeys.password,
 };
 
-enum MarketState {
-  UP,
-  DOWN,
-  FLAT,
-  NOT_SET,
+let wallet: any = {};
+
+interface transStruct {
+  asset: string;
+  price: number;
+  orderId: string;
+  isValid: boolean;
 }
 
-type Point = {
-  x: number;
-  y: number;
-};
+function resetWallet(balance: number) {
+  wallet = {
+    balance: balance,
+  };
 
-function getCurPrice(prices: any, coinId: string) {
-  return Number(prices[coinId].last);
+  COINS.forEach(item => (wallet[item] = 0));
 }
 
-function getSellPrice(prices: any, coinId: string) {
-  return Number(prices[coinId].buy);
+async function sell(price: number, coinId: string, amount: number) {
+  if (wallet[coinId] >= amount) {
+    const orderId = await api_placeSellOrder(
+      botConfig.name,
+      botConfig.pass,
+      coinId,
+      amount,
+      price,
+    );
+    return orderId;
+  }
+  return false;
 }
 
-function getBuyPrice(prices: any, coinId: string) {
-  return Number(prices[coinId].sell);
+async function buy(price: number, coinId: string, amount: number) {
+  amount = Math.min(wallet.balance, amount);
+  if (amount > 50) {
+    const count = amount / price;
+    const orderId = await api_placeBuyOrder(
+      botConfig.name,
+      botConfig.pass,
+      coinId,
+      count,
+      price,
+    );
+    return orderId;
+  }
+  return false;
 }
 
-function calculateSlope(points: Point[]) {
-  let slope = 0;
-  let Ex = 0;
-  let Ex2 = 0;
-  let Ey = 0;
-  let Eyx = 0;
-  let n = points.length;
+async function logic(
+  trans: transStruct[],
+  asset: string,
+  price: number,
+  change: number,
+) {
+  let assetAv = true;
+  let modified = false;
+  for (const i of trans) {
+    if (i.asset == asset) {
+      assetAv = false;
+      const changeSince = changePercent(i.price, price);
+      // Stop loss sell
+      if (changeSince < -botConfig.sellFactor * 0.75) {
+        console.log(`Selling stop loss (${i.price},${price})`);
+        const prices = await api_getCoinPrices();
+        const sellPrice = getSellPrice(prices, asset);
+        const orderId = await sell(sellPrice, asset, wallet[asset]);
+        if (orderId) {
+          i.orderId = orderId;
+          modified = true;
+        } else {
+          console.error('stabBot::logic Error failed to place sell order');
+        }
+      }
+      // Profit sell
+      if (changeSince > botConfig.sellFactor) {
+        console.log(`Selling profit (${i.price},${price})`);
+        const prices = await api_getCoinPrices();
+        const sellPrice = getSellPrice(prices, asset);
+        const orderId = await sell(sellPrice, asset, wallet[asset]);
+        if (orderId) {
+          i.orderId = orderId;
+          modified = true;
+        } else {
+          console.error('stabBot::logic Error failed to place sell order');
+        }
+      }
+    }
+  }
 
-  points.forEach(point => {
-    Ex += point.x;
-    Ey += point.y;
-    Eyx += point.x * point.y;
-    Ex2 += point.x * point.x;
-  });
+  if (assetAv && change > botConfig.buyFactor) {
+    console.log(`--Buying ${asset}--`);
+    const prices = await api_getCoinPrices();
+    const buyPrice = getBuyPrice(prices, asset);
+    // getSellPrice(prices, coinId),
+    const result = await buy(buyPrice, asset, 300);
+    if (result) {
+      trans.push({
+        asset: asset,
+        price: price,
+        isValid: true,
+        orderId: result,
+      });
+      modified = true;
+    } else {
+      console.error('stabBot::logic failed to place order');
+    }
+  }
 
-  slope = (Ey * Ex - n * Eyx) / (Ex * Ex - n * Ex2);
-  slope = slope == Number.NaN ? 0 : slope;
-  return Number(slope.toFixed(2));
-}
-
-function sell(price: number) {
-  if (wallet.adainr > 0) {
-    const total = wallet.adainr * price;
-    wallet.balance += total * 0.998;
-    wallet.adainr = 0;
+  if (modified) {
+    writeJsonData(trans, botConfig.transSavePath);
+    writeJsonData(wallet, botConfig.walletSavePath);
   }
 }
 
-function buy(price: number) {
-  if (wallet.balance > 0) {
-    const total = Number((wallet.balance / price).toFixed(1));
-    wallet.adainr = total;
-    wallet.balance -= total * price * 1.002;
+async function transChecker(trans: transStruct[]) {
+  for (const i of trans) {
+    try {
+      const receipt = await api_getOrderStatus(
+        botConfig.name,
+        botConfig.pass,
+        i.orderId,
+      );
+
+      // On success
+      if (receipt.status === 'done') {
+        i.isValid = receipt.side == 'buy';
+      } else if (receipt.status === 'cancel') {
+        const qty = parseFloat(receipt.executedQty);
+        if (receipt.side == 'buy') {
+          i.isValid = qty > 0;
+        }
+      } else if (receipt.status === 'wait') {
+        await api_cancelOrder(
+          botConfig.name,
+          botConfig.pass,
+          i.orderId,
+          i.asset,
+        );
+      }
+    } catch (e) {
+      /* handle error */
+      console.error('stabBot::transChecker', e);
+    }
+  }
+
+  const newTrans = trans.filter(item => item.isValid);
+  return newTrans;
+}
+
+function loadPreviousState() {
+  const data: any = readJsonData(botConfig.transSavePath);
+  if (data) {
+    console.log('using previous trans');
+    const trans = data.filter((item: transStruct) => item.isValid);
+    return trans;
+  }
+  return [];
+}
+
+async function updateWallet() {
+  const user = await api_getUser(botConfig.name);
+  if (user) {
+    wallet.balance = user.wallet.balance;
+    for (const i in user.wallet.coins) {
+      wallet[i] = user.wallet.coins[i];
+    }
   }
 }
 
 async function mainFunc() {
-  let points: Point[] = [];
+  resetWallet(1000);
+  let i = 0;
+  let previousPrices: any = {};
+  COINS.forEach(item => (previousPrices[item] = 0));
+  let trans: transStruct[] = loadPreviousState();
 
-  let x = 0;
-  while (true) {
+  while (i < botConfig.iterations) {
+    await updateWallet();
     const prices = await api_getCoinPrices();
-    const price = getCurPrice(prices, coinId);
-
-    points.push({x: x, y: price});
-
-    if (points.length >= sampleSize) {
-      const slope = calculateSlope(points);
-      if (slope > 0.07) {
-        buy(getBuyPrice(prices, coinId));
-        console.log('Buying ', wallet);
+    for (let coinId of COINS) {
+      const price = getCurPrice(prices, coinId);
+      if (previousPrices[coinId] != 0) {
+        const change = changePercent(previousPrices[coinId], price);
+        logic(trans, coinId, price, change);
       }
-      if (slope < -0.05) {
-        sell(getSellPrice(prices, coinId));
-        console.log('Selling ', wallet);
-      }
-      console.log(price);
-      console.log('slope is :', slope);
-      points.shift();
+      previousPrices[coinId] = price;
     }
-    console.log('Iteration : ', x, '\n');
-    x++;
-    await sleep(60000);
+    await sleep(botConfig.waitTime);
+    trans = await transChecker(trans);
+    console.log('----END--OF--Iteration--', i, '----');
+    i++;
   }
+  rmSync(botConfig.walletSavePath);
+  rmSync(botConfig.transSavePath);
 }
 
 mainFunc();
