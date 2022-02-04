@@ -1,5 +1,6 @@
 import sgMail from '@sendgrid/mail';
 import fetch from 'cross-fetch';
+import fs from 'fs';
 
 if (!process.env.SENDGRID_APIKEY) {
   console.log('loading ...');
@@ -99,4 +100,23 @@ export function fixedNumber(num: string | number) {
 
 export function changePercent(n1: number, n2: number) {
   return (100 * (n2 - n1)) / n1;
+}
+
+export function writeJsonData(data: any, path: string) {
+  try {
+    fs.writeFileSync(path, JSON.stringify(data));
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export function readJsonData(path: string) {
+  try {
+    const data = fs.readFileSync(path);
+    const json = JSON.parse(data.toString());
+    return json;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 }

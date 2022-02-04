@@ -1,4 +1,5 @@
-import {changePercent, sleep} from '../../Utility';
+import {rmSync} from 'fs';
+import {changePercent, readJsonData, sleep, writeJsonData} from '../../Utility';
 import {
   api_getCoinPrices,
   getBuyPrice,
@@ -13,6 +14,8 @@ const botConfig = {
   buyFactor: 4,
   sellFactor: 9,
   amount: 300,
+  transSavePath: 'temp/trans-sim-rt.json',
+  walletSavePath: 'temp/wallet-sim-rt.json',
 };
 
 let wallet: any = {};
@@ -69,6 +72,7 @@ function logic(
   sellPrice: number,
 ) {
   let assetAv = true;
+  let modified = false;
   for (const i of trans) {
     if (i.asset == asset) {
       assetAv = false;
@@ -78,11 +82,13 @@ function logic(
         console.log(`Selling stop loss (${i.price},${price})`);
         sell(sellPrice, asset, wallet[asset]);
         i.isValid = false;
+        modified = true;
       }
       if (changeSince > botConfig.sellFactor) {
         console.log(`Selling profit (${i.price},${price})`);
         sell(sellPrice, asset, wallet[asset]);
         i.isValid = false;
+        modified = true;
       }
     }
   }
@@ -91,7 +97,28 @@ function logic(
     console.log(`--Buying ${asset}--`);
     const result = buy(buyPrice, asset, 300);
     trans.push({asset: asset, price: price, isValid: result});
+    modified = true;
   }
+
+  if (modified) {
+    writeJsonData(trans, botConfig.transSavePath);
+    writeJsonData(wallet, botConfig.walletSavePath);
+  }
+}
+
+function loadPreviousState() {
+  const data: any = readJsonData(botConfig.transSavePath);
+  const data2: any = readJsonData(botConfig.walletSavePath);
+  if (data2) {
+    console.log('using previous wallet');
+    wallet = data2;
+  }
+  if (data) {
+    console.log('using previous trans');
+    const trans = data.filter((item: transStruct) => item.isValid);
+    return trans;
+  }
+  return [];
 }
 
 async function mainFunc() {
@@ -99,7 +126,7 @@ async function mainFunc() {
   let i = 0;
   let previousPrices: any = {};
   COINS.forEach(item => (previousPrices[item] = 0));
-  let trans: transStruct[] = [];
+  let trans: transStruct[] = loadPreviousState();
 
   while (i < botConfig.iterations) {
     const prices = await api_getCoinPrices();
@@ -125,6 +152,8 @@ async function mainFunc() {
     i++;
   }
   console.log('End : net worth ', getNetWorth(previousPrices));
+  rmSync(botConfig.walletSavePath);
+  rmSync(botConfig.transSavePath);
 }
 
 mainFunc();
