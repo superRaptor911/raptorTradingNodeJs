@@ -54,7 +54,7 @@ export async function api_placeBuyOrder(
       transType: 'BUY',
     };
     const result: any = await postRequest(server + '/wazirx/add', data);
-    return result?.data?.orderId;
+    return result?.orderId;
   } catch (e) {
     console.error('helper::api_getCoinPrices', e);
     return null;
@@ -78,7 +78,7 @@ export async function api_placeSellOrder(
       transType: 'SELL',
     };
     const result: any = await postRequest(server + '/wazirx/add', data);
-    return result?.data?.orderId;
+    return result?.orderId;
   } catch (e) {
     console.error('helper::api_getCoinPrices', e);
     return null;
