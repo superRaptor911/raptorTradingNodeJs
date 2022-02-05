@@ -194,6 +194,20 @@ async function updateWallet() {
   }
 }
 
+async function sellAllAssets(trans: transStruct[]) {
+  for (let i of COINS) {
+    if (wallet[i] > 0) {
+      const prices = await api_getCoinPrices();
+      const sellPrice = getSellPrice(prices, i);
+      const orderId = await sell(sellPrice, i, wallet[i]);
+    }
+  }
+
+  await sleep(botConfig.waitTime);
+  const newTrans = await transChecker(trans);
+  return newTrans;
+}
+
 async function mainFunc() {
   resetWallet(1000);
   let i = 0;
@@ -217,8 +231,12 @@ async function mainFunc() {
     console.log('----END--OF--Iteration--', i, '----');
     i++;
   }
-  rmSync(botConfig.walletSavePath);
-  rmSync(botConfig.transSavePath);
+
+  console.log('Ending cycle... Selling all assets');
+  trans = await sellAllAssets(trans);
+  console.log('done.');
+  // rmSync(botConfig.walletSavePath);
+  // rmSync(botConfig.transSavePath);
 }
 
 mainFunc();
