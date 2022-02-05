@@ -232,8 +232,8 @@ async function mainFunc() {
     i++;
   }
 
-  console.log('Ending cycle... Selling all assets');
-  trans = await sellAllAssets(trans);
+  // console.log('Ending cycle... Selling all assets');
+  // trans = await sellAllAssets(trans);
   console.log('done.');
   // rmSync(botConfig.walletSavePath);
   // rmSync(botConfig.transSavePath);
