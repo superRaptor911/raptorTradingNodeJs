@@ -15,10 +15,10 @@ import {StabKeys} from './botSecret';
 import {COINS} from './stabConfig';
 
 const botConfig = {
-  iterations: 300,
+  iterations: 90000,
   waitTime: 300000,
   buyFactor: 4,
-  sellFactor: 9,
+  sellFactor: 10,
   amount: 300,
   transSavePath: 'temp/trans-rt.json',
   walletSavePath: 'temp/wallet-rt.json',
@@ -86,7 +86,7 @@ async function logic(
       assetAv = false;
       const changeSince = changePercent(i.price, price);
       // Stop loss sell
-      if (changeSince < -botConfig.sellFactor * 0.75) {
+      if (changeSince < -botConfig.sellFactor * 0.8) {
         console.log(`Selling stop loss (${i.price},${price})`);
         const prices = await api_getCoinPrices();
         const sellPrice = getSellPrice(prices, asset);
@@ -228,7 +228,7 @@ async function mainFunc() {
     }
     await sleep(botConfig.waitTime);
     trans = await transChecker(trans);
-    console.log('----END--OF--Iteration--', i, '----');
+    // console.log('----END--OF--Iteration--', i, '----');
     i++;
   }
 

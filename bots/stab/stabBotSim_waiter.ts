@@ -81,7 +81,7 @@ function logic(
       assetAv = false;
       const changeSince = changePercent(i.price, price);
       // stop loss
-      if (changeSince < -sf * 0.75) {
+      if (changeSince < -sf * 0.8) {
         // console.log(`Selling stop loss (${i.price},${price})`);
         sell(price, asset, wallet[asset]);
         i.isValid = false;
@@ -147,7 +147,7 @@ function simulate(
 // a[4] sell
 async function mainFunc() {
   resetWallet(1000);
-  const count = 1000;
+  const count = 300;
   const histories: any = {};
   for (const coinId of COINS) {
     const history = await api_getCoinPriceHistory(coinId, 5, count);
