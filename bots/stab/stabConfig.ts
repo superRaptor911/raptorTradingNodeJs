@@ -11,4 +11,9 @@ export const COINS = [
   'sandinr',
   'hotinr',
   'ftminr',
+  'aliceinr',
+  'axsinr',
+  'galainr',
+  'manainr',
+  'xlminr',
 ];

@@ -13,22 +13,22 @@ argglobal
 $argadd index.ts
 edit bots/stab/stabBot.ts
 argglobal
-balt bots/stab/stabBot_realtimeSim.ts
-let s:l = 17 - ((16 * winheight(0) + 22) / 45)
+balt bots/stab/botSecret.ts
+let s:l = 129 - ((22 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 17
-normal! 030|
+keepjumps 129
+normal! 09|
 lcd ~/program/node/raptorTrading
 tabnext 1
-badd +2 ~/program/node/raptorTrading/bots/stab/stabBot_realtimeSim.ts
+badd +129 ~/program/node/raptorTrading/bots/stab/stabBot.ts
 badd +45 ~/program/node/raptorTrading/index.ts
+badd +2 ~/program/node/raptorTrading/bots/stab/stabBot_realtimeSim.ts
 badd +150 ~/program/node/raptorTrading/bots/stab/stabBotSim_waiter.ts
-badd +87 ~/program/node/raptorTrading/bots/helper.ts
-badd +17 ~/program/node/raptorTrading/bots/stab/stabBot.ts
-badd +57 ~/program/node/raptorTrading/controller/wazirx/WazirxTransaction.ts
-badd +128 ~/program/node/raptorTrading/wazirx/transactions.ts
+badd +57 ~/program/node/raptorTrading/bots/helper.ts
+badd +35 ~/program/node/raptorTrading/controller/wazirx/WazirxTransaction.ts
+badd +141 ~/program/node/raptorTrading/wazirx/transactions.ts
 badd +24 ~/program/node/raptorTrading/controller/Transactions.ts
 badd +70 ~/program/node/raptorTrading/controller/fund/fund.ts
 badd +76 ~/program/node/raptorTrading/controller/FundTransfer.ts
@@ -69,6 +69,7 @@ badd +125 ~/program/node/raptorTrading/tools/recoverData.js
 badd +4 ~/program/node/raptorTrading/wazirx/tests/ordertest.js
 badd +1 ~/program/node/raptorTrading/wazirx/helper.ts
 badd +1 ~/program/node/raptorTrading/bots/stab/stabConfig.ts
+badd +3 ~/program/node/raptorTrading/bots/stab/botSecret.ts
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
