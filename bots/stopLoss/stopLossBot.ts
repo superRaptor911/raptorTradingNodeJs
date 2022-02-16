@@ -126,13 +126,25 @@ export async function execStopLoss() {
       if (i.transType === 'SELL' && checkCondition(i, price)) {
         // Place sell order
         const orderId = await stopLossSell(i.username, i.coinId, i.count);
-        i.orderId = orderId;
-        await i.save();
+        if (orderId) {
+          i.orderId = orderId;
+          await i.save();
+        } else {
+          console.error(
+            'stopLossBot::execStopLoss failed to place stopLossSell',
+          );
+        }
       } else if (i.transType === 'BUY' && checkCondition(i, price)) {
         // Place buy order
         const orderId = await stopLossBuy(i.username, i.coinId, i.count);
-        i.orderId = orderId;
-        await i.save();
+        if (orderId) {
+          i.orderId = orderId;
+          await i.save();
+        } else {
+          console.error(
+            'stopLossBot::execStopLoss failed to place stopLossSell',
+          );
+        }
       }
     } else {
       // Get Transaction receipt from wazirx
