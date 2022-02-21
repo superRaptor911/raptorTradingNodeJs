@@ -102,6 +102,22 @@ async function sendSuccessMail(rule: StopLoss) {
   }
 }
 
+async function sendPartialSuccessMail(rule: StopLoss, qty: number) {
+  try {
+    const user = await UserModel.findOne({name: rule.username});
+    user &&
+      (await sendMail(
+        user.email,
+        'Stop Loss Bot Order Partially Success',
+        'Stop Loss Bot successfully executed ' +
+          `${rule.transType} ${qty}/${rule.count} ${rule.coinId} at ${rule.price}`,
+      ));
+  } catch (e) {
+    /* handle error */
+    console.error('stopLossBot::Failed To send Mail', e);
+  }
+}
+
 const checkCondition = (rule: StopLoss, price: number) => {
   if (rule.condition === 'LESS') {
     return price < rule.price;
@@ -156,11 +172,17 @@ export async function execStopLoss() {
         await i.save();
         await sendSuccessMail(i);
       } else if (receipt.status === 'cancel') {
-        console.log('Order Failed, retrying...');
+        console.log('order did not complete');
+        // Check if partially done
+        if (receipt.executedQty > 0) {
+          console.log('partially completed order');
+          i.isEnabled = false; // disable rule
+          await sendPartialSuccessMail(i, receipt.executedQty);
+        }
         i.orderId = null;
         await i.save();
       } else {
-        console.log('Order did not complete. canceling ...');
+        console.log('Order did not complete. Canceling ...');
         await wazirxCancelOrder(i.coinId, i.orderId);
       }
     }
