@@ -8,7 +8,7 @@ import {
 } from '../../wazirx/transactions';
 import {api_getCoinPrices} from '../helper';
 
-async function useAvailableCoins(
+async function getAvailableCoins(
   username: string,
   coinId: string,
   count: number,
@@ -35,7 +35,7 @@ async function getUserBalance(username: string) {
 
 async function stopLossSell(username: string, coinId: string, count: number) {
   try {
-    const coinCount = await useAvailableCoins(username, coinId, count);
+    const coinCount = await getAvailableCoins(username, coinId, count);
     const coinPrices = await api_getCoinPrices();
     const price = coinPrices[coinId].buy;
 
@@ -127,6 +127,19 @@ const checkCondition = (rule: StopLoss, price: number) => {
   return false;
 };
 
+async function updateRule(rule: StopLoss, orderId: string) {
+  if (orderId) {
+    rule.orderId = orderId;
+    await rule.save();
+  } else {
+    if (rule.transType == 'BUY') {
+      console.error('stopLossBot::execStopLoss failed to place stopLossBuy');
+    } else {
+      console.error('stopLossBot::execStopLoss failed to place stopLossSell');
+    }
+  }
+}
+
 export async function execStopLoss() {
   const rules = await StopLossModel.find({isEnabled: true});
   let coinPrices = await api_getCoinPrices();
@@ -135,32 +148,19 @@ export async function execStopLoss() {
 
   for (const i of rules) {
     coinPrices = await api_getCoinPrices();
-    const price = coinPrices[i.coinId].last;
+    const sellPrice = coinPrices[i.coinId].buy;
+    const buyPrice = coinPrices[i.coinId].sell;
 
     // Check if order placed or not
     if (!i.orderId) {
-      if (i.transType === 'SELL' && checkCondition(i, price)) {
-        // Place sell order
+      // Place sell order
+      if (i.transType === 'SELL' && checkCondition(i, sellPrice)) {
         const orderId = await stopLossSell(i.username, i.coinId, i.count);
-        if (orderId) {
-          i.orderId = orderId;
-          await i.save();
-        } else {
-          console.error(
-            'stopLossBot::execStopLoss failed to place stopLossSell',
-          );
-        }
-      } else if (i.transType === 'BUY' && checkCondition(i, price)) {
+        await updateRule(i, orderId);
+      } else if (i.transType === 'BUY' && checkCondition(i, buyPrice)) {
         // Place buy order
         const orderId = await stopLossBuy(i.username, i.coinId, i.count);
-        if (orderId) {
-          i.orderId = orderId;
-          await i.save();
-        } else {
-          console.error(
-            'stopLossBot::execStopLoss failed to place stopLossSell',
-          );
-        }
+        await updateRule(i, orderId);
       }
     } else {
       // Get Transaction receipt from wazirx
