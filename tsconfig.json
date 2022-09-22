@@ -3,7 +3,8 @@
         "module": "CommonJS",
         "target": "ESNext",
         "lib": [
-            "ESNext"
+            "ESNext",
+            "dom"
         ],
         "sourceMap": true,
         "outDir": "./dist",

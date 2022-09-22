@@ -15,6 +15,8 @@ export function checkBalance(balance: number, sum: number) {
   }
 }
 
+const FEE_PERCENT = 0.01;
+
 // Lock balance till wazirx completes transaction
 export async function lockBalance(user: User, amount: number, orderId: string) {
   user.wallet.balance -= amount;
@@ -92,7 +94,7 @@ export async function executeTransaction(
   const coinId = receipt.symbol;
   // Unlock Locked asset
   await unlockLockedAsset(transaction.id, coinId);
-  const fee = receipt.price * receipt.executedQty * 0.002;
+  const fee = receipt.price * receipt.executedQty * FEE_PERCENT;
 
   // Raptor Trading Transsaction
   const newTrans = new TransactionModel();
